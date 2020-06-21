@@ -1,19 +1,37 @@
 import React from 'react';
-import logo from '../logo.svg';
-// import {Link} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import RecipeForm from './recipe-form';
+import YourMenu from './your-menu';
 import './App.css';
 
 export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p> Welcome back to your menu! </p>
-        <p> Would you like to: </p>
-        {/* <p><Link>Add a new recipe</Link> 
-        or <Link>browse your menu</Link>?</p> */}
-
+        <p> What would you like to do? </p>
       </header>
+      <Router>
+        {/* <SideBar /> */}
+        <main>
+          <Switch>
+            <Route
+              exact
+              path="/recipe-form"
+              component={RecipeForm} />
+            <Route
+              exact
+              path="/your-menu"
+              component={YourMenu} />
+          </Switch>
+        </main>
+      </Router>
     </div>
   );
 }
