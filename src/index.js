@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 const initialState = {
-  meals: [
+  menuItems: [
       {
           id: 0,
           name: "grilled cheese",
