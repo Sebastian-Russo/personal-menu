@@ -1,5 +1,10 @@
-// import {createStore} from 'react-redux';
-
+import {createStore, combineReducers} from 'redux';
+import {reducer as formReducer} from 'redux-form';
 // import menuReducer from './reducer';
 
-// export default createStore(menuReducer);
+export default createStore(
+    combineReducers({
+        form: formReducer
+        // menu: menuReducer
+    })
+);

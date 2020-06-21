@@ -1,7 +1,9 @@
 import React from 'react';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
+import {reduxForm, Field, 
+    // SubmissionError, 
+    focus} from 'redux-form';
 import InputRecipe from './input-recipe';
-import {required, nonEmpty} from '..validators';
+import {required, nonEmpty} from '../validators';
 
 export class RecipeForm extends React.Component {
 
@@ -78,23 +80,23 @@ export class RecipeForm extends React.Component {
                 <Field
                     name="recipe-name"
                     type="text"
-                    component={RecipeInput}
+                    component={InputRecipe}
                     label="Recipe Name"
-                    validate={required, nonEmpty} 
+                    validate={[required, nonEmpty]} 
                 />
                 <Field 
                     name="ingredients"
                     type="text"
                     component={InputRecipe}
                     label="Ingredients"
-                    validate={required, nonEmpty}
+                    validate={[required, nonEmpty]}
                 />
                 <Field 
                     name="steps"
                     type="text"
                     component={InputRecipe}
                     label="Steps"
-                    validate={required, nonEmpty}
+                    validate={[required, nonEmpty]}
                 />
                 {/* <Field 
                     name="pictures"

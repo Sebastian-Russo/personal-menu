@@ -31,7 +31,7 @@ export default class InputRecipe extends React.Component {
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
                     {error}
-                    {warrning}
+                    {warning}
                 </label>
                 <Element
                     {...this.props.input}
