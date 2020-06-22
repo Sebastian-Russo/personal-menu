@@ -25,7 +25,7 @@ export function YourMenuItem(props) {
     );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     menuItems: state.menuItems
 });
 

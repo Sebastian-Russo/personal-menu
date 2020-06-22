@@ -22,12 +22,11 @@ export default function App() {
           </header>
           <Sidebar />
             <main className="main">
-          <YourMenu />
               <Switch>
-                {/* <Redirect 
+                <Redirect 
                   exact
                   from="/"
-                  to="/" /> */}
+                  to="/your-menu" />
                 <Route
                   exact
                   path="/your-menu"

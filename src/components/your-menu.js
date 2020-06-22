@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 // import {} from '../actions';
 
 export function YourMenu(props) {
+    console.log(props)
     const {menuItems} = props;
     const menuItem = menuItems.map(item => (
         <li className="menu-item" key={item.id}>
@@ -18,13 +19,14 @@ export function YourMenu(props) {
     return (
         <div className="menu-items">
             <h1>Your Menu</h1>
-            {/* <h2>Categories</h2> */}
-            <ul className="menu-item-list">{menuItem}</ul>
+            <ul className="menu-item-list">
+                {menuItem}
+            </ul>
         </div>
     );
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
         menuItems: state.menuItems
 });
 

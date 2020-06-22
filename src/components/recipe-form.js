@@ -1,6 +1,6 @@
 import React from 'react';
 import {reduxForm, Field, 
-    // SubmissionError, 
+    SubmissionError, 
     focus} from 'redux-form';
 import InputRecipe from './input-recipe';
 import {required, nonEmpty} from '../validators';
@@ -8,47 +8,47 @@ import {required, nonEmpty} from '../validators';
 export class RecipeForm extends React.Component {
 
     onSubmit(values) {
-        // return fetch('/api/recipe', {
-        //     method: 'POST',
-        //     body: JSON.stringify(values),
-        //     hearders: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             if (
-        //                 res.headers.has('content-type') &&
-        //                 res.headers
-        //                     .get('content-type')
-        //                     .startsWith('application/json')
-        //             ) {
-        //                 return res.json().then(err => Promise.reject(err));
-        //             }
-        //             return Promise.reject({
-        //                 code: res.status, 
-        //                 message: res.statusText
-        //             });
-        //         }
-        //         return;
-        //     })
-            // .then(() => console.log('Submitted with values', values))
-        return console.log('Submitted with values', values)
-            // .catch(err => {
-            //     const {reason, message, location} = err;
-            //     if (reason === 'ValidationError') {
-            //         return Promise.reject(
-            //             new SubmissionError({
-            //                 [location]: message
-            //             })
-            //         );
-            //     }
-            //     return Promise.reject(
-            //         new SubmissionError({
-            //             _error: 'Error submitting message/recipe'
-            //         })
-            //     );
-            // });
+        return fetch('/api/recipe', {
+            method: 'POST',
+            body: JSON.stringify(values),
+            hearders: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    if (
+                        res.headers.has('content-type') &&
+                        res.headers
+                            .get('content-type')
+                            .startsWith('application/json')
+                    ) {
+                        return res.json().then(err => Promise.reject(err));
+                    }
+                    return Promise.reject({
+                        code: res.status, 
+                        message: res.statusText
+                    });
+                }
+                return;
+            })
+            .then(() => console.log('Submitted with values', values))
+        // return console.log('Submitted with values', values)
+            .catch(err => {
+                const {reason, message, location} = err;
+                if (reason === 'ValidationError') {
+                    return Promise.reject(
+                        new SubmissionError({
+                            [location]: message
+                        })
+                    );
+                }
+                return Promise.reject(
+                    new SubmissionError({
+                        _error: 'Error submitting message/recipe'
+                    })
+                );
+            });
     }
 
     render() {
@@ -77,6 +77,9 @@ export class RecipeForm extends React.Component {
                 )}>
                 {successMessage}
                 {errorMessage}
+
+                <h2>Add a new favorite recipe!</h2>
+
                 <Field
                     name="recipe-name"
                     type="text"
@@ -98,18 +101,6 @@ export class RecipeForm extends React.Component {
                     label="Steps"
                     validate={[required, nonEmpty]}
                 />
-                {/* <Field 
-                    name="pictures"
-                    type="pictures"
-                    component={InputRecipe}
-                    label="Pictures"
-                />
-                <Field 
-                    name="add-menu-category"
-                    type="selector text"
-                    component={InputRecipe}
-                    label="Add to a Menu Category"
-                /> */}
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
@@ -125,3 +116,22 @@ export default reduxForm({
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('recipe', Object.keys(errors)[0]))
 })(RecipeForm);
+
+
+
+
+
+
+
+                {/* <Field 
+                    name="pictures"
+                    type="pictures"
+                    component={InputRecipe}
+                    label="Pictures"
+                /> */}
+                {/* <Field 
+                    name="add-menu-category"
+                    type="selector text"
+                    component={InputRecipe}
+                    label="Add to a Menu Category"
+                /> */}
