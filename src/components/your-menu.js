@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 // import {} from '../actions';
 
 export function YourMenu(props) {
-    console.log(props)
     const {menuItems} = props;
     const menuItem = menuItems.map(item => (
         <li className="menu-item" key={item.id}>
@@ -27,7 +26,24 @@ export function YourMenu(props) {
 }
 
 const mapStateToProps = state => ({
-        menuItems: state.menuItems
+        menuItems: state.menu.menuItems
 });
 
 export default connect(mapStateToProps)(YourMenu)
+
+
+/*
+when you combine the reducers
+You are combining them into one object in the store
+The global state, not just the one from your menu reducer
+
+{
+  menu: {
+    menuItems:[]
+  },
+  form: {}
+}
+
+  So when you mapStateToProps
+  Its state.menu.menuItems
+  */

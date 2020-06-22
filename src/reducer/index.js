@@ -35,7 +35,6 @@ const initialState = {
 
 
 export default function menuReducer(state=initialState, action) {
-    console.log(state)
     // if (action.type) {
     //     return 
     // }

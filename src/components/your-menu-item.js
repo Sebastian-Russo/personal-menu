@@ -26,7 +26,7 @@ export function YourMenuItem(props) {
 }
 
 const mapStateToProps = state => ({
-    menuItems: state.menuItems
+    menuItems: state.menu.menuItems
 });
 
 export default connect(mapStateToProps)(YourMenuItem)
