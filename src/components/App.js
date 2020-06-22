@@ -3,10 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch,
-  Link
+  Switch
 } from 'react-router-dom';
 import RecipeForm from './recipe-form';
+import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Sidebar from './sidebar';
 
@@ -21,13 +21,13 @@ export default function App() {
             <p> What would you like to do? </p>
           </header>
           <Sidebar />
-            <main>
+            <main className="main">
           <YourMenu />
-              {/* <Switch>
-                <Redirect 
+              <Switch>
+                {/* <Redirect 
                   exact
                   from="/"
-                  to="/your-menu" />
+                  to="/" /> */}
                 <Route
                   exact
                   path="/your-menu"
@@ -36,7 +36,11 @@ export default function App() {
                   exact
                   path="/recipe-form"
                   component={RecipeForm} />
-              </Switch> */}
+                <Route
+                  exact
+                  path="/your-menu-item"
+                  component={YourMenuItem} />
+              </Switch>
             </main>
         </div>
     </Router>  

@@ -112,7 +112,8 @@ export class RecipeForm extends React.Component {
                 /> */}
                 <button
                     type="submit"
-                    disabled={this.props.pristine || this.props.submitting}> 
+                    disabled={this.props.pristine || this.props.submitting}>
+                    Submit 
                 </button>
             </form>
         );
