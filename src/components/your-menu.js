@@ -6,21 +6,21 @@ import {Link} from 'react-router-dom';
 export function YourMenu(props) {
     const {menuItems} = props;
     const menuItem = menuItems.map(item => (
-        <li className="menu-item" key={item.id}>
+        <div className="menu-item" key={item.id}>
             <h3 className="menu-item-name">
                 <Link to="/your-menu-item">
                     {item.name} 
                 </Link>
             </h3>
-        </li>
+        </div>
     ));
     
     return (
         <div className="menu-items">
             <h1>Your Menu</h1>
-            <ul className="menu-item-list">
+            <div className="menu-item-list">
                 {menuItem}
-            </ul>
+            </div>
         </div>
     );
 }
@@ -30,6 +30,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(YourMenu)
+
 
 
 /*
@@ -47,3 +48,4 @@ The global state, not just the one from your menu reducer
   So when you mapStateToProps
   Its state.menu.menuItems
   */
+
