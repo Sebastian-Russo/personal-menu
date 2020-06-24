@@ -5,8 +5,16 @@ export default class InputRecipe extends React.Component {
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
         }
+        // console.log(this.input.value)
+        // console.log(this.props)
     }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        // console.log(e)
+        console.log(e.target.value)
+    }
+    
     render() {
         const Element = this.props.element || 'input'
 
@@ -33,19 +41,41 @@ export default class InputRecipe extends React.Component {
                     {error}
                     {warning}
                 </label>
+
                 <Element
                     {...this.props.input}
                     id={this.props.type}
                     type={this.props.type}
-
                     ref={input => (this.input = input)}
                     >
-                        {this.props.children}
+                      {this.props.children}
                 </Element>
+
+                <button
+                    {...this.props.input}
+                    type="button"
+                    onClick={this.handleClick} 
+                    >
+                    Add {this.props.label}
+                </button>
+
             </div>
         );
     }
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  {/* <input 

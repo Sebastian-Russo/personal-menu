@@ -1,54 +1,60 @@
 import React from 'react';
 import {reduxForm, Field, 
-    SubmissionError, 
+    // SubmissionError, 
     focus} from 'redux-form';
 import InputRecipe from './input-recipe';
 import {required, nonEmpty} from '../validators';
 
 export class RecipeForm extends React.Component {
 
+    // handleChange(e){
+    //     e.preventDefault();
+    //     const input = e.target.value;
+    //     console.log(input)
+    // }
+
     onSubmit(values) {
-        return fetch('/api/recipe', {
-            method: 'POST',
-            body: JSON.stringify(values),
-            hearders: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    if (
-                        res.headers.has('content-type') &&
-                        res.headers
-                            .get('content-type')
-                            .startsWith('application/json')
-                    ) {
-                        return res.json().then(err => Promise.reject(err));
-                    }
-                    return Promise.reject({
-                        code: res.status, 
-                        message: res.statusText
-                    });
-                }
-                return;
-            })
-            .then(() => console.log('Submitted with values', values))
-        // return console.log('Submitted with values', values)
-            .catch(err => {
-                const {reason, message, location} = err;
-                if (reason === 'ValidationError') {
-                    return Promise.reject(
-                        new SubmissionError({
-                            [location]: message
-                        })
-                    );
-                }
-                return Promise.reject(
-                    new SubmissionError({
-                        _error: 'Error submitting message/recipe'
-                    })
-                );
-            });
+        // return fetch('/api/recipe', {
+        //     method: 'POST',
+        //     body: JSON.stringify(values),
+        //     hearders: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        //     .then(res => {
+        //         if (!res.ok) {
+        //             if (
+        //                 res.headers.has('content-type') &&
+        //                 res.headers
+        //                     .get('content-type')
+        //                     .startsWith('application/json')
+        //             ) {
+        //                 return res.json().then(err => Promise.reject(err));
+        //             }
+        //             return Promise.reject({
+        //                 code: res.status, 
+        //                 message: res.statusText
+        //             });
+        //         }
+        //         return;
+        //     })
+        //     .then(() => console.log('Submitted with values', values))
+        return console.log('Submitted with values', values)
+            // .catch(err => {
+            //     const {reason, message, location} = err;
+            //     if (reason === 'ValidationError') {
+            //         return Promise.reject(
+            //             new SubmissionError({
+            //                 [location]: message
+            //             })
+            //         );
+            //     }
+            //     return Promise.reject(
+            //         new SubmissionError({
+            //             _error: 'Error submitting message/recipe'
+            //         })
+            //     );
+            // });
     }
 
     render() {
@@ -74,7 +80,8 @@ export class RecipeForm extends React.Component {
             <form 
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
-                )}>
+                )}
+                >
                 {successMessage}
                 {errorMessage}
 
@@ -101,6 +108,8 @@ export class RecipeForm extends React.Component {
                     label="Steps"
                     validate={[required, nonEmpty]}
                 />
+
+                    <br></br>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
