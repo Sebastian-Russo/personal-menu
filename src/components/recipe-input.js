@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-export default class InputRecipe extends React.Component {
+export default class RecipeInput extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
@@ -10,8 +10,6 @@ export default class InputRecipe extends React.Component {
     }
 
     handleClick = (e) => {
-        e.preventDefault();
-        // console.log(e)
         console.log(e.target.value)
     }
     
@@ -47,6 +45,7 @@ export default class InputRecipe extends React.Component {
                     id={this.props.type}
                     type={this.props.type}
                     ref={input => (this.input = input)}
+                    value='test'
                     >
                       {this.props.children}
                 </Element>

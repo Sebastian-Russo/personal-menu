@@ -1,21 +1,23 @@
-// import {} from '../actions';
+import {ADD_RECIPE} from '../actions';
 
 // const initialState = {
-//     menu: {
-//         name: "",
-//         ingredients: [
-//             {
-//                 ingredient: "",
-//                 amount: ""
-//             },
-//         ],
-//         steps: [
-//             {
-//                 "Step 1": "instruction"    
-//             }
-//         ],
-//         pictures: [],
-//         category: []
+//     menuItems: {
+//                 id: 0,
+//                 name: "",
+//                 ingredients: [
+//                     {
+//                         ingredient: "",
+//                         amount: ""
+//                     },
+//                 ],
+//                 steps: [
+//                     {
+//                         step: 1,
+//                         direction: ""    
+//                     }
+//                 ],
+//                 pictures: [],
+//                 category: []
 //     }
 // }
 
@@ -26,15 +28,15 @@ const initialState = {
             name: "grilled cheese",
             ingredients: [
                 {
-                    item: "bread",
+                    ingredient: "bread",
                     amount: "2 slices"
                 },
                 {
-                    item: "cheese",
+                    ingredient: "cheese",
                     amount: "2 slices"
                 },
                 {
-                    item: "butter",
+                    ingredient: "butter",
                     amount: "1 tbps"
                 }
             ],
@@ -54,7 +56,7 @@ const initialState = {
             name: "ramen",
             ingredients: [
                 {
-                    item: "roman packet of noodles",
+                    ingredient: "roman packet of noodles",
                     amount: "1 packet"
                 }
             ],
@@ -74,11 +76,11 @@ const initialState = {
             name: "cereal",
             ingredients: [
                 {
-                    item: "cereal",
+                    ingredient: "cereal",
                     amount: "2 cups"
                 },
                 {
-                    item: "milk",
+                    ingredient: "milk",
                     amount: "1 cup"
                 }
             ],
@@ -98,8 +100,28 @@ const initialState = {
 
 
 export default function menuReducer(state=initialState, action) {
-    // if (action.type) {
-    //     return 
-    // }
+    if (action.type === ADD_RECIPE) {
+        console.log('action added recipe')
+
+        return Object.assign({}, state, {
+            menuItems: [...state.menuItems, {
+                    id: state.menuItems.length,
+                    name: action.name, 
+                    ingredients: [
+                        {
+                            ingredient: action.ingredients,
+                            amount: action.amount
+                        },
+                    ],
+                    steps: [
+                        {
+                            step: action.step,
+                            direction: action.direction  
+                        }
+                    ]
+            }]
+        })
+    }
+    console.log(state)
     return state;
 }

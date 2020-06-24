@@ -2,59 +2,20 @@ import React from 'react';
 import {reduxForm, Field, 
     // SubmissionError, 
     focus} from 'redux-form';
-import InputRecipe from './input-recipe';
+import RecipeInput from './recipe-input';
 import {required, nonEmpty} from '../validators';
+import { addRecipe } from '../actions';
 
 export class RecipeForm extends React.Component {
 
-    // handleChange(e){
-    //     e.preventDefault();
-    //     const input = e.target.value;
-    //     console.log(input)
-    // }
-
     onSubmit(values) {
-        // return fetch('/api/recipe', {
-        //     method: 'POST',
-        //     body: JSON.stringify(values),
-        //     hearders: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             if (
-        //                 res.headers.has('content-type') &&
-        //                 res.headers
-        //                     .get('content-type')
-        //                     .startsWith('application/json')
-        //             ) {
-        //                 return res.json().then(err => Promise.reject(err));
-        //             }
-        //             return Promise.reject({
-        //                 code: res.status, 
-        //                 message: res.statusText
-        //             });
-        //         }
-        //         return;
-        //     })
-        //     .then(() => console.log('Submitted with values', values))
-        return console.log('Submitted with values', values)
-            // .catch(err => {
-            //     const {reason, message, location} = err;
-            //     if (reason === 'ValidationError') {
-            //         return Promise.reject(
-            //             new SubmissionError({
-            //                 [location]: message
-            //             })
-            //         );
-            //     }
-            //     return Promise.reject(
-            //         new SubmissionError({
-            //             _error: 'Error submitting message/recipe'
-            //         })
-            //     );
-            // });
+        console.log('Submitted with values', values)
+
+        const {name, ingredients, amount, step, direction} = values;
+
+
+        this.props.dispatch(addRecipe(name, ingredients, amount, step, direction));
+
     }
 
     render() {
@@ -88,24 +49,39 @@ export class RecipeForm extends React.Component {
                 <h2>Add a new favorite recipe!</h2>
 
                 <Field
-                    name="recipe-name"
+                    name="name"
                     type="text"
-                    component={InputRecipe}
+                    component={RecipeInput}
                     label="Recipe Name"
                     validate={[required, nonEmpty]} 
                 />
                 <Field 
                     name="ingredients"
                     type="text"
-                    component={InputRecipe}
+                    component={RecipeInput}
                     label="Ingredients"
                     validate={[required, nonEmpty]}
                 />
                 <Field 
-                    name="steps"
+                    name="amount"
                     type="text"
-                    component={InputRecipe}
-                    label="Steps"
+                    component={RecipeInput}
+                    label="Amount"
+                    validate={[required, nonEmpty]}
+                />
+
+                <Field 
+                    name="step"
+                    type="text"
+                    component={RecipeInput}
+                    label="Step Number"
+                    validate={[required, nonEmpty]}
+                />
+                <Field 
+                    name="direction"
+                    type="text"
+                    component={RecipeInput}
+                    label="Direction"
                     validate={[required, nonEmpty]}
                 />
 
@@ -135,12 +111,12 @@ export default reduxForm({
                 {/* <Field 
                     name="pictures"
                     type="pictures"
-                    component={InputRecipe}
+                    component={RecipeInput}
                     label="Pictures"
                 /> */}
                 {/* <Field 
                     name="add-menu-category"
                     type="selector text"
-                    component={InputRecipe}
+                    component={RecipeInput}
                     label="Add to a Menu Category"
                 /> */}
