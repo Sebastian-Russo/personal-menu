@@ -37,7 +37,7 @@ export default function App() {
                   component={RecipeForm} />
                 <Route
                   exact
-                  path="/your-menu-item"
+                  path="/your-menu-item/:id"
                   component={YourMenuItem} />
               </Switch>
             </main>

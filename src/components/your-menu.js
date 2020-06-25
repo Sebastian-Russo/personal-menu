@@ -8,7 +8,7 @@ export function YourMenu(props) {
     const menuItem = menuItems.map(item => (
         <div className="menu-item" key={item.id}>
             <h3 className="menu-item-name">
-                <Link to="/your-menu-item">
+                <Link to={`/your-menu-item/${item.name}`}>
                     {item.name} 
                 </Link>
             </h3>

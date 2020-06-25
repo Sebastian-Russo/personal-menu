@@ -1,16 +1,78 @@
 import React from 'react'; 
 
 export default class RecipeInput extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { 
+            menuItems:[
+                {
+                    id: 0,
+                    name: "",
+                    ingredients: [
+                        {
+                            ingredient: "",
+                            amount: ""
+                        }
+                    ],
+                    steps: [
+                        {
+                            step: 1,
+                            direction: ""    
+                        }
+                    ]
+                }
+            ]
+        }
+    }
     componentDidUpdate(prevProps) {
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
         }
-        // console.log(this.input.value)
-        // console.log(this.props)
     }
 
     handleClick = (e) => {
-        console.log(e.target.value)
+        const {name} = e.target;
+        const {value} = e.target;
+
+        console.log(name, value)
+        
+        if (name === "name") {
+            this.setState({
+                menuItems: {name: value}
+            })
+        } else if (name === "ingredients") {
+            this.setState({
+                menuItems: {
+                    ingredients: [
+                        {ingredient: value}
+                    ]
+                }
+            })
+        } else if (name === "amount") {
+            this.setState({
+                menuItems: {
+                    ingredients: [
+                        {amount: value}
+                    ]
+                }
+            })
+        } else if (name === "step") {
+            this.setState({menuItems: {
+                steps: [
+                    {step: value}
+                ]
+            }})
+        } else if (name === "direction") {
+            this.setState({menuItems: {
+                steps: [
+                    {direction: value}
+                ]
+            }})
+        }
+
+        // this.handleClick(e.target.value)
+        console.log(this.state)
+
     }
     
     render() {

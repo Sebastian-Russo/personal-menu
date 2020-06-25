@@ -4,38 +4,58 @@ import {reduxForm, Field,
     focus} from 'redux-form';
 import RecipeInput from './recipe-input';
 import {required, nonEmpty} from '../validators';
-import { addRecipe } from '../actions';
+// import { addRecipe } from '../actions';
 
 export class RecipeForm extends React.Component {
-
-    onSubmit(values) {
-        console.log('Submitted with values', values)
-
-        const {name, ingredients, amount, step, direction} = values;
-
-
-        this.props.dispatch(addRecipe(name, ingredients, amount, step, direction));
-
+    constructor(props){
+        super(props);
+        this.state = { 
+            menuItems:[
+                {
+                    id: 0,
+                    name: "",
+                    ingredients: [
+                        {
+                            ingredient: "",
+                            amount: ""
+                        }
+                    ],
+                    steps: [
+                        {
+                            step: 1,
+                            direction: ""    
+                        }
+                    ]
+                }
+            ]
+        }
     }
 
-    render() {
-        let successMessage;
-        if (this.props.submitSucceeded) {
-            successMessage = (
-                <div className="message message-success">
-                    Message submitted successfully
-                </div>
-            );
-        }
+    onSubmit = (values) => {
 
-        let errorMessage;
-        if (this.props.error) {
-            errorMessage = (
-                <div className="message message-error">
-                    {this.props.error}
-                </div>
-            );
-        }
+        console.log('Submitted with values', values)
+
+        // this.props.dispatch(addRecipe(values));
+    }
+    
+    render() {
+        // let successMessage;
+        // if (this.props.submitSucceeded) {
+        //     successMessage = (
+        //         <div className="message message-success">
+        //             Message submitted successfully
+        //         </div>
+        //     );
+        // }
+
+        // let errorMessage;
+        // if (this.props.error) {
+        //     errorMessage = (
+        //         <div className="message message-error">
+        //             {this.props.error}
+        //         </div>
+        //     );
+        // }
 
         return (
             <form 
@@ -43,8 +63,8 @@ export class RecipeForm extends React.Component {
                     this.onSubmit(values)
                 )}
                 >
-                {successMessage}
-                {errorMessage}
+                {/* {successMessage}
+                {errorMessage} */}
 
                 <h2>Add a new favorite recipe!</h2>
 
@@ -88,9 +108,12 @@ export class RecipeForm extends React.Component {
                     <br></br>
                 <button
                     type="submit"
-                    disabled={this.props.pristine || this.props.submitting}>
+                    disabled={this.props.pristine || this.props.submitting}
+                    onSubmit={this.onSubmit}
+                    >
                     Submit 
                 </button>
+
             </form>
         );
     }

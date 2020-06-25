@@ -1,24 +1,24 @@
 import {ADD_RECIPE} from '../actions';
 
 // const initialState = {
-//     menuItems: {
-//                 id: 0,
-//                 name: "",
-//                 ingredients: [
-//                     {
-//                         ingredient: "",
-//                         amount: ""
-//                     },
-//                 ],
-//                 steps: [
-//                     {
-//                         step: 1,
-//                         direction: ""    
-//                     }
-//                 ],
-//                 pictures: [],
-//                 category: []
-//     }
+    // menuItems: [{
+    //             id: 0,
+    //             name: "",
+    //             ingredients: [
+    //                 {
+    //                     ingredient: "",
+    //                     amount: ""
+    //                 },
+    //             ],
+    //             steps: [
+    //                 {
+    //                     step: 1,
+    //                     direction: ""    
+    //                 }
+    //             ],
+    //             pictures: [],
+    //             category: []
+    // }]
 // }
 
 const initialState = {
@@ -109,7 +109,7 @@ export default function menuReducer(state=initialState, action) {
                     name: action.name, 
                     ingredients: [
                         {
-                            ingredient: action.ingredients,
+                            ingredient: action.ingredient,
                             amount: action.amount
                         },
                     ],
