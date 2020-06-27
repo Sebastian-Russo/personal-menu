@@ -10,12 +10,7 @@ import {ADD_RECIPE} from '../actions';
     //                     amount: ""
     //                 },
     //             ],
-    //             steps: [
-    //                 {
-    //                     step: 1,
-    //                     direction: ""    
-    //                 }
-    //             ],
+    //             directions: "",
     //             pictures: [],
     //             category: []
     // }]
@@ -40,16 +35,7 @@ const initialState = {
                     amount: "1 tbps"
                 }
             ],
-            steps: [
-                {
-                    step: 1,
-                    direction: "put cheese on bread"
-                },
-                {
-                    step: 2,
-                    direction: "pan fry bread till golden brown and cheese has melted"
-                }
-            ]
+            directions: "put cheese on bread, then pan fry bread till golden brown and cheese has melted"
         },
         {
             id: 1,
@@ -60,16 +46,7 @@ const initialState = {
                     amount: "1 packet"
                 }
             ],
-            steps: [
-                {
-                    step: 1,
-                    direction: "boil water",
-                },
-                {
-                    step: 2, 
-                    direction: "wait 3 minutes"
-                }
-            ]
+            directions: "boil water, then wait 3 minutes"
         },
         {
             id: 2,
@@ -84,16 +61,7 @@ const initialState = {
                     amount: "1 cup"
                 }
             ],
-            steps: [
-                {
-                    step: 1,
-                    direction: "pour cereal into bowl"
-                },
-                {
-                    step: 2,
-                    direction: "pour milk into bowl"
-                }
-            ]
+            directions: "pour cereal into bowl, then pour milk into bowl"
         }
     ]
 }
@@ -113,15 +81,10 @@ export default function menuReducer(state=initialState, action) {
                             amount: action.amount
                         },
                     ],
-                    steps: [
-                        {
-                            step: action.step,
-                            direction: action.direction  
-                        }
-                    ]
+                    directions: action.directions
             }]
         })
     }
-    console.log(state)
+    // console.log(state)
     return state;
 }

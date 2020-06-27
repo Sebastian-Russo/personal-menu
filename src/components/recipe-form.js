@@ -10,105 +10,97 @@ export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-            menuItems:[
-                {
-                    id: 0,
-                    name: "",
-                    ingredients: [
-                        {
-                            ingredient: "",
-                            amount: ""
-                        }
-                    ],
-                    steps: [
-                        {
-                            step: 1,
-                            direction: ""    
-                        }
-                    ]
-                }
-            ]
+                id: 0,
+                name: "",
+                ingredients: [
+                    {
+                        ingredient: "",
+                        amount: ""
+                    }
+                ],
+                directions: ""
         }
     }
 
-    onSubmit = (values) => {
+    addIngredientAndAmount = (ingredientAndAmount) => {
+        console.log(ingredientAndAmount)
 
-        console.log('Submitted with values', values)
+        ingredientAndAmount.id = Math.random();
 
-        // this.props.dispatch(addRecipe(values));
+        this.setState({
+            ingredients: [...this.state.ingredients, ingredientAndAmount]
+        })
+        console.log(this.state)
     }
+
+    handleChange = e => { 
+        const {value} = e.target;
+        const {id} = e.target;
+
+        this.setState({
+            [id]: value
+        })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+        this.handleChange(e)
+    }
+    // onSubmit = (values) => {
+    //     console.log('Submitted all inputs', values);
+    // }
     
     render() {
-        // let successMessage;
-        // if (this.props.submitSucceeded) {
-        //     successMessage = (
-        //         <div className="message message-success">
-        //             Message submitted successfully
-        //         </div>
-        //     );
-        // }
-
-        // let errorMessage;
-        // if (this.props.error) {
-        //     errorMessage = (
-        //         <div className="message message-error">
-        //             {this.props.error}
-        //         </div>
-        //     );
-        // }
 
         return (
             <form 
-                onSubmit={this.props.handleSubmit(values =>
-                    this.onSubmit(values)
-                )}
+                onSubmit={this.handleSubmit}
+
+                // onSubmit={this.props.handleSubmit(values =>
+                //     this.onSubmit(values)
+                // )}
                 >
-                {/* {successMessage}
-                {errorMessage} */}
 
                 <h2>Add a new favorite recipe!</h2>
-
-                <Field
+               
+                <label htmlFor="name">
+                    Recipe Name
+                </label>
+                <input
                     name="name"
+                    id="name"
                     type="text"
-                    component={RecipeInput}
                     label="Recipe Name"
                     validate={[required, nonEmpty]} 
+                    defaultValue="cookies"
+                    onChange={this.handleChange}
                 />
-                <Field 
-                    name="ingredients"
-                    type="text"
-                    component={RecipeInput}
-                    label="Ingredients"
-                    validate={[required, nonEmpty]}
-                />
-                <Field 
-                    name="amount"
-                    type="text"
-                    component={RecipeInput}
-                    label="Amount"
-                    validate={[required, nonEmpty]}
-                />
+                
 
-                <Field 
-                    name="step"
+                <RecipeInput 
+                    addIngredientAndAmount={this.addIngredientAndAmount}/>
+
+
+                <label htmlFor="directions">
+                    Directions
+                </label>
+                <textarea 
+                    name="directions"
+                    id="directions"
                     type="text"
-                    component={RecipeInput}
-                    label="Step Number"
+                    rows="4" 
+                    cols="25"
+                    label="Directions"
                     validate={[required, nonEmpty]}
-                />
-                <Field 
-                    name="direction"
-                    type="text"
-                    component={RecipeInput}
-                    label="Direction"
-                    validate={[required, nonEmpty]}
+                    defaultValue="mix and bake"
+                    onChange={this.handleChange}
                 />
 
                     <br></br>
                 <button
                     type="submit"
-                    disabled={this.props.pristine || this.props.submitting}
+                    // disabled={this.props.pristine || this.props.submitting}
                     onSubmit={this.onSubmit}
                     >
                     Submit 
@@ -130,14 +122,28 @@ export default reduxForm({
 
 
 
+                // <input 
+                //     name="ingredients"
+                //     type="text"
+                //     component={RecipeInput}
+                //     label="Ingredients"
+                //     validate={[required, nonEmpty]}
+                // />
+                // <input 
+                //     name="amount"
+                //     type="text"
+                //     component={RecipeInput}
+                //     label="Amount"
+                //     validate={[required, nonEmpty]}
+                // />
 
-                {/* <Field 
+                {/* <input 
                     name="pictures"
                     type="pictures"
                     component={RecipeInput}
                     label="Pictures"
                 /> */}
-                {/* <Field 
+                {/* <input 
                     name="add-menu-category"
                     type="selector text"
                     component={RecipeInput}

@@ -7,9 +7,10 @@ export function YourMenuItem(props) {
     const {menuItems} = props;
 
     const menuItem = menuItems.filter(menuItem => menuItem.name === props.match.params.id)[0];
+    
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
-        <div key={`ingredients-${i}`}>{ingredient.amount} {ingredient.ingredient}</div>
+        <div key={`ingredients-${i}`}>{ingredient.amount} of {ingredient.ingredient}</div>
         )
     })
 console.log(menuItem)

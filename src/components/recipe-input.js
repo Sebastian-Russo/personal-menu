@@ -4,121 +4,71 @@ export default class RecipeInput extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-            menuItems:[
+            ingredients: [
                 {
-                    id: 0,
-                    name: "",
-                    ingredients: [
-                        {
-                            ingredient: "",
-                            amount: ""
-                        }
-                    ],
-                    steps: [
-                        {
-                            step: 1,
-                            direction: ""    
-                        }
-                    ]
+                    ingredient: "",
+                    amount: ""
                 }
             ]
         }
     }
-    componentDidUpdate(prevProps) {
-        if (!prevProps.meta.active && this.props.meta.active) {
-            this.input.focus();
-        }
-    }
 
-    handleClick = (e) => {
-        const {name} = e.target;
+
+    handleChange = (e) => {
         const {value} = e.target;
+        const {id} = e.target;
+        console.log(id)
 
-        console.log(name, value)
-        
-        if (name === "name") {
-            this.setState({
-                menuItems: {name: value}
-            })
-        } else if (name === "ingredients") {
-            this.setState({
-                menuItems: {
-                    ingredients: [
-                        {ingredient: value}
-                    ]
-                }
-            })
-        } else if (name === "amount") {
-            this.setState({
-                menuItems: {
-                    ingredients: [
-                        {amount: value}
-                    ]
-                }
-            })
-        } else if (name === "step") {
-            this.setState({menuItems: {
-                steps: [
-                    {step: value}
-                ]
-            }})
-        } else if (name === "direction") {
-            this.setState({menuItems: {
-                steps: [
-                    {direction: value}
-                ]
-            }})
-        }
+        this.setState({
+            // ingredients: [...this.state.ingredients, {
+                [id]: value
+            // }]
+        })
+    }
 
-        // this.handleClick(e.target.value)
-        console.log(this.state)
+    handleClick = () => {
+        console.log('clicked add amount of ingredients', this.state)
+
+        // adds state of ingredient and amount to form
+        this.props.addIngredientAndAmount(this.state)
 
     }
-    
+
     render() {
-        const Element = this.props.element || 'input'
-
-        let error;
-        if (this.props.meta.touched && this.props.metaerror) {
-            error = <div className="form-error">
-                {this.props.meta.error}
-            </div>;
-        }
-
-        let warning; 
-        if (this.props.meta.touched && this.props.meta.warning) {
-            warning = (
-                <div className="form-warning">
-                    {this.props.meta.warning}
-                </div>
-            );
-        }
-
         return (
             <div className="form-input">
-                <label htmlFor={this.props.input.name}>
-                    {this.props.label}
-                    {error}
-                    {warning}
+
+                <label htmlFor="ingredients">
+                    Ingredient
                 </label>
-
-                <Element
-                    {...this.props.input}
-                    id={this.props.type}
-                    type={this.props.type}
-                    ref={input => (this.input = input)}
-                    value='test'
+                <input 
+                    name="ingredients"
+                    id="ingredients"
+                    type="text"
+                    // ref={input => this.input = input}
+                    defaultValue='sugar'
+                    onChange={this.handleChange} 
                     >
-                      {this.props.children}
-                </Element>
-
+                </input>
+                <label htmlFor="amount">
+                    Amount
+                </label>
+                <input 
+                    name="amount"
+                    id="amount"
+                    type="text"
+                    // ref={input => this.input = input}
+                    defaultValue='1 cup'
+                    onChange={this.handleChange} 
+                    >
+                </input>
                 <button
-                    {...this.props.input}
                     type="button"
                     onClick={this.handleClick} 
                     >
-                    Add {this.props.label}
+                    Add Amount of Ingredients
                 </button>
+
 
             </div>
         );
