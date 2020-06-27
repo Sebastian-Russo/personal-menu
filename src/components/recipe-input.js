@@ -17,21 +17,13 @@ export default class RecipeInput extends React.Component {
     handleChange = (e) => {
         const {value} = e.target;
         const {id} = e.target;
-        console.log(id)
-
         this.setState({
-            // ingredients: [...this.state.ingredients, {
-                [id]: value
-            // }]
+            [id]: value
         })
     }
 
     handleClick = () => {
-        console.log('clicked add amount of ingredients', this.state)
-
-        // adds state of ingredient and amount to form
         this.props.addIngredientAndAmount(this.state)
-
     }
 
     render() {

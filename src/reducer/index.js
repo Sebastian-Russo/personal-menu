@@ -69,9 +69,10 @@ const initialState = {
 
 export default function menuReducer(state=initialState, action) {
     if (action.type === ADD_RECIPE) {
-        console.log('action added recipe')
 
-        return Object.assign({}, state, {
+        // ingredient and amount are undefined 
+        let answer; 
+        answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
                     id: state.menuItems.length,
                     name: action.name, 
@@ -84,7 +85,7 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
+        console.log('action added recipe', answer)
     }
-    // console.log(state)
     return state;
 }

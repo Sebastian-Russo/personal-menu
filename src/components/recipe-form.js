@@ -4,13 +4,13 @@ import {reduxForm, Field,
     focus} from 'redux-form';
 import RecipeInput from './recipe-input';
 import {required, nonEmpty} from '../validators';
-// import { addRecipe } from '../actions';
+import { addRecipe } from '../actions';
 
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-                id: 0,
+                id: Math.random(),
                 name: "",
                 ingredients: [
                     {
@@ -35,12 +35,14 @@ export class RecipeForm extends React.Component {
         this.setState({
             [id]: value
         })
+        
     }
 
     handleSubmit = e => {
         e.preventDefault();
+        // this.handleChange(e)
         console.log(this.state);
-        this.handleChange(e)
+        this.props.dispatch(addRecipe(this.state))
     }
     
     render() {
@@ -103,21 +105,6 @@ export default reduxForm({
 
 
 
-
-                // <input 
-                //     name="ingredients"
-                //     type="text"
-                //     component={RecipeInput}
-                //     label="Ingredients"
-                //     validate={[required, nonEmpty]}
-                // />
-                // <input 
-                //     name="amount"
-                //     type="text"
-                //     component={RecipeInput}
-                //     label="Amount"
-                //     validate={[required, nonEmpty]}
-                // />
 
                 {/* <input 
                     name="pictures"
