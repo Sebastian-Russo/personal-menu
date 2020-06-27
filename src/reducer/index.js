@@ -85,7 +85,7 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
-        console.log('action added recipe', answer)
+        // console.log('action added recipe', answer)
     }
     return state;
 }

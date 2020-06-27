@@ -3,6 +3,7 @@ import {reduxForm, Field,
     // SubmissionError, 
     focus} from 'redux-form';
 import RecipeInput from './recipe-input';
+import RecipeField from './recipe-field';
 import {required, nonEmpty} from '../validators';
 import { addRecipe } from '../actions';
 
@@ -29,6 +30,10 @@ export class RecipeForm extends React.Component {
         })
     }
 
+    deleteIngredientAndAmount = (id) => [
+
+    ]
+
     handleChange = e => { 
         const {value} = e.target;
         const {id} = e.target;
@@ -47,50 +52,55 @@ export class RecipeForm extends React.Component {
     
     render() {
         return (
-            <form 
-                onSubmit={this.handleSubmit}
-                >
-
-                <h2>Add a new favorite recipe!</h2>
-               
-                <label htmlFor="name"> Recipe Name </label>
-                <input
-                    name="name"
-                    id="name"
-                    type="text"
-                    label="Recipe Name"
-                    validate={[required, nonEmpty]} 
-                    defaultValue="cookies"
-                    onChange={this.handleChange}
-                />
-                
-                <RecipeInput 
-                    addIngredientAndAmount={this.addIngredientAndAmount}/>
-
-
-                <label htmlFor="directions"> Directions </label>
-                <textarea 
-                    name="directions"
-                    id="directions"
-                    type="text"
-                    rows="4" 
-                    cols="25"
-                    label="Directions"
-                    validate={[required, nonEmpty]}
-                    defaultValue="mix and bake"
-                    onChange={this.handleChange}
-                />
-
-                    <br></br>
-                <button
-                    type="submit"
-                    // disabled={this.props.pristine || this.props.submitting}
-                    onSubmit={this.onSubmit}
+            <div>
+                <form 
+                    onSubmit={this.handleSubmit}
                     >
-                    Submit 
-                </button>
 
-            </form>
+                    <h2>Add a new favorite recipe!</h2>
+                
+                    <label htmlFor="name"> Recipe Name </label>
+                    <input
+                        name="name"
+                        id="name"
+                        type="text"
+                        label="Recipe Name"
+                        validate={[required, nonEmpty]} 
+                        defaultValue="cookies"
+                        onChange={this.handleChange}
+                    />
+                    
+                    <RecipeInput 
+                        addIngredientAndAmount={this.addIngredientAndAmount}
+                        deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+                        />
+
+
+                    <label htmlFor="directions"> Directions </label>
+                    <textarea 
+                        name="directions"
+                        id="directions"
+                        type="text"
+                        rows="4" 
+                        cols="25"
+                        label="Directions"
+                        validate={[required, nonEmpty]}
+                        defaultValue="mix and bake"
+                        onChange={this.handleChange}
+                    />
+
+                        <br></br>
+                    <button
+                        type="submit"
+                        // disabled={this.props.pristine || this.props.submitting}
+                        onSubmit={this.onSubmit}
+                        >
+                        Submit 
+                    </button>
+                </form>
+                <br></br>
+                <RecipeField recipe={this.state}/>
+            </div>
         );
     }
 }
