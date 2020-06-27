@@ -38,26 +38,20 @@ export default class RecipeInput extends React.Component {
         return (
             <div className="form-input">
 
-                <label htmlFor="ingredients">
-                    Ingredient
-                </label>
+                <label htmlFor="ingredients"> Ingredient </label>
                 <input 
                     name="ingredients"
                     id="ingredients"
                     type="text"
-                    // ref={input => this.input = input}
                     defaultValue='sugar'
                     onChange={this.handleChange} 
                     >
                 </input>
-                <label htmlFor="amount">
-                    Amount
-                </label>
+                <label htmlFor="amount"> Amount </label>
                 <input 
                     name="amount"
                     id="amount"
                     type="text"
-                    // ref={input => this.input = input}
                     defaultValue='1 cup'
                     onChange={this.handleChange} 
                     >

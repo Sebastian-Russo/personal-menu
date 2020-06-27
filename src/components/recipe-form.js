@@ -23,20 +23,15 @@ export class RecipeForm extends React.Component {
     }
 
     addIngredientAndAmount = (ingredientAndAmount) => {
-        console.log(ingredientAndAmount)
-
         ingredientAndAmount.id = Math.random();
-
         this.setState({
             ingredients: [...this.state.ingredients, ingredientAndAmount]
         })
-        console.log(this.state)
     }
 
     handleChange = e => { 
         const {value} = e.target;
         const {id} = e.target;
-
         this.setState({
             [id]: value
         })
@@ -47,26 +42,16 @@ export class RecipeForm extends React.Component {
         console.log(this.state);
         this.handleChange(e)
     }
-    // onSubmit = (values) => {
-    //     console.log('Submitted all inputs', values);
-    // }
     
     render() {
-
         return (
             <form 
                 onSubmit={this.handleSubmit}
-
-                // onSubmit={this.props.handleSubmit(values =>
-                //     this.onSubmit(values)
-                // )}
                 >
 
                 <h2>Add a new favorite recipe!</h2>
                
-                <label htmlFor="name">
-                    Recipe Name
-                </label>
+                <label htmlFor="name"> Recipe Name </label>
                 <input
                     name="name"
                     id="name"
@@ -77,14 +62,11 @@ export class RecipeForm extends React.Component {
                     onChange={this.handleChange}
                 />
                 
-
                 <RecipeInput 
                     addIngredientAndAmount={this.addIngredientAndAmount}/>
 
 
-                <label htmlFor="directions">
-                    Directions
-                </label>
+                <label htmlFor="directions"> Directions </label>
                 <textarea 
                     name="directions"
                     id="directions"
