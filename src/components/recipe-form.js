@@ -5,6 +5,7 @@ import {reduxForm, Field,
     actionTypes} from 'redux-form';
 import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
+import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
 import { addRecipe } from '../actions';
 
@@ -13,14 +14,15 @@ export class RecipeForm extends React.Component {
         super(props);
         this.state = { 
                 id: Math.random(),
-                name: "",
+                name: null,
                 ingredients: [
                     {
-                        ingredient: "",
-                        amount: ""
+                        ingredient: null,
+                        amount: null
                     }
                 ],
-                directions: ""
+                directions: "",
+                categories: []
         }
     }
 
@@ -53,8 +55,9 @@ export class RecipeForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         // this.handleChange(e)
-        console.log(this.state);
-        this.props.dispatch(addRecipe(this.state))
+        console.log('dispatch addRecipe', this.state);
+
+        // this.props.dispatch(addRecipe(this.state))
     }
     
     render() {
@@ -94,6 +97,10 @@ export class RecipeForm extends React.Component {
                         defaultValue="mix and bake"
                         onChange={this.handleChange}
                     />
+                    <br></br>
+                    <br></br>
+
+                    <RecipeCategories />
 
                         <br></br>
                     <button

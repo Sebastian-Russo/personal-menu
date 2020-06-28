@@ -74,7 +74,7 @@ export default function menuReducer(state=initialState, action) {
         let answer; 
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
-                    id: state.menuItems.length,
+                    id: action.id,
                     name: action.name, 
                     ingredients: [
                         {
@@ -85,7 +85,7 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
-        console.log('action added recipe', answer)
+        console.log('action added recipe', answer, action)
     }
     return state;
 }
