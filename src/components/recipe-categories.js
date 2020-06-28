@@ -11,17 +11,23 @@ export default class RecipeCategories extends React.Component {
 
     checkCategories = e => {
 
-        // let checkedBox = e.target.value;
-
-        // console.log(checkedBox)
+        let checked = e.target.value;
+        this.setState({
+            categories: [...this.state.categories, checked]
+        })
+        console.log(checked, this.state.categories)
+        // does not show last category checked/clicked 
+        this.props.addCategories(this.state.categories)
     }
 
-    
+
     otherCheckbox = () => {
             this.setState({
                 otherCheckbox: !this.state.otherCheckbox
             })
     };
+
+
 
 
     render() {
@@ -73,6 +79,16 @@ export default class RecipeCategories extends React.Component {
                     />
                     <label htmlFor="quick-and-easy">Quick and Easy</label>
                     <br></br>
+                    <input
+                        name="categories"
+                        id="dessert"
+                        type="checkbox"  
+                        value="dessert"
+                        onChange={this.checkCategories}
+                    />
+                    <label htmlFor="dessert">Dessert</label>
+                    <br></br>
+
                     <input
                         name="categories"
                         id="other"

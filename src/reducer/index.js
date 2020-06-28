@@ -76,6 +76,7 @@ export default function menuReducer(state=initialState, action) {
             menuItems: [...state.menuItems, {
                     id: action.id,
                     name: action.name, 
+                    categories: action.categories,
                     ingredients: [
                         {
                             ingredient: action.ingredient,

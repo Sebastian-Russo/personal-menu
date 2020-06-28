@@ -43,6 +43,14 @@ export class RecipeForm extends React.Component {
         })
     }
 
+    addCategories = (array) => {
+        console.log('here', array)
+
+        // this.setState({
+        //     categories: [...this.state.categories, array]
+        // })
+    }
+
     handleChange = e => { 
         const {value} = e.target;
         const {id} = e.target;
@@ -100,7 +108,9 @@ export class RecipeForm extends React.Component {
                     <br></br>
                     <br></br>
 
-                    <RecipeCategories />
+                    <RecipeCategories 
+                        addCategories={this.addCategories}
+                        />
 
                         <br></br>
                     <button
