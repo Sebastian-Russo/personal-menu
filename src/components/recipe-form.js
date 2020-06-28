@@ -1,7 +1,8 @@
 import React from 'react';
 import {reduxForm, Field, 
     // SubmissionError, 
-    focus} from 'redux-form';
+    focus,
+    actionTypes} from 'redux-form';
 import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import {required, nonEmpty} from '../validators';
@@ -28,11 +29,17 @@ export class RecipeForm extends React.Component {
         this.setState({
             ingredients: [...this.state.ingredients, ingredientAndAmount]
         })
+        console.log(this.state)
     }
 
-    deleteIngredientAndAmount = (id) => [
-
-    ]
+    deleteIngredientAndAmount = (id) => {
+        this.setState({
+            ingredients: this.state.ingredients.filter(ingredientAndAmount => {
+                console.log(ingredientAndAmount.id, id) 
+                return ingredientAndAmount.id !== id
+            })
+        })
+    }
 
     handleChange = e => { 
         const {value} = e.target;
@@ -72,7 +79,6 @@ export class RecipeForm extends React.Component {
                     
                     <RecipeInput 
                         addIngredientAndAmount={this.addIngredientAndAmount}
-                        deleteIngredientAndAmount={this.deleteIngredientAndAmount}
                         />
 
 
@@ -99,7 +105,10 @@ export class RecipeForm extends React.Component {
                     </button>
                 </form>
                 <br></br>
-                <RecipeField recipe={this.state}/>
+                <RecipeField 
+                    menuItem={this.state}
+                    deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+                    />
             </div>
         );
     }

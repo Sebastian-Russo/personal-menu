@@ -1,13 +1,20 @@
 import React from 'react';
 
 export default function(props){
-    const {recipe} = props;
-
-    const ingredients = recipe.ingredients.map((ingredient, i) => {
+    const {menuItem} = props;
+    
+    const ingredients = menuItem.ingredients.map((ingredientAndAmount, i) => {
         return (
-            <div key={`ingredients-${i}`}>
-                {ingredient.amount} of {ingredient.ingredients}
+            // key={`ingredients-${i}`}
+            <div key={ingredientAndAmount.id}>
+                <div>
+                    {ingredientAndAmount.amount} of {ingredientAndAmount.ingredients}
+                </div>
+                <button onClick={() => {props.deleteIngredientAndAmount(ingredientAndAmount.id)}}>
+                    Delete 
+                    </button>
             </div>
+
         )
     })
 
