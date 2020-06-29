@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 // *** AKA RECIPE COMPONENT ***
 
 export function YourMenuItem(props) {
@@ -28,7 +29,12 @@ export function YourMenuItem(props) {
             <div>{ingredients}</div>
             <h3>Directions: </h3>
             <div>{menuItem.directions}</div>
-            <h3>Categories:</h3>
+
+            
+            <Link to={'/your-menu'}>
+                <h3>Categories:</h3>
+            </Link>
+
             <div>{categories}</div>
         </div>
     );
