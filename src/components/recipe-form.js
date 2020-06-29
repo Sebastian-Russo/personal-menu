@@ -31,24 +31,21 @@ export class RecipeForm extends React.Component {
         this.setState({
             ingredients: [...this.state.ingredients, ingredientAndAmount]
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     deleteIngredientAndAmount = (id) => {
         this.setState({
             ingredients: this.state.ingredients.filter(ingredientAndAmount => {
-                console.log(ingredientAndAmount.id, id) 
+                // console.log(ingredientAndAmount.id, id) 
                 return ingredientAndAmount.id !== id
             })
         })
     }
 
-    addCategories = (array) => {
-        console.log('here', array)
-
-        // this.setState({
-        //     categories: [...this.state.categories, array]
-        // })
+    addCategories = (categories) => {
+        console.log('adding categories to parent state', categories)
+        this.setState({ categories })
     }
 
     handleChange = e => { 
@@ -65,7 +62,7 @@ export class RecipeForm extends React.Component {
         // this.handleChange(e)
         console.log('dispatch addRecipe', this.state);
 
-        // this.props.dispatch(addRecipe(this.state))
+        this.props.dispatch(addRecipe(this.state))
     }
     
     render() {

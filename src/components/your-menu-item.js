@@ -3,16 +3,21 @@ import {connect} from 'react-redux';
 // *** AKA RECIPE COMPONENT ***
 
 export function YourMenuItem(props) {
-    console.log(props)
     const {menuItems} = props;
     // why the [0] if it's the only one in the array?
-    // filtered menut item obj from array of objs, by filtering params id
+    // filtered menu item obj from array of objs, by filtering params id
     // previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
     const menuItem = menuItems.filter(menuItem => menuItem.name === props.match.params.id)[0];
 
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
         <div key={`ingredients-${i}`}>{ingredient.amount} of {ingredient.ingredient}</div>
+        )
+    })
+
+    const categories = menuItem.categories.map((category, i) => {
+        return (
+        <div key={`categories-${i}`}>{category}</div>
         )
     })
     
@@ -23,6 +28,8 @@ export function YourMenuItem(props) {
             <div>{ingredients}</div>
             <h3>Directions: </h3>
             <div>{menuItem.directions}</div>
+            <h3>Categories:</h3>
+            <div>{categories}</div>
         </div>
     );
 }

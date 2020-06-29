@@ -3,13 +3,6 @@ import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export function Sidebar(props) {
-    // const {menuItems} = props;
-    // const menuItem = menuItems.map(item => 
-    //     <li key={item.id}>
-    //         <Link to={}/>
-    //     </li>
-    // );
-
     return (
         <div className="sidebar">
             <nav className="sidebar-nav">

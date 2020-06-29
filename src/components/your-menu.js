@@ -1,26 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-// import {} from '../actions';
+import YourMenuCategories from './your-menu-categories'; 
 
 export function YourMenu(props) {
     const {menuItems} = props;
-    const menuItem = menuItems.map(item => (
-        <div className="menu-item" key={item.id}>
-            <h3 className="menu-item-name">
-                <Link to={`/your-menu-item/${item.name}`}>
-                    {item.name} 
-                </Link>
-            </h3>
-        </div>
-    ));
+    // const menuItem = menuItems.map(item => (
+    //     <div className="menu-item" key={item.id}>
+    //         <h3 className="menu-item-name">
+    //             <Link to={`/your-menu-item/${item.name}`}>
+    //                 {item.name} 
+    //             </Link>
+    //         </h3>
+    //     </div>
+    // ));
     
     return (
         <div className="menu-items">
             <h1>Your Menu</h1>
-            <div className="menu-item-list">
+            <YourMenuCategories />
+            
+            {/* <div className="menu-item-list">
                 {menuItem}
-            </div>
+            </div> */}
         </div>
     );
 }

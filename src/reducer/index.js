@@ -1,26 +1,32 @@
 import {ADD_RECIPE} from '../actions';
 
-// const initialState = {
-    // menuItems: [{
-    //             id: 0,
-    //             name: "",
-    //             ingredients: [
-    //                 {
-    //                     ingredient: "",
-    //                     amount: ""
-    //                 },
-    //             ],
-    //             directions: "",
-    //             pictures: [],
-    //             category: []
-    // }]
-// }
-
 const initialState = {
+    categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
+    categoryListTwo: [
+        {
+            category: 'breakfast',
+        },
+        {
+            category: 'lunch'
+        },
+        { 
+            category: 'dinner'
+        },
+        {   
+            category: 'dessert'
+        },
+        {
+            category: 'snacks'
+        },
+        {
+            category: 'quick-and-easy'
+        }
+    ],
     menuItems: [
         {
             id: 0,
             name: "grilled cheese",
+            categories: ["lunch"],
             ingredients: [
                 {
                     ingredient: "bread",
@@ -40,6 +46,7 @@ const initialState = {
         {
             id: 1,
             name: "ramen",
+            categories: ["snacks", "lunch", "quick-and-easy"],
             ingredients: [
                 {
                     ingredient: "roman packet of noodles",
@@ -51,6 +58,7 @@ const initialState = {
         {
             id: 2,
             name: "cereal",
+            categories: ["breakfast", "quick-and-easy"],
             ingredients: [
                 {
                     ingredient: "cereal",

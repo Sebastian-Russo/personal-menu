@@ -9,6 +9,8 @@ import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Sidebar from './sidebar';
+import YourMenuCategories from './your-menu-categories';
+import YourMenuCategoriesCategory from './your-menu-categories-category';
 
 
 export default function App() {
@@ -39,6 +41,10 @@ export default function App() {
                   exact
                   path="/your-menu-item/:id"
                   component={YourMenuItem} />
+                <Route
+                  exact
+                  path="/your-menu-categories/:id"
+                  component={YourMenuCategoriesCategory} />
               </Switch>
             </main>
         </div>
