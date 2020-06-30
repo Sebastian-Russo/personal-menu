@@ -54,12 +54,10 @@ export class RecipeForm extends React.Component {
         this.setState({
             [id]: value
         })
-        
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        // this.handleChange(e)
         console.log('dispatch addRecipe', this.state);
 
         this.props.dispatch(addRecipe(this.state))

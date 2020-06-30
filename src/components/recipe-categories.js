@@ -9,14 +9,17 @@ export default class RecipeCategories extends React.Component {
         }
     }
 
-    checkCategories = e => {
-
+    handeChangeCheckCategories = e => {
         let checked = e.target.value;
         this.setState({
             categories: [...this.state.categories, checked]
         })
         console.log(checked, this.state.categories)
-        // does not show last category checked/clicked 
+      
+        this.addCategoriesToParent()
+    }
+
+    addCategoriesToParent = () => {
         this.props.addCategories(this.state.categories)
     }
 
@@ -27,11 +30,7 @@ export default class RecipeCategories extends React.Component {
             })
     };
 
-
-
-
     render() {
-
         return (
             <div>
                     <input
@@ -39,7 +38,7 @@ export default class RecipeCategories extends React.Component {
                         id="breakfast"
                         type="checkbox"  
                         value="breakfast"
-                        onChange={this.checkCategories} 
+                        onChange={this.handeChangeCheckCategories} 
                     />
                     <label htmlFor="breakfast">Breakfast</label>
                     <br></br>
@@ -48,7 +47,7 @@ export default class RecipeCategories extends React.Component {
                         id="lunch"
                         type="checkbox" 
                         value="lunch"
-                        onChange={this.checkCategories} 
+                        onChange={this.handeChangeCheckCategories} 
                     />
                     <label htmlFor="lunch">Lunch</label>
                     <br></br>
@@ -57,7 +56,7 @@ export default class RecipeCategories extends React.Component {
                         id="dinner"
                         type="checkbox"  
                         value="dinner"
-                        onChange={this.checkCategories}
+                        onChange={this.handeChangeCheckCategories}
                     />
                     <label htmlFor="dinner">Dinner</label>
                     <br></br>
@@ -66,7 +65,7 @@ export default class RecipeCategories extends React.Component {
                         id="snacks"
                         type="checkbox"  
                         value="snacks"
-                        onChange={this.checkCategories}
+                        onChange={this.handeChangeCheckCategories}
                     />
                     <label htmlFor="Snacks">Snacks</label>
                     <br></br>
@@ -75,7 +74,7 @@ export default class RecipeCategories extends React.Component {
                         id="quick-and-easy"
                         type="checkbox"  
                         value="quick-and-easy"
-                        onChange={this.checkCategories}
+                        onChange={this.handeChangeCheckCategories}
                     />
                     <label htmlFor="quick-and-easy">Quick and Easy</label>
                     <br></br>
@@ -84,7 +83,7 @@ export default class RecipeCategories extends React.Component {
                         id="dessert"
                         type="checkbox"  
                         value="dessert"
-                        onChange={this.checkCategories}
+                        onChange={this.handeChangeCheckCategories}
                     />
                     <label htmlFor="dessert">Dessert</label>
                     <br></br>
@@ -94,7 +93,7 @@ export default class RecipeCategories extends React.Component {
                         id="other"
                         type="checkbox"  
                         value="other"
-                        onChange={this.checkCategories}
+                        onChange={this.handeChangeCheckCategories}
                         onChange={this.otherCheckbox}
                     />
                     <label htmlFor="create">Create a new category</label>
@@ -103,26 +102,10 @@ export default class RecipeCategories extends React.Component {
                         id="otherValue"
                         name="other"
                         hidden={!this.state.otherCheckbox ? false : true}
+                        onChange={this.handeChangeCheckCategories}
                         />
 
             </div>
         )
     }
 }
-
-
-
-
-
-// var otherCheckbox = document.querySelector('input[value="other"]');
-// var otherText = document.querySelector('input[id="otherValue"]');
-// otherText.style.visibility = 'hidden';
-
-// otherCheckbox.addEventListener('change', () => {
-//   if(otherCheckbox.checked) {
-//     otherText.style.visibility = 'visible';
-//     otherText.value = '';
-//   } else {
-//     otherText.style.visibility = 'hidden';
-//   }
-// });
