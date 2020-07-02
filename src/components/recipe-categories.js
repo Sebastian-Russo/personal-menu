@@ -1,31 +1,7 @@
 import React from 'react'; 
 
-export default class RecipeCategories extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = { 
-            categories: [],
-            otherCheckbox: true
-        }
-    }
+export default function RecipeCategories(props) {
 
-    handeChangeCheckCategories = e => {
-        let checked = e.target.value;
-        this.setState({
-            categories: [...this.state.categories, checked]
-        })
-        console.log(checked, this.state.categories)
-
-        this.props.addCategories(this.state.categories)
-    }
-
-    otherCheckbox = () => {
-            this.setState({
-                otherCheckbox: !this.state.otherCheckbox
-            })
-    };
-
-    render() {
         const categories = [
             "breakfast",
             "lunch",
@@ -42,8 +18,8 @@ export default class RecipeCategories extends React.Component {
                         id={cat}
                         type="checkbox"
                         value={cat}
-                        onChange={this.handeChangeCheckCategories}
-                    />
+                        // onChange={props.handeChangeCheckCategories()}
+                        onChange={(e) => props.addCategory(e)}                    />
                     <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
                     <br></br>
                 </div>
@@ -52,26 +28,7 @@ export default class RecipeCategories extends React.Component {
 
         return (
             <div>
-
-                    <div>{categories}</div>
-
-                    <input
-                        name="categories"
-                        id="other"
-                        type="checkbox"  
-                        value="other"
-                        onChange={this.handeChangeCheckCategories}
-                        onChange={this.otherCheckbox}
-                    />
-                    <label htmlFor="create">Create a new category</label>
-                    <input 
-                        type="text"
-                        id="otherValue"
-                        name="other"
-                        hidden={!this.state.otherCheckbox ? false : true}
-                    />
-
+                {categories}
             </div>
         )
-    }
 }

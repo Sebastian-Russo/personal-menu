@@ -13,11 +13,12 @@ export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-                id: Math.random(),
                 name: null,
                 ingredients: [],
                 directions: "",
-                categories: []
+                categories: [],
+                otherCheckbox: true,
+                newCategory: []
         }
     }
 
@@ -38,9 +39,15 @@ export class RecipeForm extends React.Component {
         })
     }
 
-    addCategories = (categories) => {
-        console.log('adding categories to parent state', categories)
-        this.setState({ categories: [...this.state.categories, categories] })
+    addCategory = (event) => {
+        const category = event.target.value;
+        // if state.categories array includes new category, why setState? should it be if it doesn't include?
+        if (this.state.categories.includes(category)) {
+            this.setState({
+                categories: this.state.categories.filter(cat => cat !== category)
+            })
+        }
+        this.setState({ categories: [...this.state.categories, category] })
     }
 
     handleChange = e => { 
@@ -49,6 +56,17 @@ export class RecipeForm extends React.Component {
             [name]: value
         })
     }
+
+    handleNewCategory = (e) => {
+        const change = e.target.value;
+        this.setState({ newCategory: [change] })
+    }
+
+    // otherCheckbox = () => {
+    //     this.setState({
+    //         otherCheckbox: !this.state.otherCheckbox
+    //     })
+    // };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -79,8 +97,7 @@ export class RecipeForm extends React.Component {
                     
                     <RecipeInput 
                         addIngredientAndAmount={this.addIngredientAndAmount}
-                        />
-
+                    />
 
                     <label htmlFor="directions"> Directions </label>
                     <textarea 
@@ -98,10 +115,27 @@ export class RecipeForm extends React.Component {
                     <br></br>
 
                     <RecipeCategories 
-                        addCategories={this.addCategories}
-                        />
+                        addCategory={this.addCategory}
+                    />
+                    <input
+                        name="categories"
+                        id="other"
+                        type="checkbox"  
+                        value="other"
+                        onChange={(e) => this.addCategory(e)}   
+                        // onChange={this.otherCheckbox()}
+                    />
+                    <label htmlFor="create">Create a new category</label>
+                    <input 
+                        type="text"
+                        id="otherValue"
+                        name="other"
+                        // hidden={!this.state.otherCheckbox ? false : true}
+                        onChange={this.handleNewCategory}
+                    />
 
-                        <br></br>
+                    <br></br>
+
                     <button
                         type="submit"
                         // disabled={this.props.pristine || this.props.submitting}
@@ -110,6 +144,7 @@ export class RecipeForm extends React.Component {
                         Submit 
                     </button>
                 </form>
+
                 <br></br>
                 <RecipeField 
                     menuItem={this.state}
