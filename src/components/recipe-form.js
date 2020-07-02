@@ -1,5 +1,5 @@
 import React from 'react';
-import {reduxForm, Field, 
+import {reduxForm, 
     // SubmissionError, 
     focus,
     actionTypes} from 'redux-form';
@@ -22,18 +22,16 @@ export class RecipeForm extends React.Component {
         }
     }
 
-    addIngredientAndAmount = (ingredientAndAmount) => {
-        ingredientAndAmount.id = Math.random();
+    addIngredientAndAmount = (ingredient) => {
+        ingredient.id = Math.floor(Math.random() * 10000000000);
         this.setState({
-            ingredients: [...this.state.ingredients, ingredientAndAmount]
-        })
-        // console.log(this.state)
-    }
+            ingredients: [...this.state.ingredients, ingredient]
+        });
+    };
 
     deleteIngredientAndAmount = (id) => {
         this.setState({
             ingredients: this.state.ingredients.filter(ingredientAndAmount => {
-                // console.log(ingredientAndAmount.id, id) 
                 return ingredientAndAmount.id !== id
             })
         })
@@ -71,7 +69,6 @@ export class RecipeForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         console.log('dispatch addRecipe', this.state);
-
         this.props.dispatch(addRecipe(this.state))
     }
     

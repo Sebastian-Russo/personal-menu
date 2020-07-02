@@ -3,24 +3,23 @@ import React from 'react';
 export default function(props){
     const {menuItem} = props;
     
-    const ingredients = menuItem.ingredients.map((ingredientAndAmount, i) => {
+    const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
-            <div key={ingredientAndAmount.id}>
+            <div key={ingredient.id}>
                 <div>
-                    {ingredientAndAmount.amount} of {ingredientAndAmount.ingredients}
+                    {ingredient.amount} of {ingredient.ingredient}
                 </div>
-                <button onClick={() => {props.deleteIngredientAndAmount(ingredientAndAmount.id)}}>
+                <button onClick={() => {props.deleteIngredientAndAmount(ingredient.id)}}>
                     Delete 
                 </button>
             </div>
-
         )
     })
 
     return(
         <div>
             <div>Your Recipe so far...</div>
-            <div>{ingredients}</div>
+            {ingredients}
         </div>
     )
 }

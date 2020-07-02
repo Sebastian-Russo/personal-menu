@@ -3,60 +3,52 @@ import React from 'react';
 export default class RecipeInput extends React.Component {
     constructor(props){
         super(props);
-        this.state = { 
-            ingredients: [
-                {
-                    ingredient: [],
-                    amount: []
-                }
-            ]
+
+        this.state = {                 
+            ingredient: "",
+            amount: ""
         }
     }
 
-
     handleChange = (e) => {
-        const {value} = e.target;
-        const {id} = e.target;
+        const {value, name} = e.target;
         this.setState({
-            [id]: value
+            [name]: value
         })
     }
 
-    handleClick = () => {
-        console.log(this.state)
-        this.props.addIngredientAndAmount(this.state)
+    handleClick = (e) => {
+        e.preventDefault();
+        this.props.addIngredientAndAmount(this.state);
+        // below is to clear the amount and ingredient after each click ?
+        this.setState({
+            amount: "",
+            ingredient: ""
+        })
     }
 
     render() {
         return (
             <div className="form-input">
-
-                <label htmlFor="ingredients"> Ingredient </label>
+                <label htmlFor="ingredient"> Ingredient </label>
                 <input 
-                    name="ingredients"
-                    id="ingredients"
+                    name="ingredient"
+                    id="ingredient"
                     type="text"
-                    defaultValue='sugar'
+                    // why keep value here?
+                    value={this.state.ingredient}
                     onChange={this.handleChange} 
-                    >
-                </input>
+                />
                 <label htmlFor="amount"> Amount </label>
                 <input 
                     name="amount"
                     id="amount"
                     type="text"
-                    defaultValue='1 cup'
+                    //
+                    value={this.state.amount}
                     onChange={this.handleChange} 
-                    >
-                </input>
-                <button
-                    type="button"
-                    onClick={this.handleClick} 
-                    >
-                    Add Amount of Ingredients
-                </button>
-
-
+                    />
+                <button type="button" onClick={this.handleClick}>Add Amount of Ingredients</button>
             </div>
         );
     }

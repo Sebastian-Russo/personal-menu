@@ -76,6 +76,7 @@ const initialState = {
 
 
 export default function menuReducer(state=initialState, action) {
+    console.log('action dispatched!', action)
     let answer; 
     if (action.type === ADD_RECIPE) {
         // ingredient and amount are undefined 
@@ -84,12 +85,13 @@ export default function menuReducer(state=initialState, action) {
                     id: action.id,
                     name: action.name, 
                     categories: action.categories,
-                    ingredients: [
-                        {
-                            ingredient: action.ingredient,
-                            amount: action.amount
-                        },
-                    ],
+                    ingredients: "",
+                    // [
+                    //     {
+                    //         ingredient: action.ingredient,
+                    //         amount: action.amount
+                    //     },
+                    // ],
                     directions: action.directions
             }]
         })
@@ -100,6 +102,6 @@ export default function menuReducer(state=initialState, action) {
         })
         return answer
     }
-    console.log('action added recipe', answer, action)
+    console.log('action dispatched!', answer, action)
     return state;
 }
