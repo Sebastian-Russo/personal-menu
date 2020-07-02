@@ -5,14 +5,13 @@ export default function(props){
     
     const ingredients = menuItem.ingredients.map((ingredientAndAmount, i) => {
         return (
-            // key={`ingredients-${i}`}
             <div key={ingredientAndAmount.id}>
                 <div>
                     {ingredientAndAmount.amount} of {ingredientAndAmount.ingredients}
                 </div>
                 <button onClick={() => {props.deleteIngredientAndAmount(ingredientAndAmount.id)}}>
                     Delete 
-                    </button>
+                </button>
             </div>
 
         )

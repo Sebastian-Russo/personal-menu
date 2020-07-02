@@ -1,4 +1,4 @@
-import {ADD_RECIPE} from '../actions';
+import {ADD_RECIPE, EDIT_DIRECTIONS} from '../actions';
 
 const initialState = {
     categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
@@ -76,10 +76,9 @@ const initialState = {
 
 
 export default function menuReducer(state=initialState, action) {
+    let answer; 
     if (action.type === ADD_RECIPE) {
-
         // ingredient and amount are undefined 
-        let answer; 
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
                     id: action.id,
@@ -94,7 +93,13 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
-        console.log('action added recipe', answer, action)
+        return answer
+    } else if (action.type === EDIT_DIRECTIONS) {
+        answer = Object.assign({}, state, {
+            menuItems: {directions: action.directions}
+        })
+        return answer
     }
+    console.log('action added recipe', answer, action)
     return state;
 }

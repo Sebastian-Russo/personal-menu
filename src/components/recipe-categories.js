@@ -15,14 +15,9 @@ export default class RecipeCategories extends React.Component {
             categories: [...this.state.categories, checked]
         })
         console.log(checked, this.state.categories)
-      
-        this.addCategoriesToParent()
-    }
 
-    addCategoriesToParent = () => {
         this.props.addCategories(this.state.categories)
     }
-
 
     otherCheckbox = () => {
             this.setState({
@@ -31,62 +26,34 @@ export default class RecipeCategories extends React.Component {
     };
 
     render() {
+        const categories = [
+            "breakfast",
+            "lunch",
+            "dinner",
+            "snacks",
+            "quick-and-easy",
+            "dessert"
+        ].map((cat, i) => {
+            const label = cat[0].toUpperCase() + cat.slice(1);
+            return (
+                <div key={`${cat}-${i}`}>
+                    <input 
+                        name={cat}
+                        id={cat}
+                        type="checkbox"
+                        value={cat}
+                        onChange={this.handeChangeCheckCategories}
+                    />
+                    <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
+                    <br></br>
+                </div>
+            )
+        })
+
         return (
             <div>
-                    <input
-                        name="categories"
-                        id="breakfast"
-                        type="checkbox"  
-                        value="breakfast"
-                        onChange={this.handeChangeCheckCategories} 
-                    />
-                    <label htmlFor="breakfast">Breakfast</label>
-                    <br></br>
-                    <input
-                        name="categories"
-                        id="lunch"
-                        type="checkbox" 
-                        value="lunch"
-                        onChange={this.handeChangeCheckCategories} 
-                    />
-                    <label htmlFor="lunch">Lunch</label>
-                    <br></br>
-                    <input
-                        name="categories"
-                        id="dinner"
-                        type="checkbox"  
-                        value="dinner"
-                        onChange={this.handeChangeCheckCategories}
-                    />
-                    <label htmlFor="dinner">Dinner</label>
-                    <br></br>
-                    <input
-                        name="categories"
-                        id="snacks"
-                        type="checkbox"  
-                        value="snacks"
-                        onChange={this.handeChangeCheckCategories}
-                    />
-                    <label htmlFor="Snacks">Snacks</label>
-                    <br></br>
-                    <input
-                        name="categories"
-                        id="quick-and-easy"
-                        type="checkbox"  
-                        value="quick-and-easy"
-                        onChange={this.handeChangeCheckCategories}
-                    />
-                    <label htmlFor="quick-and-easy">Quick and Easy</label>
-                    <br></br>
-                    <input
-                        name="categories"
-                        id="dessert"
-                        type="checkbox"  
-                        value="dessert"
-                        onChange={this.handeChangeCheckCategories}
-                    />
-                    <label htmlFor="dessert">Dessert</label>
-                    <br></br>
+
+                    <div>{categories}</div>
 
                     <input
                         name="categories"
@@ -102,8 +69,7 @@ export default class RecipeCategories extends React.Component {
                         id="otherValue"
                         name="other"
                         hidden={!this.state.otherCheckbox ? false : true}
-                        onChange={this.handeChangeCheckCategories}
-                        />
+                    />
 
             </div>
         )

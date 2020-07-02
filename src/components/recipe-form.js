@@ -15,12 +15,7 @@ export class RecipeForm extends React.Component {
         this.state = { 
                 id: Math.random(),
                 name: null,
-                ingredients: [
-                    {
-                        ingredient: null,
-                        amount: null
-                    }
-                ],
+                ingredients: [],
                 directions: "",
                 categories: []
         }
@@ -45,14 +40,13 @@ export class RecipeForm extends React.Component {
 
     addCategories = (categories) => {
         console.log('adding categories to parent state', categories)
-        this.setState({ categories })
+        this.setState({ categories: [...this.state.categories, categories] })
     }
 
     handleChange = e => { 
-        const {value} = e.target;
-        const {id} = e.target;
+        const {value, name} = e.target;
         this.setState({
-            [id]: value
+            [name]: value
         })
     }
 
@@ -142,10 +136,4 @@ export default reduxForm({
                     type="pictures"
                     component={RecipeInput}
                     label="Pictures"
-                /> */}
-                {/* <input 
-                    name="add-menu-category"
-                    type="selector text"
-                    component={RecipeInput}
-                    label="Add to a Menu Category"
                 /> */}

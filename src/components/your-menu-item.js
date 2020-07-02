@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {editDirections} from '../actions';
 // *** AKA RECIPE COMPONENT ***
 
 export function YourMenuItem(props) {
@@ -9,6 +10,15 @@ export function YourMenuItem(props) {
     // filtered menu item obj from array of objs, by filtering params id
     // previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
     const menuItem = menuItems.filter(menuItem => menuItem.name === props.match.params.id)[0];
+
+    const directions = () => {
+        return (
+            <div>
+                <div>{menuItem.directions}</div>
+                {/* <button onClick={props.dispatch(editDirections)}>Edit</button> */}
+            </div>
+        )
+    }
 
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
@@ -21,14 +31,14 @@ export function YourMenuItem(props) {
         <div key={`categories-${i}`}>{category}</div>
         )
     })
-    
+
     return (
         <div className="menu-item">
             <h1>{menuItem.name}</h1>
             <h3>Ingredients:</h3>
             <div>{ingredients}</div>
             <h3>Directions: </h3>
-            <div>{menuItem.directions}</div>
+            <div>{directions()}</div>
 
             
             <Link to={'/your-menu'}>

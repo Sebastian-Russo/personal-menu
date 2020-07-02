@@ -6,8 +6,8 @@ export default class RecipeInput extends React.Component {
         this.state = { 
             ingredients: [
                 {
-                    ingredient: "",
-                    amount: ""
+                    ingredient: [],
+                    amount: []
                 }
             ]
         }
@@ -23,6 +23,7 @@ export default class RecipeInput extends React.Component {
     }
 
     handleClick = () => {
+        console.log(this.state)
         this.props.addIngredientAndAmount(this.state)
     }
 
