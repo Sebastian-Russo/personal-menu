@@ -62,11 +62,11 @@ export class RecipeForm extends React.Component {
         this.setState({ newCategory: [change] })
     }
 
-    // otherCheckbox = () => {
-    //     this.setState({
-    //         otherCheckbox: !this.state.otherCheckbox
-    //     })
-    // };
+    otherCheckbox = () => {
+        this.setState({
+            otherCheckbox: !this.state.otherCheckbox
+        })
+    };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -123,14 +123,14 @@ export class RecipeForm extends React.Component {
                         type="checkbox"  
                         value="other"
                         onChange={(e) => this.addCategory(e)}   
-                        // onChange={this.otherCheckbox()}
+                        onChange={this.otherCheckbox}
                     />
                     <label htmlFor="create">Create a new category</label>
                     <input 
                         type="text"
                         id="otherValue"
                         name="other"
-                        // hidden={!this.state.otherCheckbox ? false : true}
+                        hidden={!this.state.otherCheckbox ? false : true}
                         onChange={this.handleNewCategory}
                     />
 
