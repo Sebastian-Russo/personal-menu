@@ -102,7 +102,6 @@ export class RecipeForm extends React.Component {
                         cols="25"
                         label="Directions"
                         validate={[required, nonEmpty]}
-                        defaultValue="mix and bake"
                         onChange={this.handleChange}
                     />
                     <br></br>

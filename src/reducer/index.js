@@ -55,10 +55,8 @@ const initialState = {
 }
 
 export default function menuReducer(state=initialState, action) {
-    console.log('action dispatched!', action)
     let answer; 
     if (action.type === ADD_RECIPE) {
-        // ingredient and amount are undefined 
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
                     id: Math.floor(Math.random() * 10000000000),
@@ -76,6 +74,6 @@ export default function menuReducer(state=initialState, action) {
         })
         return answer
     }
-    console.log('action dispatched!', answer, action)
+    console.log('global store', action, answer)
     return state;
 }

@@ -6,14 +6,13 @@ export function YourMenuCategories(props) {
 
     const categories = props.categoryList.map((category, i) => {
         return (
-        <div key={`categories-${i}`}>
-            <h3>
-                <Link to={`/your-menu-categories/${category}`}>
-                    {category}
-                </Link>
-            </h3>
-        
-        </div>
+            <div key={`categories-${i}`}>
+                <h3>
+                    <Link to={`/your-menu-categories/${category}`}>
+                        {category}
+                    </Link>
+                </h3>
+            </div>
         )
     })
      
@@ -22,7 +21,7 @@ export function YourMenuCategories(props) {
             <h3>Categories: </h3>
             <div>{categories}</div>
         </div>
- )   
+    )   
 }
 
 const mapStateToProps = state => ({
