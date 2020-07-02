@@ -13,7 +13,7 @@ export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-                name: null,
+                name: "",
                 ingredients: [],
                 directions: "",
                 categories: [],
@@ -68,16 +68,13 @@ export class RecipeForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('dispatch addRecipe', this.state);
         this.props.dispatch(addRecipe(this.state))
     }
     
     render() {
         return (
             <div>
-                <form 
-                    onSubmit={this.handleSubmit}
-                    >
+                <form onSubmit={this.handleSubmit}>
 
                     <h2>Add a new favorite recipe!</h2>
                 

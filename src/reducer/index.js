@@ -2,26 +2,6 @@ import {ADD_RECIPE, EDIT_DIRECTIONS} from '../actions';
 
 const initialState = {
     categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
-    categoryListTwo: [
-        {
-            category: 'breakfast',
-        },
-        {
-            category: 'lunch'
-        },
-        { 
-            category: 'dinner'
-        },
-        {   
-            category: 'dessert'
-        },
-        {
-            category: 'snacks'
-        },
-        {
-            category: 'quick-and-easy'
-        }
-    ],
     menuItems: [
         {
             id: 0,
@@ -74,7 +54,6 @@ const initialState = {
     ]
 }
 
-
 export default function menuReducer(state=initialState, action) {
     console.log('action dispatched!', action)
     let answer; 
@@ -82,20 +61,15 @@ export default function menuReducer(state=initialState, action) {
         // ingredient and amount are undefined 
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
-                    id: action.id,
+                    id: Math.floor(Math.random() * 10000000000),
                     name: action.name, 
                     categories: action.categories,
-                    ingredients: "",
-                    // [
-                    //     {
-                    //         ingredient: action.ingredient,
-                    //         amount: action.amount
-                    //     },
-                    // ],
+                    ingredients: action.ingredients,
                     directions: action.directions
             }]
         })
         return answer
+
     } else if (action.type === EDIT_DIRECTIONS) {
         answer = Object.assign({}, state, {
             menuItems: {directions: action.directions}
