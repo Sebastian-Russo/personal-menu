@@ -17,6 +17,7 @@ export class RecipeForm extends React.Component {
                 ingredients: props.menuItem.ingredients || [],
                 directions: props.menuItem.directions || "",
                 categories: props.menuItem.categories || [],
+                id: props.menuItem.id || Math.floor(Math.random() * 10000000000),
                 otherCheckbox: true,
                 newCategory: []
         }
@@ -70,13 +71,7 @@ export class RecipeForm extends React.Component {
         e.preventDefault();
         this.props.dispatch(addRecipe(this.state))
     }
-
-    valueControlledByState = () => {
-
-    }
-
-    // <input value={this.state.<value that is controlled by state here>}/>
-    
+ 
     render() {
         return (
             <div>
@@ -97,7 +92,6 @@ export class RecipeForm extends React.Component {
                     
                     <RecipeInput 
                         addIngredientAndAmount={this.addIngredientAndAmount}
-                        // menuItem={this.state.ingredients}
                     />
 
                     <label htmlFor="directions"> Directions </label>

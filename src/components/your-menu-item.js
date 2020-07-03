@@ -12,7 +12,7 @@ export function YourMenuItem(props) {
     // filtered menu item obj from array of objs, by filtering params id
     // previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
     const menuItem = menuItems.filter(menuItem => menuItem.name === props.match.params.id)[0];
-    // console.log(menuItem)
+    console.log(menuItem)
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
         <div key={`ingredients-${i}`}>{ingredient.amount} of {ingredient.ingredient}</div>
@@ -36,6 +36,7 @@ export function YourMenuItem(props) {
             />
         )
     } 
+    
     if (props.editing === false) {
         return (
             <div className="menu-item">

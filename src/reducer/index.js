@@ -66,7 +66,7 @@ export default function menuReducer(state=initialState, action) {
     if (action.type === ADD_RECIPE) {
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
-                    id: Math.floor(Math.random() * 10000000000),
+                    id: action.id,
                     name: action.name, 
                     categories: action.categories,
                     ingredients: action.ingredients,
