@@ -8,8 +8,8 @@ export const addRecipe = ({name, ingredients, directions, id, categories}) => ({
     categories
 })
 
-export const EDIT_DIRECTIONS = 'EDIT_DIRECTIONS';
-export const editDirections = directions => ({
-    type: EDIT_DIRECTIONS,
-    directions
+export const EDIT_RECIPE = 'EDIT_RECIPE';
+export const editRecipe = () => ({
+    type: EDIT_RECIPE,
+    editing: true
 })

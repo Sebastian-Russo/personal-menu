@@ -1,6 +1,7 @@
-import {ADD_RECIPE, EDIT_DIRECTIONS} from '../actions';
+import {ADD_RECIPE, EDIT_RECIPE} from '../actions';
 
 const initialState = {
+    editing: false,
     categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
     menuItems: [
         {
@@ -66,14 +67,16 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
+        console.log('global store', action, answer)
         return answer
-
-    } else if (action.type === EDIT_DIRECTIONS) {
+    } else if (action.type === EDIT_RECIPE) {
         answer = Object.assign({}, state, {
-            menuItems: {directions: action.directions}
+            editing: !state.editing
         })
+        console.log('global store', action, answer)
         return answer
     }
     console.log('global store', action, answer)
     return state;
 }
+

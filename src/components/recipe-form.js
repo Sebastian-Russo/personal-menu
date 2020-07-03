@@ -12,6 +12,7 @@ import { addRecipe } from '../actions';
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
+        console.log(props)
         this.state = { 
                 name: "",
                 ingredients: [],
@@ -70,6 +71,12 @@ export class RecipeForm extends React.Component {
         e.preventDefault();
         this.props.dispatch(addRecipe(this.state))
     }
+
+    valueControlledByState = () => {
+
+    }
+
+    // <input value={this.state.<value that is controlled by state here>}/>
     
     render() {
         return (
@@ -84,13 +91,14 @@ export class RecipeForm extends React.Component {
                         id="name"
                         type="text"
                         label="Recipe Name"
+                        value={this.props.menuItem.name}
                         validate={[required, nonEmpty]} 
-                        defaultValue="cookies"
                         onChange={this.handleChange}
                     />
                     
                     <RecipeInput 
                         addIngredientAndAmount={this.addIngredientAndAmount}
+                        menutItem={this.props.menuItem}
                     />
 
                     <label htmlFor="directions"> Directions </label>
@@ -101,6 +109,7 @@ export class RecipeForm extends React.Component {
                         rows="4" 
                         cols="25"
                         label="Directions"
+                        value={this.props.menuItem.directions}
                         validate={[required, nonEmpty]}
                         onChange={this.handleChange}
                     />
@@ -128,7 +137,6 @@ export class RecipeForm extends React.Component {
                     />
 
                     <br></br>
-
                     <button
                         type="submit"
                         // disabled={this.props.pristine || this.props.submitting}
