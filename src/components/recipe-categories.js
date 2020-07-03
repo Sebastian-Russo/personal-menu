@@ -8,7 +8,8 @@ export default function RecipeCategories(props) {
             "dinner",
             "snacks",
             "quick-and-easy",
-            "dessert"
+            "dessert",
+            "other"
         ].map((cat, i) => {
             const label = cat[0].toUpperCase() + cat.slice(1);
             return (
@@ -18,7 +19,6 @@ export default function RecipeCategories(props) {
                         id={cat}
                         type="checkbox"
                         value={cat}
-                        // onChange={props.handeChangeCheckCategories()}
                         onChange={(e) => props.addCategory(e)}                    />
                     <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
                     <br></br>

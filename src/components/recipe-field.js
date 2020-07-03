@@ -1,10 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-export function RecipeField(props){
+export default function RecipeField(props){
     const {menuItem} = props;
-    console.log(menuItem)
-    
+        
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
             <div key={ingredient.id}>
@@ -25,9 +23,3 @@ export function RecipeField(props){
         </div>
     )
 }
-
-const mapStateToProps = state => ({
-    menuItems: state.menuItems
-})
-
-export default connect(mapStateToProps)(RecipeField)

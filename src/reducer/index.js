@@ -11,14 +11,17 @@ const initialState = {
             ingredients: [
                 {
                     ingredient: "bread",
+                    id: 1,
                     amount: "2 slices"
                 },
                 {
                     ingredient: "cheese",
+                    id: 2,
                     amount: "2 slices"
                 },
                 {
                     ingredient: "butter",
+                    id: 3,
                     amount: "1 tbps"
                 }
             ],
@@ -31,6 +34,7 @@ const initialState = {
             ingredients: [
                 {
                     ingredient: "roman packet of noodles",
+                    id: 1,
                     amount: "1 packet"
                 }
             ],
@@ -43,10 +47,12 @@ const initialState = {
             ingredients: [
                 {
                     ingredient: "cereal",
+                    id: 1,
                     amount: "2 cups"
                 },
                 {
                     ingredient: "milk",
+                    id: 2,
                     amount: "1 cup"
                 }
             ],

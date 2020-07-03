@@ -1,8 +1,7 @@
 import React from 'react';
 import {reduxForm, 
     // SubmissionError, 
-    focus,
-    actionTypes} from 'redux-form';
+    focus,} from 'redux-form';
 import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
@@ -14,10 +13,10 @@ export class RecipeForm extends React.Component {
         super(props);
         console.log(props)
         this.state = { 
-                name: "",
-                ingredients: [],
-                directions: "",
-                categories: [],
+                name: props.menuItem.name || "",
+                ingredients: props.menuItem.ingredients || [],
+                directions: props.menuItem.directions || "",
+                categories: props.menuItem.categories || [],
                 otherCheckbox: true,
                 newCategory: []
         }
@@ -91,14 +90,14 @@ export class RecipeForm extends React.Component {
                         id="name"
                         type="text"
                         label="Recipe Name"
-                        value={this.props.menuItem.name}
+                        value={this.state.name}
                         validate={[required, nonEmpty]} 
                         onChange={this.handleChange}
                     />
                     
                     <RecipeInput 
                         addIngredientAndAmount={this.addIngredientAndAmount}
-                        menutItem={this.props.menuItem}
+                        // menuItem={this.state.ingredients}
                     />
 
                     <label htmlFor="directions"> Directions </label>
@@ -109,7 +108,7 @@ export class RecipeForm extends React.Component {
                         rows="4" 
                         cols="25"
                         label="Directions"
-                        value={this.props.menuItem.directions}
+                        value={this.state.directions}
                         validate={[required, nonEmpty]}
                         onChange={this.handleChange}
                     />
@@ -118,12 +117,14 @@ export class RecipeForm extends React.Component {
 
                     <RecipeCategories 
                         addCategory={this.addCategory}
+                        menuItem={this.props.menuItem}
                     />
                     <input
                         name="categories"
                         id="other"
                         type="checkbox"  
                         value="other"
+                        value={this.props.categories}
                         onChange={(e) => this.addCategory(e)}   
                         onChange={this.otherCheckbox}
                     />
@@ -150,6 +151,7 @@ export class RecipeForm extends React.Component {
                 <RecipeField 
                     menuItem={this.state}
                     deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+                    menuItem={this.props.menuItem}
                     />
             </div>
         );

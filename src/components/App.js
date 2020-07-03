@@ -9,7 +9,6 @@ import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Sidebar from './sidebar';
-import YourMenuCategories from './your-menu-categories';
 import YourMenuCategoriesCategory from './your-menu-categories-category';
 
 

@@ -3,10 +3,10 @@ import React from 'react';
 export default class RecipeInput extends React.Component {
     constructor(props){
         super(props);
-
+        console.log(props)
         this.state = {                 
-            ingredient: "",
-            amount: ""
+            ingredient: props.ingredient || "",
+            amount: props.amount || ""
         }
     }
 
@@ -44,7 +44,7 @@ export default class RecipeInput extends React.Component {
                     name="amount"
                     id="amount"
                     type="text"
-                    //
+                    // controlled component when using value in input 
                     value={this.state.amount}
                     onChange={this.handleChange} 
                     />
