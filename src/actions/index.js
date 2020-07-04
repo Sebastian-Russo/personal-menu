@@ -13,3 +13,8 @@ export const editRecipe = () => ({
     type: EDIT_RECIPE,
     editing: true
 })
+
+export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
+export const deleteMenuItem = () => ({
+    type: DELETE_MENU_ITEM
+})

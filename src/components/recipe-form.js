@@ -14,12 +14,14 @@ export class RecipeForm extends React.Component {
         
         if (this.props.menuItem) {
             console.log('edit menu item')
+            const {menuItem} = props;
+            const {name, ingredients, directions, categories, id,} = menuItem;
             this.state = { 
-                name: props.menuItem.name || "",
-                ingredients: props.menuItem.ingredients || [],
-                directions: props.menuItem.directions || "",
-                categories: props.menuItem.categories || [],
-                id: props.menuItem.id || Math.floor(Math.random() * 10000000000),
+                name: name || "",
+                ingredients: ingredients || [],
+                directions: directions || "",
+                categories: categories || [],
+                id: id || Math.floor(Math.random() * 10000000000),
                 otherCheckbox: true,
                 newCategory: []
             }
@@ -36,18 +38,20 @@ export class RecipeForm extends React.Component {
             }
         }
     }
-
+////////////////////////////////////////////////////////////////////////
     addIngredientAndAmount = (ingredient) => {
         ingredient.id = Math.floor(Math.random() * 10000000000);
+        console.log(ingredient)
         this.setState({
             ingredients: [...this.state.ingredients, ingredient]
         });
+        console.log(this.state)
     };
 
     deleteIngredientAndAmount = (id) => {
         this.setState({
-            ingredients: this.state.ingredients.filter(ingredientAndAmount => {
-                return ingredientAndAmount.id !== id
+            ingredients: this.state.ingredients.filter(ingredient => {
+                return ingredient.id !== id
             })
         })
     }
@@ -157,9 +161,8 @@ export class RecipeForm extends React.Component {
 
                 <br></br>
                 <RecipeField 
-                    menuItemNew={this.state}
+                    menuItem={this.state}
                     deleteIngredientAndAmount={this.deleteIngredientAndAmount}
-                    menuItem={this.props.menuItem}
                     />
             </div>
         );
