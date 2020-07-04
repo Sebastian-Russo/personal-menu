@@ -3,10 +3,18 @@ import React from 'react';
 export default class RecipeInput extends React.Component {
     constructor(props){
         super(props);
-        console.log(props)
-        this.state = {                 
-            ingredient: props.ingredient || "",
-            amount: props.amount || ""
+ 
+        if (this.props.ingredient) {
+            // console.log(props)
+            this.state = {                 
+                ingredient: props.ingredient || "",
+                amount: props.amount || ""
+            }
+        } else {
+            this.state = {                 
+                ingredient: "",
+                amount: ""
+            }
         }
     }
 

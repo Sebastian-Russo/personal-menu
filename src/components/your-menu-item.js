@@ -29,33 +29,37 @@ export function YourMenuItem(props) {
         props.dispatch(editRecipe())
     }
     
+    let render;
     if (props.editing === true) {
-        return (
+        return render = (
             <RecipeForm 
                 menuItem={menuItem}
             />
         )
     } 
-    
     if (props.editing === false) {
-        return (
+        return render = (
             <div className="menu-item">
                 <h1>{menuItem.name}</h1>
                 <h3>Ingredients:</h3>
                 <div>{ingredients}</div>
                 <h3>Directions: </h3>
                 <div>{menuItem.directions}</div>
-
                 <Link to={'/your-menu'}>
                     <h3>Categories:</h3>
                 </Link>
-
                 <div>{categories}</div>
                 <br></br>
                 <button onClick={handleClick}>Edit Recipe</button>
             </div>
         );
     }
+
+    return (
+        <div>
+            {render}
+        </div>
+    )
 }
 
 const mapStateToProps = state => ({

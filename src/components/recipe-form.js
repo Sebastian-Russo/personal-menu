@@ -11,8 +11,10 @@ import { addRecipe } from '../actions';
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
-        console.log(props)
-        this.state = { 
+        
+        if (this.props.menuItem) {
+            console.log('edit menu item')
+            this.state = { 
                 name: props.menuItem.name || "",
                 ingredients: props.menuItem.ingredients || [],
                 directions: props.menuItem.directions || "",
@@ -20,6 +22,18 @@ export class RecipeForm extends React.Component {
                 id: props.menuItem.id || Math.floor(Math.random() * 10000000000),
                 otherCheckbox: true,
                 newCategory: []
+            }
+        } else {
+            console.log('new menu item')
+            this.state = { 
+                name: "",
+                ingredients: [],
+                directions: "",
+                categories: [],
+                id: Math.floor(Math.random() * 10000000000),
+                otherCheckbox: true,
+                newCategory: []
+            }
         }
     }
 
@@ -143,7 +157,7 @@ export class RecipeForm extends React.Component {
 
                 <br></br>
                 <RecipeField 
-                    menuItem={this.state}
+                    menuItemNew={this.state}
                     deleteIngredientAndAmount={this.deleteIngredientAndAmount}
                     menuItem={this.props.menuItem}
                     />
