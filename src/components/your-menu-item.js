@@ -8,10 +8,9 @@ import {editRecipe} from '../actions';
 export function YourMenuItem(props) {
     
     const {menuItems} = props;
-    // why the [0] if it's the only one in the array?
-    // filtered menu item obj from array of objs, by filtering params id
-    // previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
-    const menuItem = menuItems.filter(menuItem => menuItem.name === props.match.params.id)[0];
+    console.log(menuItems, props)
+
+    const menuItem = menuItems.filter(menuItem => menuItem.id == props.match.params.id)[0];
     console.log(menuItem)
     const ingredients = menuItem.ingredients.map((ingredient, i) => {
         return (
@@ -25,10 +24,14 @@ export function YourMenuItem(props) {
         )
     })
 
-    const handleClick = () => {
+    const handleEditClick = () => {
         props.dispatch(editRecipe())
     }
     
+    const handleDeleteClick = () => {
+        
+    }
+
     let render;
     if (props.editing === true) {
         return render = (
@@ -50,7 +53,8 @@ export function YourMenuItem(props) {
                 </Link>
                 <div>{categories}</div>
                 <br></br>
-                <button onClick={handleClick}>Edit Recipe</button>
+                <button onClick={handleEditClick}>Edit Recipe</button>
+                <button onClick={handleDeleteClick}>Delete Recipe</button>
             </div>
         );
     }
@@ -69,3 +73,9 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(YourMenuItem)
 
+
+
+// why the [0] if it's the only one in the array?
+// filtered menu item obj from array of objs, by filtering params id
+// previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
+// const menuItem = menuItems.filter(menuItem => menuItem.id === props.match.params.id)[0];

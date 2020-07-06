@@ -15,6 +15,13 @@ export const editRecipe = () => ({
 })
 
 export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
-export const deleteMenuItem = () => ({
-    type: DELETE_MENU_ITEM
+export const deleteMenuItem = id => ({
+    type: DELETE_MENU_ITEM,
+    id
+})
+
+export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';
+export const updateMenuItem = menuItem => ({
+    type: UPDATE_MENU_ITEM,
+    menuItem
 })

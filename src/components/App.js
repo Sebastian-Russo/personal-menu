@@ -34,16 +34,16 @@ export default function App() {
                   component={YourMenu} />
                 <Route
                   exact
-                  path="/recipe-form"
-                  component={RecipeForm} />
+                  path="/your-menu-categories/:id"
+                  component={YourMenuCategoriesCategory} />
                 <Route
                   exact
                   path="/your-menu-item/:id"
                   component={YourMenuItem} />
                 <Route
                   exact
-                  path="/your-menu-categories/:id"
-                  component={YourMenuCategoriesCategory} />
+                  path="/recipe-form"
+                  component={RecipeForm} />
               </Switch>
             </main>
         </div>

@@ -17,11 +17,11 @@ export class RecipeForm extends React.Component {
             const {menuItem} = props;
             const {name, ingredients, directions, categories, id,} = menuItem;
             this.state = { 
-                name: name || "",
-                ingredients: ingredients || [],
-                directions: directions || "",
-                categories: categories || [],
-                id: id || Math.floor(Math.random() * 10000000000),
+                name: name,
+                ingredients: ingredients,
+                directions: directions,
+                categories: categories,
+                id: id,
                 otherCheckbox: true,
                 newCategory: []
             }
@@ -38,7 +38,7 @@ export class RecipeForm extends React.Component {
             }
         }
     }
-////////////////////////////////////////////////////////////////////////
+
     addIngredientAndAmount = (ingredient) => {
         ingredient.id = Math.floor(Math.random() * 10000000000);
         console.log(ingredient)
@@ -175,14 +175,3 @@ export default reduxForm({
         dispatch(focus('recipe', Object.keys(errors)[0]))
 })(RecipeForm);
 
-
-
-
-
-
-                {/* <input 
-                    name="pictures"
-                    type="pictures"
-                    component={RecipeInput}
-                    label="Pictures"
-                /> */}

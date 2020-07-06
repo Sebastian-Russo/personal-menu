@@ -1,4 +1,4 @@
-import {ADD_RECIPE, EDIT_RECIPE} from '../actions';
+import {ADD_RECIPE, EDIT_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM} from '../actions';
 
 const initialState = {
     editing: false,
@@ -81,8 +81,32 @@ export default function menuReducer(state=initialState, action) {
         })
         console.log('global store', action, answer)
         return answer
+
+        // UPDATE
+    // }  else if (action.type === UPDATE_MENU_ITEM) {
+    //     const menuItem = 
+    //     answer = Object.assign({}, state, {
+    //         menuItems: [...state.menuItems, selected]
+    //     })
+        
+
+
+    } else if (action.type === DELETE_MENU_ITEM) {
+        const selected = state.menuItems.filter(menuItem => menuItem.id !== action.id);
+        answer = Object.assign({}, state, {
+            menuItems: selected
+        })
+        console.log('global store', action, answer)
+        return answer
     }
     console.log('global store', action, answer)
     return state;
 }
+
+
+// edit recipe... can i use add recipe, or should i make a new action? 
+// check id of menu item, if matches action.id, filter menu items 
+// need to find recipe with id to replace recipe/menu item with new edited version
+
+
 
