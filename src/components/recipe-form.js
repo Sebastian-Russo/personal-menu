@@ -6,14 +6,14 @@ import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
-import { addRecipe } from '../actions';
+import { addRecipe, updateMenuItem } from '../actions';
 
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         
         if (this.props.menuItem) {
-            console.log('edit menu item')
+            console.log('edit menu item', props)
             const {menuItem} = props;
             const {name, ingredients, directions, categories, id,} = menuItem;
             this.state = { 
@@ -85,9 +85,17 @@ export class RecipeForm extends React.Component {
         })
     };
 
+    // handleSubmit = e => {
+    //     e.preventDefault();
+    //     this.props.dispatch(addRecipe(this.state))
+    // }
     handleSubmit = e => {
         e.preventDefault();
-        this.props.dispatch(addRecipe(this.state))
+        if (this.props.editing === true) {
+            this.props.dispatch(updateMenuItem(this.state))
+        } else {
+            this.props.dispatch(addRecipe(this.state))
+        }
     }
  
     render() {

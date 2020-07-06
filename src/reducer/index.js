@@ -99,16 +99,16 @@ export default function menuReducer(state=initialState, action) {
         })
         console.log('global store', action, answer)
         return answer
-
-        // UPDATE
-    // }  else if (action.type === UPDATE_MENU_ITEM) {
-    //     const menuItem = 
-    //     answer = Object.assign({}, state, {
-    //         menuItems: [...state.menuItems, selected]
-    //     })
-        
-
-
+    }  else if (action.type === UPDATE_MENU_ITEM) {
+        answer = Object.assign({}, state, {
+            menuItems: state.menuItems.map(menuItem => menuItem.id === action.id ? {
+                id: action.id,
+                name: action.name, 
+                categories: action.categories,
+                ingredients: action.ingredients,
+                directions: action.directions
+            } : menuItem)
+        })
     } else if (action.type === DELETE_MENU_ITEM) {
         const selected = state.menuItems.filter(menuItem => menuItem.id !== action.id);
         answer = Object.assign({}, state, {

@@ -38,6 +38,7 @@ export function YourMenuItem(props) {
         return render = (
             <RecipeForm 
                 menuItem={menuItem}
+                editing={props.editing}
             />
         )
     } 
