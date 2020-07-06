@@ -19,6 +19,7 @@ export default function RecipeCategories(props) {
                         id={cat}
                         type="checkbox"
                         value={cat}
+                        // value={props.categories}
                         onChange={(e) => props.addCategory(e)}                    />
                     <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
                     <br></br>

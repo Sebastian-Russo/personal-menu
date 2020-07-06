@@ -43,7 +43,7 @@ const initialState = {
         {
             id: 2,
             name: "cereal",
-            categories: ["breakfast", "quick-and-easy"],
+            categories: ["breakfast", "dessert", "quick-and-easy"],
             ingredients: [
                 {
                     ingredient: "cereal",
@@ -57,7 +57,25 @@ const initialState = {
                 }
             ],
             directions: "pour cereal into bowl, then pour milk into bowl"
-        }
+        },
+        {
+            id: 3,
+            name: "mac & cheese",
+            categories: ["lunch", "dinner", "snacks", "quick-and-easy"],
+            ingredients: [
+                {
+                    ingredient: "macaroni",
+                    id: 1,
+                    amount: "1 lb"
+                },
+                {
+                    ingredient: "cheese",
+                    id: 2,
+                    amount: "1 cup"
+                }
+            ],
+            directions: "boil pasta for 10 minutes, then mix in cheese to melt"
+    }
     ]
 }
 

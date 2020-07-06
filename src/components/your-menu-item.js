@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import RecipeForm from './recipe-form';
-import {editRecipe} from '../actions';
+import {editRecipe, deleteMenuItem} from '../actions';
 // *** AKA RECIPE COMPONENT ***
 
 export function YourMenuItem(props) {
@@ -12,15 +12,16 @@ export function YourMenuItem(props) {
 
     const menuItem = menuItems.filter(menuItem => menuItem.id == props.match.params.id)[0];
     console.log(menuItem)
-    const ingredients = menuItem.ingredients.map((ingredient, i) => {
+
+    const ingredients = menuItem.ingredients.map(ingredient => {
         return (
-        <div key={`ingredients-${i}`}>{ingredient.amount} of {ingredient.ingredient}</div>
+        <div key={ingredient.id}>{ingredient.amount} of {ingredient.ingredient}</div>
         )
     })
 
     const categories = menuItem.categories.map((category, i) => {
         return (
-            <div key={`categories-${i}`}>{category}</div>
+            <div key={`categories-${i}`}><Link to={`/your-menu-categories/${category}`}>{category}</Link></div>
         )
     })
 
@@ -29,7 +30,7 @@ export function YourMenuItem(props) {
     }
     
     const handleDeleteClick = () => {
-        
+        props.dispatch(deleteMenuItem(menuItem.id))
     }
 
     let render;
@@ -48,9 +49,7 @@ export function YourMenuItem(props) {
                 <div>{ingredients}</div>
                 <h3>Directions: </h3>
                 <div>{menuItem.directions}</div>
-                <Link to={'/your-menu'}>
-                    <h3>Categories:</h3>
-                </Link>
+                <Link to={'/your-menu'}><h3>Categories:</h3></Link>
                 <div>{categories}</div>
                 <br></br>
                 <button onClick={handleEditClick}>Edit Recipe</button>

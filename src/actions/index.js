@@ -20,8 +20,8 @@ export const deleteMenuItem = id => ({
     id
 })
 
-export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';
-export const updateMenuItem = menuItem => ({
-    type: UPDATE_MENU_ITEM,
-    menuItem
-})
+// export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';
+// export const updateMenuItem = menuItem => ({
+//     type: UPDATE_MENU_ITEM,
+//     menuItem
+// })

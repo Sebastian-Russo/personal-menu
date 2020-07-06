@@ -129,7 +129,8 @@ export class RecipeForm extends React.Component {
 
                     <RecipeCategories 
                         addCategory={this.addCategory}
-                        menuItem={this.props.menuItem}
+                        // value={this.categories}
+                        // categories={this.categories}
                     />
                     <input
                         name="categories"

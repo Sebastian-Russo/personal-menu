@@ -23,9 +23,9 @@ export function YourMenuCategoriesCategory(props) {
     
     return (
         <div>
-            <h3>Selected Category</h3>
-            <h3>{selected}</h3>
+            <h1>{selected}</h1>
             <div>{menuItem}</div>
+            <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>
         </div>
     )   
 }
