@@ -6,17 +6,28 @@ import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
-import { addRecipe, updateMenuItem } from '../actions';
+import { addRecipe, updateMenuItem, addCategory } from '../actions';
 
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
-        
+        this.state = { 
+            name: "",
+            ingredients: [],
+            directions: "",
+            categories: [],
+            id: Math.floor(Math.random() * 10000000000),
+            otherCheckbox: true,
+            newCategory: ""
+        }
+    }
+
+    componentDidMount() {
         if (this.props.menuItem) {
-            console.log('edit menu item', props)
-            const {menuItem} = props;
+            console.log('edit menu item', this.props)
+            const {menuItem} = this.props;
             const {name, ingredients, directions, categories, id,} = menuItem;
-            this.state = { 
+            this.setState({ 
                 name: name,
                 ingredients: ingredients,
                 directions: directions,
@@ -24,20 +35,10 @@ export class RecipeForm extends React.Component {
                 id: id,
                 otherCheckbox: true,
                 newCategory: []
-            }
-        } else {
-            console.log('new menu item')
-            this.state = { 
-                name: "",
-                ingredients: [],
-                directions: "",
-                categories: [],
-                id: Math.floor(Math.random() * 10000000000),
-                otherCheckbox: true,
-                newCategory: []
-            }
+            })
         }
     }
+
 
     addIngredientAndAmount = (ingredient) => {
         ingredient.id = Math.floor(Math.random() * 10000000000);
@@ -76,7 +77,10 @@ export class RecipeForm extends React.Component {
 
     handleNewCategory = (e) => {
         const change = e.target.value;
-        this.setState({ newCategory: [change] })
+        this.setState({ newCategory: change })
+    }
+    handleAddCategoryToState = () => {
+        this.props.dispatch(addCategory(this.state.newCategory))
     }
 
     otherCheckbox = () => {
@@ -85,10 +89,6 @@ export class RecipeForm extends React.Component {
         })
     };
 
-    // handleSubmit = e => {
-    //     e.preventDefault();
-    //     this.props.dispatch(addRecipe(this.state))
-    // }
     handleSubmit = e => {
         e.preventDefault();
         if (this.props.editing === true) {
@@ -137,8 +137,7 @@ export class RecipeForm extends React.Component {
 
                     <RecipeCategories 
                         addCategory={this.addCategory}
-                        // value={this.categories}
-                        // categories={this.categories}
+                        categories={this.state.categories}
                     />
                     <input
                         name="categories"
@@ -157,7 +156,13 @@ export class RecipeForm extends React.Component {
                         hidden={!this.state.otherCheckbox ? false : true}
                         onChange={this.handleNewCategory}
                     />
+                    <button
+                    hidden={!this.state.otherCheckbox ? false : true}
+                        onClick={this.handleAddCategoryToState}>
+                        Add Category
+                    </button>
 
+                    <br></br>
                     <br></br>
                     <button
                         type="submit"

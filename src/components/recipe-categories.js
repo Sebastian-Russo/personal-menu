@@ -1,17 +1,17 @@
 import React from 'react'; 
 
 export default function RecipeCategories(props) {
-
+    // connect this component to store, then use categoryList
         const categories = [
             "breakfast",
             "lunch",
             "dinner",
             "snacks",
             "quick-and-easy",
-            "dessert",
-            "other"
+            "dessert"
         ].map((cat, i) => {
             const label = cat[0].toUpperCase() + cat.slice(1);
+            const checked = props.categories.includes(cat)
             return (
                 <div key={`${cat}-${i}`}>
                     <input 
@@ -19,7 +19,7 @@ export default function RecipeCategories(props) {
                         id={cat}
                         type="checkbox"
                         value={cat}
-                        // value={props.categories}
+                        checked={checked}
                         onChange={(e) => props.addCategory(e)}                    />
                     <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
                     <br></br>

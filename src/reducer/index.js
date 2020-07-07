@@ -1,4 +1,4 @@
-import {ADD_RECIPE, EDIT_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM} from '../actions';
+import {ADD_RECIPE, EDIT_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM, ADD_CATEGORY} from '../actions';
 
 const initialState = {
     editing: false,
@@ -81,6 +81,13 @@ const initialState = {
 
 export default function menuReducer(state=initialState, action) {
     let answer; 
+    if(action.type === ADD_CATEGORY) {
+        answer = Object.assign({}, state, {
+            categoryList: [...state.categoryList, action.category]
+        })
+        console.log('global store', action, answer)
+        return answer
+    }
     if (action.type === ADD_RECIPE) {
         answer = Object.assign({}, state, {
             menuItems: [...state.menuItems, {
@@ -93,13 +100,15 @@ export default function menuReducer(state=initialState, action) {
         })
         console.log('global store', action, answer)
         return answer
-    } else if (action.type === EDIT_RECIPE) {
+    } 
+    if (action.type === EDIT_RECIPE) {
         answer = Object.assign({}, state, {
             editing: !state.editing
         })
         console.log('global store', action, answer)
         return answer
-    }  else if (action.type === UPDATE_MENU_ITEM) {
+    }
+    if (action.type === UPDATE_MENU_ITEM) {
         answer = Object.assign({}, state, {
             menuItems: state.menuItems.map(menuItem => menuItem.id === action.id ? {
                 id: action.id,
@@ -109,7 +118,8 @@ export default function menuReducer(state=initialState, action) {
                 directions: action.directions
             } : menuItem)
         })
-    } else if (action.type === DELETE_MENU_ITEM) {
+    }
+    if (action.type === DELETE_MENU_ITEM) {
         const selected = state.menuItems.filter(menuItem => menuItem.id !== action.id);
         answer = Object.assign({}, state, {
             menuItems: selected
