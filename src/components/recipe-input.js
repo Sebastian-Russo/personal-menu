@@ -4,17 +4,18 @@ export default class RecipeInput extends React.Component {
     constructor(props){
         super(props);
  
+        this.state = {                 
+            ingredient: "",
+            amount: ""
+        }
+    }
+
+    componentDidMount() {
         if (this.props.ingredient) {
-            // console.log(props)
-            this.state = {                 
-                ingredient: props.ingredient || "",
-                amount: props.amount || ""
-            }
-        } else {
-            this.state = {                 
-                ingredient: "",
-                amount: ""
-            }
+            this.setState({                 
+                ingredient: this.props.ingredient || "",
+                amount: this.props.amount || ""
+            })
         }
     }
 
