@@ -2,8 +2,8 @@ import React from 'react';
 import {reduxForm, 
     // SubmissionError, 
     focus,} from 'redux-form';
+import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import YourMenu from './your-menu';
 import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
@@ -41,10 +41,16 @@ export class RecipeForm extends React.Component {
         }
     }
 
+    // 1st arg. prevProps, 2nd arg. prevState
+    componentWillUpdate(prevProps, newProp) {
+        console.log(prevProps, newProp)
+        if (prevProps.menuItems.length < this.props.menuItems.length){
+            return <Redirect to={`/your-menu-item/${newProp.id}`} />
+        }
+    }
 
     addIngredientAndAmount = (ingredient) => {
         ingredient.id = Math.floor(Math.random() * 10000000000);
-        console.log(ingredient)
         this.setState({
             ingredients: [...this.state.ingredients, ingredient]
         });
@@ -81,7 +87,8 @@ export class RecipeForm extends React.Component {
         const change = e.target.value;
         this.setState({ newCategory: change })
     }
-    handleAddCategoryToState = () => {
+    handleAddCategoryToState = (e) => {
+        e.preventDefault();
         this.props.dispatch(addCategory(this.state.newCategory))
     }
 
@@ -98,12 +105,11 @@ export class RecipeForm extends React.Component {
             this.props.dispatch(updateMenuItem(this.state))
         } else {
             this.props.dispatch(addRecipe(this.state))
-            return <Redirect to="/your-menu" />
-            // return <YourMenu />
         }
     }
  
     render() {
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -188,9 +194,14 @@ export class RecipeForm extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    menuItems: state.menu.menuItems
+})
+
+RecipeForm = connect(mapStateToProps)(RecipeForm)
+
 export default reduxForm({
     form: 'recipe',
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('recipe', Object.keys(errors)[0]))
 })(RecipeForm);
-

@@ -20,7 +20,7 @@ export function YourMenuItem(props) {
 
     const ingredients = menuItem.ingredients.map(ingredient => {
         return (
-        <div key={ingredient.id}>{ingredient.amount} of {ingredient.ingredient}</div>
+            <div key={ingredient.id}>{ingredient.amount} of {ingredient.ingredient}</div>
         )
     })
 
