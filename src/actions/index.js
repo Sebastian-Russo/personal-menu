@@ -11,7 +11,7 @@ export const addRecipe = ({name, ingredients, directions, id, categories}) => ({
 export const EDIT_RECIPE = 'EDIT_RECIPE';
 export const editRecipe = () => ({
     type: EDIT_RECIPE,
-    editing: true
+    editing: !true
 })
 
 export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';

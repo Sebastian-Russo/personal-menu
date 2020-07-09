@@ -2,11 +2,13 @@ import React from 'react';
 import {reduxForm, 
     // SubmissionError, 
     focus,} from 'redux-form';
+import {Redirect} from 'react-router-dom';
+import YourMenu from './your-menu';
 import RecipeInput from './recipe-input';
 import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
-import { addRecipe, updateMenuItem, addCategory } from '../actions';
+import { addRecipe, updateMenuItem, addCategory, editRecipe } from '../actions';
 
 export class RecipeForm extends React.Component {
     constructor(props){
@@ -92,9 +94,12 @@ export class RecipeForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         if (this.props.editing === true) {
+            this.props.dispatch(editRecipe())
             this.props.dispatch(updateMenuItem(this.state))
         } else {
             this.props.dispatch(addRecipe(this.state))
+            return <Redirect to="/your-menu" />
+            // return <YourMenu />
         }
     }
  
@@ -157,7 +162,7 @@ export class RecipeForm extends React.Component {
                         onChange={this.handleNewCategory}
                     />
                     <button
-                    hidden={!this.state.otherCheckbox ? false : true}
+                        hidden={!this.state.otherCheckbox ? false : true}
                         onClick={this.handleAddCategoryToState}>
                         Add Category
                     </button>

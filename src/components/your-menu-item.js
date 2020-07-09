@@ -13,6 +13,7 @@ export function YourMenuItem(props) {
     const menuItem = menuItems.filter(menuItem => menuItem.id == props.match.params.id)[0];
     console.log(menuItem)
 
+    // handles delete item button 
     if (!menuItem){
         return <Redirect to="/your-menu" />
     }

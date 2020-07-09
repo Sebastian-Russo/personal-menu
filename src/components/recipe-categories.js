@@ -2,18 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 export function RecipeCategories(props) {
-
-    console.log(props)
-
-    // connect this component to store, then use categoryList
-        // const categories = [
-        //     "breakfast",
-        //     "lunch",
-        //     "dinner",
-        //     "snacks",
-        //     "quick-and-easy",
-        //     "dessert"
-        // ]
         
         const categories = props.categoryList.map((cat, i) => {
             const label = cat[0].toUpperCase() + cat.slice(1);
