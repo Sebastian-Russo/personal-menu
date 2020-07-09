@@ -20,7 +20,8 @@ export class RecipeForm extends React.Component {
             categories: [],
             id: Math.floor(Math.random() * 10000000000),
             otherCheckbox: true,
-            newCategory: ""
+            newCategory: "",
+            redirect: false
         }
     }
     // checks if props are coming from edit button 
@@ -43,9 +44,11 @@ export class RecipeForm extends React.Component {
 
     // 1st arg. prevProps, 2nd arg. prevState
     componentWillUpdate(prevProps, newProp) {
-        console.log(prevProps, newProp)
-        if (prevProps.menuItems.length < this.props.menuItems.length){
-            return <Redirect to={`/your-menu-item/${newProp.id}`} />
+        console.log(prevProps.menuItems.length, newProp.id, this.props.menuItems.length)
+        if (prevProps.menuItems.length > this.props.menuItems.length){
+            console.log('here')
+            this.setState({redirect: true})
+            // return <Redirect to={`/your-menu-item/${newProp.id}`} />
         }
     }
 
@@ -109,6 +112,10 @@ export class RecipeForm extends React.Component {
     }
  
     render() {
+        const redirect = this.state.redirect;
+        if (redirect === true) {
+            return <Redirect to={`/your-menu-item/${this.state.id}`} />
+        }
 
         return (
             <div>
