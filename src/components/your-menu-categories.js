@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 export function YourMenuCategories({categoryList}) {
+    console.log(categoryList)
     const categories = categoryList.map((category, i) => {
         return (
             <div key={`categories-${i}`}>
@@ -14,7 +15,7 @@ export function YourMenuCategories({categoryList}) {
             </div>
         )
     })
-     
+
     return (
         <div>
             <h3>Categories:</h3>

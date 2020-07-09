@@ -1,16 +1,25 @@
 import React from 'react'; 
+import {connect} from 'react-redux';
 
-export default function RecipeCategories(props) {
+export function RecipeCategories(props) {
+
+    console.log(props)
+
     // connect this component to store, then use categoryList
-        const categories = [
-            "breakfast",
-            "lunch",
-            "dinner",
-            "snacks",
-            "quick-and-easy",
-            "dessert"
-        ].map((cat, i) => {
+        // const categories = [
+        //     "breakfast",
+        //     "lunch",
+        //     "dinner",
+        //     "snacks",
+        //     "quick-and-easy",
+        //     "dessert"
+        // ]
+        
+        const categories = props.categoryList.map((cat, i) => {
             const label = cat[0].toUpperCase() + cat.slice(1);
+            // while looping through with map, 
+            // see if the props category array includes that cat
+            // returns true or false, checked prop shows true or false 
             const checked = props.categories.includes(cat)
             return (
                 <div key={`${cat}-${i}`}>
@@ -33,3 +42,9 @@ export default function RecipeCategories(props) {
             </div>
         )
 }
+
+const mapStateToProps = state => ({
+    categoryList: state.menu.categoryList
+})
+
+export default connect(mapStateToProps)(RecipeCategories)

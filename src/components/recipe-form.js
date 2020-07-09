@@ -21,7 +21,7 @@ export class RecipeForm extends React.Component {
             newCategory: ""
         }
     }
-
+    // checks if props are coming from edit button 
     componentDidMount() {
         if (this.props.menuItem) {
             console.log('edit menu item', this.props)

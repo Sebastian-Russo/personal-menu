@@ -9,7 +9,7 @@ export default class RecipeInput extends React.Component {
             amount: ""
         }
     }
-
+    // checks if props are coming from edit button 
     componentDidMount() {
         if (this.props.ingredient) {
             this.setState({                 

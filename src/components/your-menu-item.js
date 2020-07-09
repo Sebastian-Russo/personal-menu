@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import RecipeForm from './recipe-form';
 import {editRecipe, deleteMenuItem} from '../actions';
 // *** AKA RECIPE COMPONENT ***
@@ -12,6 +12,10 @@ export function YourMenuItem(props) {
 
     const menuItem = menuItems.filter(menuItem => menuItem.id == props.match.params.id)[0];
     console.log(menuItem)
+
+    if (!menuItem){
+        return <Redirect to="/your-menu" />
+    }
 
     const ingredients = menuItem.ingredients.map(ingredient => {
         return (
