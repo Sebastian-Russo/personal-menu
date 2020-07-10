@@ -8,9 +8,8 @@ import {
 import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
-import Sidebar from './sidebar';
+import Navbar from './navbar';
 import YourMenuCategoriesCategory from './your-menu-categories-category';
-
 
 export default function App() {
 
@@ -21,7 +20,7 @@ export default function App() {
             <p> Welcome back to your menu! </p>
             <p> What would you like to do? </p>
           </header>
-          <Sidebar />
+          <Navbar />
             <main className="main">
               <Switch>
                 <Redirect 
