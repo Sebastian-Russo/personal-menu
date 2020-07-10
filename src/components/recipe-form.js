@@ -9,6 +9,7 @@ import RecipeField from './recipe-field';
 import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
 import { addRecipe, updateMenuItem, addCategory, editRecipe } from '../actions';
+import './recipe-form.css'
 
 export class RecipeForm extends React.Component {
     constructor(props){

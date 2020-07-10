@@ -1,5 +1,6 @@
 import React from 'react';
 import YourMenuCategories from './your-menu-categories'; 
+import './your-menu.css'
 
 export default function YourMenu(props) {
     return (

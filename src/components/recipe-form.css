@@ -1,0 +1,13 @@
+.form {
+    flex-direction: row;
+}
+
+label {
+    flex-basis: 10rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+input {
+    flex-direction: column;
+}
