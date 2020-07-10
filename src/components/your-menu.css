@@ -1,6 +1,14 @@
+/* @import url('fonts.googleapis.com/css?family=Dancing+Script&display=swap'); */
+
 .menu-items {
     width: 80%;
     padding: 20px;
     margin: auto;
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: "Dancing Script";
 }

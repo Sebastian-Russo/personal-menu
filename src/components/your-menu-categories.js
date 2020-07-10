@@ -6,7 +6,7 @@ export function YourMenuCategories({categoryList}) {
     console.log(categoryList)
     const categories = categoryList.map((category, i) => {
         return (
-            <div key={`categories-${i}`}>
+            <div key={`categories-${i}`} className="categories-text">
                 <h3>
                     <Link to={`/your-menu-categories/${category}`}>
                         {category}
