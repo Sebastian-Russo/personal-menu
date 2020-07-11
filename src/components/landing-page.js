@@ -8,8 +8,7 @@ import YourMenuCategoriesCategory from './your-menu-categories-category';
 import RegistrationForm from './registration-form';
 import LoginForm from './login-form';
 
-export default function Dashboard() {
-
+export default function LandingPage() {
   return (
     <Router>  
        <div className="dashboard">
