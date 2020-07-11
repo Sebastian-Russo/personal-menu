@@ -1,29 +1,34 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
+import {fetchProtectedData} from '../actions/protected-data';
 import YourMenuCategories from './your-menu-categories'; 
 import './your-menu.css'
 
-export default function YourMenu(props) {
+export class YourMenu extends React.Component {
     componentDidMount() {
-        props.dispatch(fetchProtectedData());
+        this.props.dispatch(fetchProtectedData());
     }
 
-    return (
-        <div>
-            <div className="landing-page">
-                <div className="landing-page-username">
-                    Username: {props.username}
+    render() {
+        return (
+            <div>
+                <div className="landing-page">
+                    <div className="landing-page-username">
+                        Username: {this.props.username}
+                    </div>
+                    <div className="landing-page-name">Name: {this.props.name}</div>
+                    <div className="landing-page-protected-data">
+                        Protected data: {this.props.protectedData}
+                    </div>
                 </div>
-                <div className="landing-page-name">Name: {this.props.name}</div>
-                <div className="landing-page-protected-data">
-                    Protected data: {props.protectedData}
+                <div className="menu-items container">
+                    <h1>Your Menu</h1>
+                    <YourMenuCategories />
                 </div>
             </div>
-            <div className="menu-items container">
-                <h1>Your Menu</h1>
-                <YourMenuCategories />
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 const mapStateToProps = state => {
