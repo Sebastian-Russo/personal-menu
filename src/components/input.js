@@ -1,14 +1,14 @@
 import React from 'react';
 
 export default class Input extends React.Component {
-    // componentDidUpate(prevProps) {
-    //     console.log(prevProps, this.props)
+    componentDidUpate(prevProps) {
+        console.log(prevProps, this.props)
 
-    //     console.log(prevProps.meta.active, this.props.meta.active)
-    //     if (!prevProps.meta.active && this.props.meta.active) {
-    //         this.input.focus();
-    //     }
-    // }
+        console.log(prevProps.meta.active, this.props.meta.active)
+        if (!prevProps.meta.active && this.props.meta.active) {
+            this.input.focus();
+        }
+    }
     
     render() {
         // console.log(this.props.meta.touched, this.props.meta.error)

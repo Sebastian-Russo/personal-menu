@@ -10,14 +10,14 @@ import RegistrationForm from './registration-form';
 import LoginForm from './login-form';
 import { refreshAuthToken } from '../actions/auth';
 
-export class LandingPage extends React.Component {
-  componetDidUpdate(prevProps) {
+export class App extends React.Component {
+  componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
-      this.startPeriodicRefresh();
+        this.startPeriodicRefresh();
     } else if (prevProps.loggedIn && !this.props.loggedIn) {
-      this.startPeriodicRefresh();
+        this.stopPeriodicRefresh();
     }
-  }
+}
 
   componentWillUpdate() {
     this.startPeriodicRefresh();
@@ -90,4 +90,5 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.currentUser !== null
 });
 
-export default withRouter(connect(mapStateToProps)(LandingPage));
+// export default withRouter(connect(mapStateToProps)(LandingPage));
+export default connect(mapStateToProps)(App);

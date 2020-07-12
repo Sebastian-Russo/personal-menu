@@ -49,7 +49,7 @@ export class RecipeForm extends React.Component {
         if (prevProps.menuItems.length > this.props.menuItems.length){
             console.log('here')
             this.setState({redirect: true})
-            // return <Redirect to={`/your-menu-item/${newProp.id}`} />
+            // return <Redirect to={`/your-menu-item/${this.state.id}`} />
         }
     }
 

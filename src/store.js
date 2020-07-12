@@ -6,7 +6,7 @@ import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protected-data';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
-import menuReducer from './reducer';
+import menuReducer from './reducers';
 
 
 const store = createStore(
