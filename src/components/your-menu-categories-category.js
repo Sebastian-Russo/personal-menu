@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import './your-menu-categories-category.css'
 
 export function YourMenuCategoriesCategory(props) {   
     console.log(props) 
@@ -22,7 +23,7 @@ export function YourMenuCategoriesCategory(props) {
     })
     
     return (
-        <div>
+        <div className="container-categories">
             <h1>{selected}</h1>
             <div>{menuItem}</div>
             <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>

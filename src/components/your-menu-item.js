@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import RecipeForm from './recipe-form';
 import {editRecipe, deleteMenuItem} from '../actions';
+import './your-menu-item.css';
 // *** AKA RECIPE COMPONENT ***
 
 export function YourMenuItem(props) {
@@ -50,7 +51,7 @@ export function YourMenuItem(props) {
     if (props.editing === false) {
         return render = (
             <div className="menu-item">
-                <h1>{menuItem.name}</h1>
+                <h1 className="title-categories">{menuItem.name}</h1>
                 <h3>Ingredients:</h3>
                 <div>{ingredients}</div>
                 <h3>Directions: </h3>
