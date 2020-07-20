@@ -2,6 +2,7 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+    font-family: 'Dancing Script', cursive;
     text-transform: uppercase;
 }
 
@@ -9,16 +10,20 @@ code {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  font-family: 'Dancing Script', cursive;
   flex-basis: 80%;
   background-color: beige;
   padding: 20px;
   margin: auto;
   border-radius: 15px;
   overflow: scroll;
+  width: 80%;
+  
+  margin: auto;
+  text-align: center;
 }
 
 p {
   margin: auto;
   text-align: center;
 }
-

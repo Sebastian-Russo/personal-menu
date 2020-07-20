@@ -18,7 +18,7 @@ export function YourMenuCategories({categoryList}) {
 
     return (
         <div>
-            <h3>Categories:</h3>
+            {/* <h3>Categories:</h3> */}
             <div>{categories}</div>
         </div>
     )   

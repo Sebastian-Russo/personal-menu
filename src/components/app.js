@@ -5,10 +5,13 @@ import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Navbar from './navbar';
+import Home from './home';
 import YourMenuCategoriesCategory from './your-menu-categories-category';
 import RegistrationForm from './registration-form';
 import LoginForm from './login-form';
+import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
+import Footer from "./footer";
 
 export class App extends React.Component {
   componentDidUpdate(prevProps) {
@@ -41,17 +44,18 @@ export class App extends React.Component {
       return (
         <Router>  
           <div className="dashboard">
-              <header className="dashboard-header">
-                <p> Welcome back to your menu! </p>
-                <p> What would you like to do? </p>
-              </header>
+              <header className="header"></header>
               <Navbar />
                 <main className="main">
                   <Switch>
                     <Redirect 
                       exact
                       from="/"
-                      to="/your-menu" />
+                      to="/home" />
+                    <Route
+                      exact
+                      path="/home"
+                      component={Home} />
                     <Route
                       exact
                       path="/your-menu"
@@ -68,6 +72,10 @@ export class App extends React.Component {
                       exact
                       path="/recipe-form"
                       component={RecipeForm} />
+                    <Route 
+                      exact
+                      path="/grocery-list"
+                      component={GroceryList} />
                     <Route
                       exact
                       path="/registration-form"
@@ -78,6 +86,7 @@ export class App extends React.Component {
                       component={LoginForm} />
                   </Switch>
                 </main>
+                <Footer />
             </div>
         </Router>  
       );

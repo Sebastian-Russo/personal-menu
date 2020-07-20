@@ -1,23 +1,36 @@
+.nav_wrapper{
+  /* width:100%;
+  background-color: rgb(3, 247, 247);  */
+}
+
+.nav-bar {
+  background-color: rgb(3, 247, 247); 
+  width: 100%;
+  overflow: hidden;
+}
+
 .navbar-list {
     position: relative;
     overflow-x: hidden; 
     padding: 20px 0px 10px 10px;
     display: flex;
+    justify-content: center;
+    font-family: 'Bubbler One', sans-serif;
 }
-
-.nav-list-items {
-    background-color: rgb(3, 247, 247); 
-}
-
   
   .navbar-list a {
     padding: 6px 40px 6px 16px;
     text-decoration: none;
     font-size: 15px;
     color: #818181;
+    justify-content: center;
   }
   
   .navbar-list a:hover {
     color: #f1f1f1;
   }
   
+  .nav-list-items {
+    background-color: rgb(3, 247, 247); 
+    font-family: 'Bubbler One', sans-serif;
+}
