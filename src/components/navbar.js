@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './navbar.css';
 
 export default function Navbar(props) {
     return (
         <div className="nav-wrapper">
             <nav className="nav-bar">
-            <label class="logo">Logo</label>
+            <label className="logo">
+                <img scr="/logo.png" alt="fork and knife" width="50px" height="60px"/>
+                </label>
                 <input type="checkbox" id="check" />
                 <label for="check" className="hamburger-button"><i class="fas fa-bars"></i></label>
                 <ul className="navbar-list">
