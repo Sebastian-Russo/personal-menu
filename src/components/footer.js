@@ -4,7 +4,7 @@ import "./footer.css";
 export default function Footer() {
     return(
         <div className="footer">
-           Your favorite recipes.
+           <span className="copyright">&copy;</span> Your Personal Menu Recipe Book
         </div>
     )
 }

@@ -6,6 +6,9 @@ export default function Navbar(props) {
     return (
         <div className="nav-wrapper">
             <nav className="nav-bar">
+            <label class="logo">Logo</label>
+                <input type="checkbox" id="check" />
+                <label for="check" className="hamburger-button"><i class="fas fa-bars"></i></label>
                 <ul className="navbar-list">
                     <div><Link to="/home" className="nav-list-items"><i class="fas fa-home"></i>  Home</Link></div>
                     <div><Link to="/your-menu" className="nav-list-items"><i class="fas fa-utensils"></i>  Your Menu</Link></div>

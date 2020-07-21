@@ -1,6 +1,9 @@
 import {ADD_RECIPE, EDIT_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM, ADD_CATEGORY} from '../actions';
 
 const initialState = {
+    quotes: [
+        "quote 1", "quote 2", "quote 3"
+    ],
     editing: false,
     categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
     menuItems: [

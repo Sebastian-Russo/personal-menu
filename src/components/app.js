@@ -43,7 +43,7 @@ export class App extends React.Component {
     render() {
       return (
         <Router>  
-          <div className="dashboard">
+          <div>
               <header className="header"></header>
               <Navbar />
                 <main className="main">

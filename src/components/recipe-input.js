@@ -57,7 +57,7 @@ export default class RecipeInput extends React.Component {
                     value={this.state.amount}
                     onChange={this.handleChange} 
                     />
-                <button type="button" onClick={this.handleClick}>Add Amount of Ingredients</button>
+                <button type="button" onClick={this.handleClick}>Add Amount of Ingredient</button>
             </div>
         );
     }
