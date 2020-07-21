@@ -9,7 +9,9 @@ export default function RecipeField(props){
                     <div>
                         {ingredient.amount} of {ingredient.ingredient}
                     </div>
-                    <button onClick={() => {props.deleteIngredientAndAmount(ingredient.id)}}>
+                    <button
+                        className="button-delete" 
+                        onClick={() => {props.deleteIngredientAndAmount(ingredient.id)}}>
                         Delete 
                     </button>
                 </div>
@@ -18,12 +20,9 @@ export default function RecipeField(props){
 
         return(
             <div>
-                <div>Your Recipe so far...</div>
+                <br></br><hr></hr>
+                <div>The ingredients listed...</div>
                 {ingredients}
             </div>
         )
-
-    // }
-
-
 }

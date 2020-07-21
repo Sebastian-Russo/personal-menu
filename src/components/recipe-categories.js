@@ -10,7 +10,7 @@ export function RecipeCategories(props) {
             // returns true or false, checked prop shows true or false 
             const checked = props.categories.includes(cat)
             return (
-                <div key={`${cat}-${i}`}>
+                <div key={`${cat}-${i}`} className="ingredient-list">
                     <input 
                         name={cat}
                         id={cat}
@@ -25,7 +25,7 @@ export function RecipeCategories(props) {
         })
 
         return (
-            <div>
+            <div className="box-category">
                 {categories}
             </div>
         )

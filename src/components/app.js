@@ -6,7 +6,7 @@ import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Navbar from './navbar';
 import Home from './home';
-import YourMenuCategoriesCategory from './your-menu-categories-category';
+import YourMenuCategory from './your-menu-category';
 import RegistrationForm from './registration-form';
 import LoginForm from './login-form';
 import GroceryList from './grocery-list';
@@ -62,8 +62,8 @@ export class App extends React.Component {
                       component={YourMenu} />
                     <Route
                       exact
-                      path="/your-menu-categories/:id"
-                      component={YourMenuCategoriesCategory} />
+                      path="/your-menu-category/:id"
+                      component={YourMenuCategory} />
                     <Route
                       exact
                       path="/your-menu-item/:id"

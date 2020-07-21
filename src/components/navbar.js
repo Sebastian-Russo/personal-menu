@@ -8,7 +8,7 @@ export default function Navbar(props) {
         <div className="nav-wrapper">
             <nav className="nav-bar">
             <label className="logo">
-                <img scr="/logo.png" alt="fork and knife" width="50px" height="60px"/>
+                <img src="images/logo.png" alt="fork and knife" width="150px" height="180px"/>
                 </label>
                 <input type="checkbox" id="check" />
                 <label for="check" className="hamburger-button"><i class="fas fa-bars"></i></label>

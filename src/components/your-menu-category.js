@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import './your-menu-categories-category.css'
+import './your-menu-category.css'
 
 export function YourMenuCategoriesCategory(props) {   
     console.log(props) 
