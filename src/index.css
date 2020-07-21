@@ -6,7 +6,7 @@ body {
 }
  
 main {
-  font-family: 'Bubbler One', sans-serif;
+  font-family: "Dancing Script";
   flex-basis: 80%;
   background-color: beige;
   padding: 20px;
@@ -43,4 +43,16 @@ button {
 button:hover {
   background-color: white;
   transition: .3s;
+}
+
+
+a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-family: "Dancing Script";
+}
+
+a:hover {
+  color:#ffffff;
+  transform: scale(1.2);
 }
