@@ -1,18 +1,9 @@
 import React from 'react'; 
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
 import Quotes from './quotes.js'
 import './home.css'
 
-export class Home extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            quotes: props.quotes
-        }
-    }
-
-    render(){
+export default function Home() {
 
         return (
             <div>
@@ -46,11 +37,4 @@ export class Home extends React.Component {
                 </div>
             </div>    
         )
-    }
 }
-
-const mapStateToProps = state => ({
-    quotes: state.menu.quotes
-})
-
-export default connect(mapStateToProps)(Home);
