@@ -9,6 +9,7 @@ main {
   font-family: "Dancing Script";
   flex-basis: 80%;
   background-color: beige;
+  opacity: 0.7;
   padding: 20px;
   margin: auto;
   border-radius: 15px;
@@ -19,18 +20,13 @@ main {
   transition: all .2s ease-in-out;
 }
 
-main:hover {
-  transform: scale(1.05);
-
-}
-
 p {
   margin: auto;
   text-align: center;
 }
 
 button {
-  color: rgb(0, 255, 255);
+  color: black;
   background-color: beige;
   font-family: 'Bubbler One', sans-serif;
   font-size: 16px;
@@ -41,6 +37,7 @@ button {
 }
 
 button:hover {
+  color: rgb(0, 255, 255);
   background-color: white;
   transition: .3s;
 }

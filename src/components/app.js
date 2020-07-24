@@ -62,11 +62,11 @@ export class App extends React.Component {
                       component={YourMenu} />
                     <Route
                       exact
-                      path="/your-menu-category/:id"
+                      path="/your-menu/:category"
                       component={YourMenuCategory} />
                     <Route
                       exact
-                      path="/your-menu-item/:id"
+                      path="/your-menu/:category/:id"
                       component={YourMenuItem} />
                     <Route
                       exact

@@ -5,10 +5,10 @@ import {reduxForm,
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import RecipeInput from './recipe-input';
-import RecipeField from './recipe-field';
-import RecipeCategories from './recipe-categories';
+// import RecipeField from './recipe-field';
+// import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
-import { addRecipe, updateMenuItem, addCategory, editRecipe } from '../actions';
+import { addRecipe, updateMenuItem, addCategory, } from '../actions';
 import './recipe-form.css'
 
 export class RecipeForm extends React.Component {
@@ -22,7 +22,7 @@ export class RecipeForm extends React.Component {
             id: Math.floor(Math.random() * 10000000000),
             otherCheckbox: true,
             newCategory: "",
-            redirect: false
+            redirect: false,
         }
     }
     // checks if props are coming from edit button 
@@ -45,7 +45,6 @@ export class RecipeForm extends React.Component {
 
     // 1st arg. prevProps, 2nd arg. prevState
     componentWillUpdate(prevProps, newProp) {
-        console.log(prevProps.menuItems.length, newProp.id, this.props.menuItems.length)
         if (prevProps.menuItems.length > this.props.menuItems.length){
             console.log('here')
             this.setState({redirect: true})
@@ -61,7 +60,7 @@ export class RecipeForm extends React.Component {
         console.log(this.state)
     };
 
-    deleteIngredientAndAmount = (id) => {
+    deleteIngredientAndAmount = (e, id) => {
         this.setState({
             ingredients: this.state.ingredients.filter(ingredient => {
                 return ingredient.id !== id
@@ -72,7 +71,7 @@ export class RecipeForm extends React.Component {
     addCategory = (event) => {
         const category = event.target.value;
         // if state.categories array includes new category, why setState? should it be if it doesn't include?
-        if (this.state.categories.includes(category)) {
+        if (!this.state.categories.includes(category)) {
             this.setState({
                 categories: this.state.categories.filter(cat => cat !== category)
             })
@@ -81,6 +80,7 @@ export class RecipeForm extends React.Component {
     }
 
     handleChange = e => { 
+        console.log(e)
         const {value, name} = e.target;
         this.setState({
             [name]: value
@@ -102,22 +102,69 @@ export class RecipeForm extends React.Component {
         })
     };
 
+    handleIngredientChange = (e, index, property) => {
+        e.preventDefault();
+        const { ingredients } = this.state;
+        ingredients[index][property] = e.target.value;
+        console.log('new new', ingredients);
+        this.setState({
+            ingredients
+        });
+    };
+
     handleSubmit = e => {
         e.preventDefault();
-        if (this.props.editing === true) {
-            this.props.dispatch(editRecipe())
+        if (this.state.id) {
             this.props.dispatch(updateMenuItem(this.state))
         } else {
             this.props.dispatch(addRecipe(this.state))
         }
+        this.props.setEditing();
     }
  
     render() {
-        const redirect = this.state.redirect;
-        if (redirect === true) {
-            return <Redirect to={`/your-menu-item/${this.state.id}`} />
-        }
+        const {
+            id,
+            name,
+            redirect,
+            directions,
+            categories,
+            ingredients,
+            otherCheckbox
+        } = this.state;
 
+        if (redirect === true) {
+            return <Redirect to={`/your-menu//${id}`} />
+        }
+        let showIngredients;
+
+        if(ingredients.length) {
+            showIngredients = ingredients.map((item, i) => {
+                return (
+                <div className="form-input" key={`ingredient-${i}`}>
+                    <label htmlFor="ingredient"> Ingredient </label>
+                    <input 
+                        name="ingredient"
+                        id="ingredient"
+                        type="text"
+                        // why keep value here?
+                        value={item.ingredient}
+                        onChange={e => this.handleIngredientChange(e, i, 'ingredient')} 
+                    />
+                    <label htmlFor="amount"> Amount </label>
+                    <input 
+                        name="amount"
+                        id="amount"
+                        type="text"
+                        // controlled component when using value in input 
+                        value={item.amount}
+                        onChange={e => this.handleIngredientChange(e, i, 'amount')} 
+                        />
+                    <button type="button" onClick={e => this.deleteIngredientAndAmount(e, item.id)}>Delete</button>
+                </div>
+                )
+            })
+        }
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -130,7 +177,7 @@ export class RecipeForm extends React.Component {
                         id="name"
                         type="text"
                         label="Recipe Name"
-                        value={this.state.name}
+                        value={name}
                         validate={[required, nonEmpty]} 
                         onChange={this.handleChange}
                     />
@@ -147,17 +194,14 @@ export class RecipeForm extends React.Component {
                         rows="4" 
                         cols="25"
                         label="Directions"
-                        value={this.state.directions}
+                        value={directions}
                         validate={[required, nonEmpty]}
                         onChange={this.handleChange}
                     />
                     <br></br>
                     <br></br>
-
-                    <RecipeCategories 
-                        addCategory={this.addCategory}
-                        categories={this.state.categories}
-                    />
+                    <h3>Ingredients</h3>
+                    {showIngredients}
                     <input
                         name="categories"
                         id="other"
@@ -172,11 +216,11 @@ export class RecipeForm extends React.Component {
                         type="text"
                         id="otherValue"
                         name="other"
-                        hidden={!this.state.otherCheckbox ? false : true}
+                        hidden={!otherCheckbox ? false : true}
                         onChange={this.handleNewCategory}
                     />
                     <button
-                        hidden={!this.state.otherCheckbox ? false : true}
+                        hidden={!otherCheckbox ? false : true}
                         onClick={this.handleAddCategoryToState}>
                         Add Category
                     </button>
@@ -185,18 +229,16 @@ export class RecipeForm extends React.Component {
                     <br></br>
                     <button
                         type="submit"
-                        // disabled={this.props.pristine || this.props.submitting}
-                        onSubmit={this.onSubmit}
                         >
                         Submit 
                     </button>
                 </form>
 
                 <br></br>
-                <RecipeField 
+                {/* <RecipeField 
                     menuItem={this.state}
                     deleteIngredientAndAmount={this.deleteIngredientAndAmount}
-                    />
+                    /> */}
             </div>
         );
     }

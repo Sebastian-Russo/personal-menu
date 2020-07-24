@@ -2,23 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 export function RecipeCategories(props) {
-        
-        const categories = props.categoryList.map((cat, i) => {
-            const label = cat[0].toUpperCase() + cat.slice(1);
+        console.log('recipe categories', props);
+        const categories = props.categoryList.map((category, i) => {
+            const label = category[0].toUpperCase() + category.slice(1);
             // while looping through with map, 
-            // see if the props category array includes that cat
+            // see if the props category array includes that category
             // returns true or false, checked prop shows true or false 
-            const checked = props.categories.includes(cat)
+            const checked = props.categories.includes(category)
             return (
-                <div key={`${cat}-${i}`} className="ingredient-list">
+                <div key={`${category}-${i}`} className="ingredient-list">
                     <input 
-                        name={cat}
-                        id={cat}
+                        name={category}
+                        id={category}
                         type="checkbox"
-                        value={cat}
+                        value={category}
                         checked={checked}
                         onChange={(e) => props.addCategory(e)}                    />
-                    <label htmlFor={cat}>{label.replace(/-/g, ' ')}</label>
+                    <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
                     <br></br>
                 </div>
             )

@@ -1,9 +1,7 @@
-import {ADD_RECIPE, EDIT_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM, ADD_CATEGORY} from '../actions';
+import {ADD_RECIPE, DELETE_MENU_ITEM, UPDATE_MENU_ITEM, ADD_CATEGORY, ADD_TO_GROCERY_LIST} from '../actions';
 
 const initialState = {
-    quotes: [
-        "quote 1", "quote 2", "quote 3"
-    ],
+    groceryList: ['test'],
     editing: false,
     categoryList: ['breakfast', 'lunch', 'dinner', 'dessert', 'snacks', 'quick-and-easy'],
     menuItems: [
@@ -104,13 +102,6 @@ export default function menuReducer(state=initialState, action) {
         console.log('global store', action, answer)
         return answer
     } 
-    if (action.type === EDIT_RECIPE) {
-        answer = Object.assign({}, state, {
-            editing: !state.editing
-        })
-        console.log('global store', action, answer)
-        return answer
-    }
     if (action.type === UPDATE_MENU_ITEM) {
         answer = Object.assign({}, state, {
             menuItems: state.menuItems.map(menuItem => menuItem.id === action.id ? {
@@ -126,6 +117,13 @@ export default function menuReducer(state=initialState, action) {
         const selected = state.menuItems.filter(menuItem => menuItem.id !== action.id);
         answer = Object.assign({}, state, {
             menuItems: selected
+        })
+        console.log('global store', action, answer)
+        return answer
+    }
+    if (action.type === ADD_TO_GROCERY_LIST) {
+        answer = Object.assign({}, state, {
+            groceryList: [...state.groceryList, action.items]
         })
         console.log('global store', action, answer)
         return answer

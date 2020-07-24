@@ -10,7 +10,7 @@ export function YourMenu({categoryList}) {
         return (
             <div key={`categories-${i}`}>
                 <h3>
-                    <Link to={`/your-menu-category/${category}`} className="category-text">
+                    <Link to={`/your-menu/${category}`} className="category-text">
                         {category}
                     </Link>
                 </h3>

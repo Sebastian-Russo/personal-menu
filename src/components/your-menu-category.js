@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import './your-menu-category.css'
 
-export function YourMenuCategoriesCategory(props) {   
-    console.log(props) 
+export function YourMenuCategory(props) {   
     const menuItems = props.menuItems;
    
-    const selected = props.categoryList.filter(item => item === props.match.params.id)[0];
+    const selected = props.categoryList.filter(item => item === props.match.params.category)[0];
 
     const selectedMenuItems = menuItems.filter(menuItem => menuItem.categories.find(category => { 
         return category === selected }))
@@ -15,12 +14,12 @@ export function YourMenuCategoriesCategory(props) {
     const menuItem = selectedMenuItems.map((item, i) => {
         return (
             <div key={`menu-item-${i}`}>
-                <Link to={`/your-menu-item/${item.id}`}>
-                    {item.name} 
+                <Link to={`/your-menu/${selected}/${item.id}`}>
+                    {item.name}
                 </Link>
             </div>
         )
-    })
+    });
     
     return (
         <div className="container-categories">
@@ -28,12 +27,12 @@ export function YourMenuCategoriesCategory(props) {
             <div>{menuItem}</div>
             <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>
         </div>
-    )   
-}
+    ); 
+};
 
 const mapStateToProps = state => ({
     categoryList: state.menu.categoryList,
     menuItems: state.menu.menuItems
-})
+});
 
-export default connect(mapStateToProps)(YourMenuCategoriesCategory)
+export default connect(mapStateToProps)(YourMenuCategory)

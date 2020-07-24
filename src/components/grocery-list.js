@@ -1,12 +1,22 @@
 import React from 'react'; 
+import {connect} from 'react-redux';
 
-export default function GroceryList(props) {
+export function GroceryList(props) {
+    console.log(props)
+
+    const items = props.groceryList;
+
     return (
         <div>
             <h1>Grocery List</h1>
-            <div>Grocery List</div>
-            <div>Grocery List</div>
-            <div>Grocery List</div>
+            <div>{items}</div>
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    groceryList: state.menu.GroceryList,
+    categoryList: state.menu.categoryList
+})
+
+export default connect(mapStateToProps)(GroceryList);
