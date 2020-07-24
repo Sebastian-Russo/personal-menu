@@ -25,7 +25,7 @@ export class RecipeForm extends React.Component {
             redirect: false,
         }
     }
-    // checks if props are coming from edit button 
+    // checks if props are coming from your-menu-item because of edit recipe button
     componentDidMount() {
         if (this.props.menuItem) {
             console.log('edit menu item', this.props)
@@ -114,7 +114,7 @@ export class RecipeForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        if (this.state.id) {
+        if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
             this.props.dispatch(updateMenuItem(this.state))
         } else {
             this.props.dispatch(addRecipe(this.state))

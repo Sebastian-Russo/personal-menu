@@ -6,15 +6,15 @@ import './your-menu-category.css'
 export function YourMenuCategory(props) {   
     const menuItems = props.menuItems;
    
-    const selected = props.categoryList.filter(item => item === props.match.params.category)[0];
+    const selectedCategory = props.categoryList.filter(item => item === props.match.params.category)[0];
 
     const selectedMenuItems = menuItems.filter(menuItem => menuItem.categories.find(category => { 
-        return category === selected }))
+        return category === selectedCategory }))
 
     const menuItem = selectedMenuItems.map((item, i) => {
         return (
             <div key={`menu-item-${i}`}>
-                <Link to={`/your-menu/${selected}/${item.id}`}>
+                <Link to={`/your-menu/${selectedCategory}/${item.id}`}>
                     {item.name}
                 </Link>
             </div>
@@ -23,7 +23,7 @@ export function YourMenuCategory(props) {
     
     return (
         <div className="container-categories">
-            <h1>{selected}</h1>
+            <h1>{selectedCategory}</h1>
             <div>{menuItem}</div>
             <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>
         </div>

@@ -35,15 +35,15 @@
     justify-content: center;
     font-size: 20px;
   }
-  
-  .navbar-list a:hover {
-    color: #03f7f7;
-    transition: .5s;
-  }
-  
-  .nav-list-items {
-    background-color: #03f7f7; 
-    font-family: 'Bubbler One', sans-serif;
+
+.navbar-list a:hover {
+  color: white;
+  transition: .5s;
+}
+
+.nav-list-items {
+  background-color: #03f7f7; 
+  font-family: 'Bubbler One', sans-serif;
 }
 
 .hamburger-button {
@@ -67,9 +67,6 @@
   }
   nav ul li a{
     font-size: 16px;
-  }
-  main {
-
   }
 }
 
@@ -99,6 +96,10 @@
   .nav-bar, .navbar-list, .nav-list-items, a {
     background: none;
     color:  #03f7f7;
+  }
+  .navbar-list a:hover {
+    color: #03f7f7;
+    transition: .5s;
   }
   #check:checked ~ ul {
     right: 0;

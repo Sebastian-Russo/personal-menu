@@ -38,15 +38,17 @@ export const addToGroceryList = items => ({
     items
 })
 
-const getRecipes = (token) => {
-    fetch(`API_BASE_URL/recipes`, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }).then(res => {
-        return res.json()
-    }).then(json => {
-        console.log(json)
-    });
-}
+
+
+// const getRecipes = (token) => {
+//     fetch(`API_BASE_URL/recipes`, {
+//         method: 'GET',
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     }).then(res => {
+//         return res.json()
+//     }).then(json => {
+//         console.log(json)
+//     });
+// }

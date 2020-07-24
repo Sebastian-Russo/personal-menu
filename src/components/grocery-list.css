@@ -1,0 +1,14 @@
+.box-grocery-list {
+    display: flex;
+}
+
+.box-grocery-item {
+    flex-direction: row;
+    color: red;
+}
+
+.button-delete-grocery-item {
+    flex-direction: row;
+    color: red;
+
+}

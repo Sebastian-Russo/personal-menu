@@ -1,3 +1,27 @@
 .title-categories {
     text-transform: capitalize;
 }
+
+.box-addItem {
+    display: flex;
+    justify-content: center;
+}
+
+.button-addItem {
+    flex-direction: row;
+    padding: 4px 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.grocery-item {
+    flex-direction: row;
+    font-size: 20px;
+}
+
+.button-send-grocery-list {
+    margin-top: 15px;
+    padding: 6px 12px;
+    font-size: 12px;
+}
