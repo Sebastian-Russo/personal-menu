@@ -95,6 +95,7 @@ class Quotes extends React.Component {
         this.randomQuoteGenerator();
     };
 
+    // recursion = function that calls itself, setTime calls itself once each time randomQuoteGenerator is called. setInterval would be making another sequence of calls each time, like nested into each other
     randomQuoteGenerator = () => {
         const randomNum = Math.floor(Math.random() * this.state.quotes.length);
         const randomQuote = this.state.quotes[randomNum];

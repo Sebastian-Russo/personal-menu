@@ -123,7 +123,7 @@ export default function menuReducer(state=initialState, action) {
     }
     if (action.type === ADD_TO_GROCERY_LIST) {
         answer = Object.assign({}, state, {
-            groceryList: [...state.groceryList, action.items]
+            groceryList: [...state.groceryList.concat(action.items)]
         })
         console.log('global store', action, answer)
         return answer

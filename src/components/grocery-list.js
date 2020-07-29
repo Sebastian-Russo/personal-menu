@@ -6,9 +6,7 @@ export function GroceryList({groceryList}) {
     console.log(groceryList)
     const items = groceryList.map((item, i) => {
         return (
-            <div 
-                className="box-grocery-list"
-                key={`item-${i}`}>
+            <div className="box-grocery-list" key={`item-${i}`}>
                 <div className="grocery-item">{item}</div>
                 <button className="button-delete-grocery-item">Delete Item</button>
             </div>
