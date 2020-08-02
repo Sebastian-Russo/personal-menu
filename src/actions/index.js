@@ -38,17 +38,45 @@ export const addToGroceryList = items => ({
     items
 })
 
+export const DELETE_ITEM_FROM_GROCERY_LIST = 'DELETE_ITEM_FROM_GROCERY_LIST';
+export const deleteItemFromGroceryList = item => ({
+    type: DELETE_ITEM_FROM_GROCERY_LIST,
+    item
+})
 
 
-// const getRecipes = (token) => {
-//     fetch(`API_BASE_URL/recipes`, {
-//         method: 'GET',
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     }).then(res => {
-//         return res.json()
-//     }).then(json => {
-//         console.log(json)
-//     });
-// }
+/*** API AJAX REQUESTS ***/
+
+export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
+export const getRecipesSuccess = recipes => ({
+    type: GET_RECIPES_SUCCESS,
+    recipes
+})
+
+export const GET_RECIPES_ERROR = 'GET_RECIPES_ERROR';
+export const getRecipesError = error => ({
+    type: GET_RECIPES_ERROR,
+    error
+})
+
+// log user in and get recipes 
+export const getRecipes = (token) => {
+    fetch(`API_BASE_URL/recipes`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(res => {
+        return res.json()
+    }).then(json => {
+        console.log(json)
+    });
+}
+
+
+
+
+// - update recipes 
+// - add recipes
+// - delete recipes 
+// - draw all recipes into store, but would not recommend update recipe in store, massive update for one little change 

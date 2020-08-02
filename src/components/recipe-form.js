@@ -22,7 +22,7 @@ export class RecipeForm extends React.Component {
             id: Math.floor(Math.random() * 10000000000),
             otherCheckbox: true,
             newCategory: "",
-            redirect: false,
+            redirect: false
         }
     }
     // checks if props are coming from your-menu-item because of edit recipe button
@@ -119,9 +119,9 @@ export class RecipeForm extends React.Component {
         } else {
             this.props.dispatch(addRecipe(this.state))
         }
-        this.props.setEditing();
+        // this.props.setEditing();
     }
- 
+
     render() {
         const {
             id,
@@ -165,6 +165,25 @@ export class RecipeForm extends React.Component {
                 )
             })
         }
+
+        // let cat = this.props.categoryList.map((category, i) => {
+        //     const label = category[0].toUpperCase() + category.slice(1);
+
+        //     return (
+        //         <div key={`${category}-${i}`} className="ingredient-list">
+        //             <input 
+        //                 name={category}
+        //                 id={category}
+        //                 type="checkbox"
+        //                 value={category}
+        //                 // checked={checked}
+        //                 onChange={(e) => this.addCategory(e)}                    />
+        //             <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
+        //             <br></br>
+        //         </div>
+        //     )
+        // })
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -202,6 +221,10 @@ export class RecipeForm extends React.Component {
                     <br></br>
                     <h3>Ingredients</h3>
                     {showIngredients}
+
+                    <h3>Categories</h3>
+                    {/* {cat} */}
+
                     <input
                         name="categories"
                         id="other"
@@ -245,7 +268,8 @@ export class RecipeForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    menuItems: state.menu.menuItems
+    menuItems: state.menu.menuItems,
+    categoryList: state.menu.categoryList
 })
 
 RecipeForm = connect(mapStateToProps)(RecipeForm)

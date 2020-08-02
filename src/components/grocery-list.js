@@ -1,20 +1,26 @@
 import React from 'react'; 
 import {connect} from 'react-redux';
+import {deleteItemFromGroceryList} from '../actions';
+import './grocery-list.css'
 
-export function GroceryList({groceryList}) {
+export function GroceryList(props, {groceryList}) {
 
-    console.log(groceryList)
-    const items = groceryList.map((item, i) => {
+
+    const items = props.groceryList.map((item, i) => {
         return (
             <div className="box-grocery-list" key={`item-${i}`}>
                 <div className="grocery-item">{item}</div>
-                <button className="button-delete-grocery-item">Delete Item</button>
+                <button 
+                    className="button-delete-grocery-item"
+                    type="button"
+                    // onClick={props.dispatch(deleteItemFromGroceryList(item))}
+                    >Delete Item</button>
             </div>
         )
     })
 
     return (
-        <div className="box-grocery-list">
+        <div className="container-grocery-list">
             <h1>Grocery List</h1>
             <div className="grocery-item">{items}</div>
         </div>
@@ -22,7 +28,7 @@ export function GroceryList({groceryList}) {
 }
 
 const mapStateToProps = state => ({
-    groceryList: state.menu.groceryList,
+    groceryList: state.menu.groceryList
 })
 
 export default connect(mapStateToProps)(GroceryList);

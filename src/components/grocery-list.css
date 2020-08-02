@@ -1,5 +1,6 @@
 .box-grocery-list {
     display: flex;
+    justify-content: center;
 }
 
 .box-grocery-item {
@@ -8,7 +9,9 @@
 }
 
 .button-delete-grocery-item {
-    flex-direction: row;
+    flex-direction: column;
     color: red;
-
+    margin-top: 15px;
+    padding: 6px 12px;
+    font-size: 12px;
 }

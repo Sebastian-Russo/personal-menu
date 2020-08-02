@@ -5,10 +5,11 @@ export function RecipeCategories(props) {
         console.log('recipe categories', props);
         const categories = props.categoryList.map((category, i) => {
             const label = category[0].toUpperCase() + category.slice(1);
-            // while looping through with map, 
-            // see if the props category array includes that category
+            // while looping through categoryList with map, 
+            // see if the array includes that category
             // returns true or false, checked prop shows true or false 
-            const checked = props.categories.includes(category)
+            // const checked = props.categoryList.includes(category)
+            // const checked = categories.includes(category)
             return (
                 <div key={`${category}-${i}`} className="ingredient-list">
                     <input 

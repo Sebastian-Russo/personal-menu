@@ -16,7 +16,7 @@ const store = createStore(
         auth: authReducer,
         protectedData: protectedDataReducer
     }),
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // applyMiddleware function to add Redux Thunk to our store
 );
 
 const authToken = loadAuthToken();

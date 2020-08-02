@@ -25,3 +25,7 @@
     padding: 6px 12px;
     font-size: 12px;
 }
+
+.button-addItem:focus {
+    color: red;
+}

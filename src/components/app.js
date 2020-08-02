@@ -21,7 +21,7 @@ export class App extends React.Component {
         this.stopPeriodicRefresh();
     }
 }
-
+// When the component will definitely rerender
   componentWillUpdate() {
     this.startPeriodicRefresh();
   }

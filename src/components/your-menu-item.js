@@ -77,7 +77,7 @@ export class YourMenuItem extends React.Component {
                         <button 
                             className="button-addItem"
                             onClick={() => this.handleAddToGroceryList(ingredient)}
-                        >Add to Grocery List</button>
+                        >Add Item</button>
                         <br></br>
                         <br></br>
                     </div>
