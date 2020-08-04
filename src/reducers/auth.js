@@ -7,8 +7,8 @@ import {
 } from '../actions/auth';
 
 const initialState = {
-    authToken: null, // authToken !== null does not mean it has been validated
-    currentUser: "5f297175fe118d52b6b9c948", //userId: "5f297175fe118d52b6b9c948" // the user obj response from server 
+    authToken: 1234, // authToken !== null does not mean it has been validated
+    currentUser: "5f297175fe118d52b6b9c948",  // the user obj response from server 
     username: null,
     loading: false,
     error: null

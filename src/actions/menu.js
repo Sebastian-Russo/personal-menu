@@ -54,12 +54,14 @@ export const addRecipeError = error => ({
     error
 })
 
-export const addRecipe = (token, userId) => dispatch => {
+export const addRecipe = (token, userId, recipe) => dispatch => {
     fetch(`${API_BASE_URL}/recipes/${userId}`, {
         method: 'POST',
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json' // lets the server know what it's expecting
+        },
+        body: JSON.stringify(recipe)
     }).then(res => {
         return res.json()
     }).then(json => {
@@ -95,12 +97,14 @@ export const updateMenuItemError = error => ({
     error
 })
 
-export const updateMenuItem = (token, userId) => dispatch => {
+export const updateMenuItem = (token, userId, recipe) => dispatch => {
     fetch(`${API_BASE_URL}/recipes/${userId}`, {
         method: 'PUT',
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json' // lets the server know what it's expecting
+        },
+        body: JSON.stringify(recipe)
     }).then(res => {
         return res.json()
     }).then(json => {

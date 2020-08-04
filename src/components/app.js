@@ -18,7 +18,7 @@ export class App extends React.Component {
 
   componentDidMount() {
     if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
-      this.props.dispatch(getRecipes(this.props.userId))
+      this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
     }
   }
 
@@ -105,7 +105,7 @@ export class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  hasAuthToken: state.auth.authToken !== null,
+  authToken: state.auth.authToken,
   userId: state.auth.currentUser,
   username: state.auth.username
 });

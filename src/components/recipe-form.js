@@ -19,7 +19,6 @@ export class RecipeForm extends React.Component {
             ingredients: [],
             directions: "",
             categories: [],
-            id: Math.floor(Math.random() * 10000000000),
             otherCheckbox: true,
             newCategory: "",
             redirect: false
@@ -45,7 +44,7 @@ export class RecipeForm extends React.Component {
 
     // 1st arg. prevProps, 2nd arg. prevState
     componentWillUpdate(prevProps, newProp) {
-        if (prevProps.menuItems.length > this.props.menuItems.length){
+        if (prevProps.menuItems.length > this.props.menuItems){
             console.log('here')
             this.setState({redirect: true})
             // return <Redirect to={`/your-menu-item/${this.state.id}`} />
@@ -53,7 +52,6 @@ export class RecipeForm extends React.Component {
     }
 
     addIngredientAndAmount = (ingredient) => {
-        ingredient.id = Math.floor(Math.random() * 10000000000);
         this.setState({
             ingredients: [...this.state.ingredients, ingredient]
         });
@@ -115,9 +113,12 @@ export class RecipeForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
-            this.props.dispatch(updateMenuItem(this.state))
+            this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
         } else {
             this.props.dispatch(addRecipe(this.state))
+            this.setState({
+                redirect: true
+            })
         }
         // this.props.setEditing();
     }
@@ -269,7 +270,9 @@ export class RecipeForm extends React.Component {
 
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
-    categoryList: state.category.categoryList
+    categoryList: state.category.categoryList,
+    userId: state.auth.currentUser,
+    authToken: state.auth.authToken 
 })
 
 RecipeForm = connect(mapStateToProps)(RecipeForm)
