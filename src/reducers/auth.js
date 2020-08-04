@@ -8,15 +8,18 @@ import {
 
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
-    currentUser: null,
+    currentUser: null, // the user obj response from server 
+    username: null,
     loading: false,
     error: null
 };
 
-export default function reducer(state = initialState, action) {
+export default function authReducer(state = initialState, action) {
     if (action.type === SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
-            authToken: action.authToken
+            authToken: action.authToken,
+            currentUser: action.userId,
+            username: action.username
         });
     } else if (action.type === CLEAR_AUTH) {
         return Object.assign({}, state, {

@@ -28,7 +28,7 @@ export function GroceryList(props, {groceryList}) {
 }
 
 const mapStateToProps = state => ({
-    groceryList: state.menu.groceryList
+    groceryList: state.grocery.groceryList
 })
 
 export default connect(mapStateToProps)(GroceryList);

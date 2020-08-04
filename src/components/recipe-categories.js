@@ -33,7 +33,7 @@ export function RecipeCategories(props) {
 }
 
 const mapStateToProps = state => ({
-    categoryList: state.menu.categoryList
+    categoryList: state.category.categoryList
 })
 
 export default connect(mapStateToProps)(RecipeCategories)

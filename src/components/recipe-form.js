@@ -269,7 +269,7 @@ export class RecipeForm extends React.Component {
 
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
-    categoryList: state.menu.categoryList
+    categoryList: state.category.categoryList
 })
 
 RecipeForm = connect(mapStateToProps)(RecipeForm)

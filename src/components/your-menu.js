@@ -28,7 +28,7 @@ export function YourMenu({categoryList}) {
 }
 
 const mapStateToProps = state => ({
-    categoryList: state.menu.categoryList
+    categoryList: state.category.categoryList
 })
 
 export default connect(mapStateToProps)(YourMenu)

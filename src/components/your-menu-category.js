@@ -31,7 +31,7 @@ export function YourMenuCategory(props) {
 };
 
 const mapStateToProps = state => ({
-    categoryList: state.menu.categoryList,
+    categoryList: state.category.categoryList,
     menuItems: state.menu.menuItems
 });
 

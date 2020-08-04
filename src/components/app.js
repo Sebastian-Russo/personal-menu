@@ -12,12 +12,21 @@ import LoginForm from './login-form';
 import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
 import Footer from "./footer";
+import { getRecipes } from '../actions';
 
 export class App extends React.Component {
+
+  componentDidMount() {
+    if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
+      this.props.dispatch(getRecipes(this.props.userId))
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if (!prevProps.loggedIn && this.props.loggedIn) {
+    if (!prevProps.userId && this.props.userId) {
         this.startPeriodicRefresh();
-    } else if (prevProps.loggedIn && !this.props.loggedIn) {
+        // this.dispatch(getRecipes(token))
+    } else if (prevProps.userId && !this.props.userId) {
         this.stopPeriodicRefresh();
     }
 }
@@ -41,6 +50,7 @@ export class App extends React.Component {
   }
 
     render() {
+
       return (
         <Router>  
           <div>
@@ -96,7 +106,8 @@ export class App extends React.Component {
 
 const mapStateToProps = state => ({
   hasAuthToken: state.auth.authToken !== null,
-  loggedIn: state.auth.currentUser !== null
+  userId: state.auth.currentUser,
+  username: state.auth.username
 });
 
 // export default withRouter(connect(mapStateToProps)(LandingPage));
