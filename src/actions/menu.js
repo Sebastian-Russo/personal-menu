@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../config';
+
 /*** API AJAX REQUESTS ***/
 
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
