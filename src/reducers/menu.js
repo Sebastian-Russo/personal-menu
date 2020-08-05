@@ -12,80 +12,80 @@ import {
 const initialState = {
     editing: false, 
     error: null,
-    // menuItems: [
-    //     {
-    //         id: 0,
-    //         name: "grilled cheese",
-    //         categories: ["lunch"],
-    //         ingredients: [
-    //             {
-    //                 ingredient: "bread",
-    //                 id: 1,
-    //                 amount: "2 slices"
-    //             },
-    //             {
-    //                 ingredient: "cheese",
-    //                 id: 2,
-    //                 amount: "2 slices"
-    //             },
-    //             {
-    //                 ingredient: "butter",
-    //                 id: 3,
-    //                 amount: "1 tbps"
-    //             }
-    //         ],
-    //         directions: "put cheese on bread, then pan fry bread till golden brown and cheese has melted"
-    //     },
-    //     {
-    //         id: 1,
-    //         name: "ramen",
-    //         categories: ["snacks", "lunch", "quick-and-easy"],
-    //         ingredients: [
-    //             {
-    //                 ingredient: "roman packet of noodles",
-    //                 id: 1,
-    //                 amount: "1 packet"
-    //             }
-    //         ],
-    //         directions: "boil water, then wait 3 minutes"
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "cereal",
-    //         categories: ["breakfast", "dessert", "quick-and-easy"],
-    //         ingredients: [
-    //             {
-    //                 ingredient: "cereal",
-    //                 id: 1,
-    //                 amount: "2 cups"
-    //             },
-    //             {
-    //                 ingredient: "milk",
-    //                 id: 2,
-    //                 amount: "1 cup"
-    //             }
-    //         ],
-    //         directions: "pour cereal into bowl, then pour milk into bowl"
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "mac & cheese",
-    //         categories: ["lunch", "dinner", "snacks", "quick-and-easy"],
-    //         ingredients: [
-    //             {
-    //                 ingredient: "macaroni",
-    //                 id: 1,
-    //                 amount: "1 lb"
-    //             },
-    //             {
-    //                 ingredient: "cheese",
-    //                 id: 2,
-    //                 amount: "1 cup"
-    //             }
-    //         ],
-    //         directions: "boil pasta for 10 minutes, then mix in cheese to melt"
-    //     }
-    // ]
+    menuItems: [
+        {
+            id: 0,
+            name: "grilled cheese",
+            categories: ["lunch"],
+            ingredients: [
+                {
+                    ingredient: "bread",
+                    id: 1,
+                    amount: "2 slices"
+                },
+                {
+                    ingredient: "cheese",
+                    id: 2,
+                    amount: "2 slices"
+                },
+                {
+                    ingredient: "butter",
+                    id: 3,
+                    amount: "1 tbps"
+                }
+            ],
+            directions: "put cheese on bread, then pan fry bread till golden brown and cheese has melted"
+        },
+        {
+            id: 1,
+            name: "ramen",
+            categories: ["snacks", "lunch", "quick-and-easy"],
+            ingredients: [
+                {
+                    ingredient: "roman packet of noodles",
+                    id: 1,
+                    amount: "1 packet"
+                }
+            ],
+            directions: "boil water, then wait 3 minutes"
+        },
+        {
+            id: 2,
+            name: "cereal",
+            categories: ["breakfast", "dessert", "quick-and-easy"],
+            ingredients: [
+                {
+                    ingredient: "cereal",
+                    id: 1,
+                    amount: "2 cups"
+                },
+                {
+                    ingredient: "milk",
+                    id: 2,
+                    amount: "1 cup"
+                }
+            ],
+            directions: "pour cereal into bowl, then pour milk into bowl"
+        },
+        {
+            id: 3,
+            name: "mac & cheese",
+            categories: ["lunch", "dinner", "snacks", "quick-and-easy"],
+            ingredients: [
+                {
+                    ingredient: "macaroni",
+                    id: 1,
+                    amount: "1 lb"
+                },
+                {
+                    ingredient: "cheese",
+                    id: 2,
+                    amount: "1 cup"
+                }
+            ],
+            directions: "boil pasta for 10 minutes, then mix in cheese to melt"
+        }
+    ]
 }
 
 export default function menuReducer(state=initialState, action) {

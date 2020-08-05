@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     authToken: 1234, // authToken !== null does not mean it has been validated
-    currentUser: "5f297175fe118d52b6b9c948",  // the user obj response from server 
+    currentUser: "5f2aa35d43ea5564f76bd73f",  //"5f297175fe118d52b6b9c948",  // the user obj response from server 
     username: null,
     loading: false,
     error: null

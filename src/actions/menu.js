@@ -2,6 +2,10 @@ import { API_BASE_URL } from '../config';
 
 /*** API AJAX REQUESTS ***/
 
+/* - getRecipes, getSuccessRecipes; takes care of request. dispatching getRecipesSucces(json) (with json aka the response from the ajax request) 
+getRecipeSuccess takes the recipes that were returned and passes them through to the reducer as recipes, so your reducer doesn’t handle async requests, your actions do. 
+your actions take the information returned from the async request and passes them through to the reducer, so the reducer can add them to the store (success) */
+
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
 export const getRecipesSuccess = recipes => ({
     type: GET_RECIPES_SUCCESS,
@@ -54,8 +58,8 @@ export const addRecipeError = error => ({
     error
 })
 
-export const addRecipe = (token, userId, recipe) => dispatch => {
-    fetch(`${API_BASE_URL}/recipes/${userId}`, {
+export const addRecipe = (token, recipe) => dispatch => {
+    fetch(`${API_BASE_URL}/recipes`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -135,17 +139,14 @@ export const deleteMenuItemError = error => ({
     error
 })
 
-export const deleteMenuItem = (token, userId) => dispatch => {
-    fetch(`${API_BASE_URL}/recipes/${userId}`, {
+export const deleteMenuItem = (token, recipeId) => dispatch => {
+    fetch(`${API_BASE_URL}/recipes/${recipeId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }).then(res => {
-        return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(deleteMenuItemSuccess(json))
+    }).then(() => {
+        dispatch(deleteMenuItemSuccess(recipeId))
     }).catch(err => {
         dispatch(deleteMenuItemError(err))
     });

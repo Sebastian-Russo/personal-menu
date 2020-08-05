@@ -20,6 +20,6 @@ export default function groceryReducer(state=initialState, action) {
         })
         return answer
     }
-    console.log('global store', action, answer)
+    // console.log('global store', action, answer)
     return state;
 }

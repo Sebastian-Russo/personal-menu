@@ -32,7 +32,8 @@ export class YourMenuItem extends React.Component {
     }
 
     handleDeleteClick = () => {
-        this.props.dispatch(deleteMenuItem(this.menuItem.id))
+        console.log(this.state.menuItem.id)
+        this.props.dispatch(deleteMenuItem(this.props.authToken, this.state.menuItem.id))
     }
 
 
@@ -68,11 +69,13 @@ export class YourMenuItem extends React.Component {
 
         // lists the menu item ingredients 
         const ingredients = menuItem.ingredients 
-            ? menuItem.ingredients.map(ingredient => {
+            ? menuItem.ingredients.map((ingredient,i) => {
                 return (
                     <div   
                         className="box-addItem"  
-                        key={ingredient.id}>
+                        key={`ingredient-${i}`}
+                        // key={ingredient.id}
+                        >
                         <div className="grocery-item">{ingredient.amount} of {ingredient.ingredient}</div>
                         <button 
                             className="button-addItem"
@@ -117,7 +120,9 @@ export class YourMenuItem extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    menuItems: state.menu.menuItems
+    menuItems: state.menu.menuItems,
+    userId: state.auth.currentUser,
+    authToken: state.auth.authToken 
 });
 
 export default connect(mapStateToProps)(YourMenuItem)

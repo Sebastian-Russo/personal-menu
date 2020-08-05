@@ -44,7 +44,7 @@ export class RecipeForm extends React.Component {
 
     // 1st arg. prevProps, 2nd arg. prevState
     componentWillUpdate(prevProps, newProp) {
-        if (prevProps.menuItems.length > this.props.menuItems){
+        if (prevProps.menuItems.length > this.props.menuItems.length){
             console.log('here')
             this.setState({redirect: true})
             // return <Redirect to={`/your-menu-item/${this.state.id}`} />
@@ -115,7 +115,9 @@ export class RecipeForm extends React.Component {
         if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
             this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
         } else {
-            this.props.dispatch(addRecipe(this.state))
+            const recipe = this.state;
+            recipe.userId = this.props.userId;
+            this.props.dispatch(addRecipe(this.props.authToken, recipe))
             this.setState({
                 redirect: true
             })
