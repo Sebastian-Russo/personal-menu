@@ -21,7 +21,8 @@ export class RecipeForm extends React.Component {
             categories: [],
             otherCheckbox: true,
             newCategory: "",
-            redirect: false
+            redirect: false,
+            checked: false
         }
     }
     // checks if props are coming from your-menu-item because of edit recipe button
@@ -37,7 +38,8 @@ export class RecipeForm extends React.Component {
                 categories: categories,
                 id: id,
                 otherCheckbox: true,
-                newCategory: []
+                newCategory: [],
+                checked: false
             })
         }
     }
@@ -61,20 +63,24 @@ export class RecipeForm extends React.Component {
     deleteIngredientAndAmount = (e, id) => {
         this.setState({
             ingredients: this.state.ingredients.filter(ingredient => {
-                return ingredient.id !== id
+                return ingredient._id !== id
             })
         })
     }
 
     addCategory = (event) => {
         const category = event.target.value;
-        // if state.categories array includes new category, why setState? should it be if it doesn't include?
-        if (!this.state.categories.includes(category)) {
-            this.setState({
-                categories: this.state.categories.filter(cat => cat !== category)
-            })
-        }
-        this.setState({ categories: [...this.state.categories, category] })
+        // const checked = this.state.categories.includes(category);
+        // console.log(checked)
+        this.setState({
+             categories: [...this.state.categories, category]
+        })
+        
+        // if (!this.state.categories.includes(category)) {
+        //     this.setState({
+        //         categories: this.state.categories.filter(cat => cat !== category)
+        //     })
+        // }
     }
 
     handleChange = e => { 
@@ -135,57 +141,61 @@ export class RecipeForm extends React.Component {
             ingredients,
             otherCheckbox
         } = this.state;
+        // console.log(categories)
+        
 
         if (redirect === true) {
             return <Redirect to={`/your-menu//${id}`} />
         }
-        let showIngredients;
 
+        let showIngredients;
         if(ingredients.length) {
             showIngredients = ingredients.map((item, i) => {
+                // console.log(item._id)
                 return (
                 <div className="form-input" key={`ingredient-${i}`}>
                     <label htmlFor="ingredient"> Ingredient </label>
                     <input 
-                        name="ingredient"
-                        id="ingredient"
+                        name={item.ingredient}
+                        id={item.id}
                         type="text"
-                        // why keep value here?
                         value={item.ingredient}
                         onChange={e => this.handleIngredientChange(e, i, 'ingredient')} 
                     />
                     <label htmlFor="amount"> Amount </label>
                     <input 
-                        name="amount"
-                        id="amount"
+                        name={item.amount}
+                        id={item.id}
                         type="text"
                         // controlled component when using value in input 
                         value={item.amount}
                         onChange={e => this.handleIngredientChange(e, i, 'amount')} 
                         />
-                    <button type="button" onClick={e => this.deleteIngredientAndAmount(e, item.id)}>Delete</button>
+                    <button type="button" onClick={(e) => this.deleteIngredientAndAmount(e, item._id)}>Delete</button>
                 </div>
                 )
             })
         }
 
-        // let cat = this.props.categoryList.map((category, i) => {
-        //     const label = category[0].toUpperCase() + category.slice(1);
 
-        //     return (
-        //         <div key={`${category}-${i}`} className="ingredient-list">
-        //             <input 
-        //                 name={category}
-        //                 id={category}
-        //                 type="checkbox"
-        //                 value={category}
-        //                 // checked={checked}
-        //                 onChange={(e) => this.addCategory(e)}                    />
-        //             <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
-        //             <br></br>
-        //         </div>
-        //     )
-        // })
+        let cat = this.props.categoryList.map((category, i) => {
+            const checked = categories.includes(category);
+            const label = category[0].toUpperCase() + category.slice(1);
+            return (
+                <div key={`${category}-${i}`} className="ingredient-list">
+                    <input 
+                        name={category}
+                        id={category}
+                        type="checkbox"
+                        value={category}
+                        checked={checked}
+                        // checked={this.state.checked}
+                        onChange={(e) => this.addCategory(e)}                    />
+                    <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
+                    <br></br>
+                </div>
+            )
+        })
 
         return (
             <div>
@@ -222,11 +232,9 @@ export class RecipeForm extends React.Component {
                     />
                     <br></br>
                     <br></br>
-                    <h3>Ingredients</h3>
-                    {showIngredients}
 
                     <h3>Categories</h3>
-                    {/* {cat} */}
+                    {cat}
 
                     <input
                         name="categories"
@@ -253,6 +261,8 @@ export class RecipeForm extends React.Component {
 
                     <br></br>
                     <br></br>
+                    <h3>Ingredients</h3>
+                    {showIngredients}
                     <button
                         type="submit"
                         >

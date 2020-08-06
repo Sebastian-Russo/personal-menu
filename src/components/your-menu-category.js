@@ -7,8 +7,9 @@ export function YourMenuCategory(props) {
     const menuItems = props.menuItems;
    
     const selectedCategory = props.categoryList.filter(item => item === props.match.params.category)[0];
-
+    console.log(selectedCategory)
     const selectedMenuItems = menuItems.filter(menuItem => menuItem.categories.find(category => { 
+        // console.log(menuItems, menuItem, categories)
         return category === selectedCategory }))
 
     const menuItem = selectedMenuItems.map((item, i) => {
