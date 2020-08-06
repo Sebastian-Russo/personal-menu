@@ -5,7 +5,7 @@ export const addToGroceryList = items => ({
 })
 
 export const DELETE_ITEM_FROM_GROCERY_LIST = 'DELETE_ITEM_FROM_GROCERY_LIST';
-export const deleteItemFromGroceryList = item => ({
+export const deleteItemFromGroceryList = index => ({
     type: DELETE_ITEM_FROM_GROCERY_LIST,
-    item
+    index
 })

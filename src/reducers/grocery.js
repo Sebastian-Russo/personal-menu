@@ -14,12 +14,14 @@ export default function groceryReducer(state=initialState, action) {
         return answer
     }
     if (action.type === DELETE_ITEM_FROM_GROCERY_LIST) {
-        const selected = state.groceryList.filter(item => item !== action.item)
+        const selected = state.groceryList.filter((item, index) => index !== action.index)
         answer = Object.assign({}, state, {
                 groceryList: selected
         })
+        console.log('global store', action, answer)
         return answer
     }
-    // console.log('global store', action, answer)
+    console.log('global store', action, answer)
     return state;
 }
+

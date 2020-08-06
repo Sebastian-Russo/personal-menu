@@ -44,7 +44,7 @@ export class YourMenuItem extends React.Component {
         this.setState({ groceryList: [...this.state.groceryList, groceryItem]})
         console.log(this.state)
     }
-
+    // adds grocery list (to store)
     addToStoreGroceryList = (e) => {
         e.preventDefault();
         this.props.dispatch(addToGroceryList(this.state.groceryList));
