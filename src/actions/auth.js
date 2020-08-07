@@ -41,7 +41,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 export const login = (username, password) => dispatch => {
-    dispatch(authRequest());
+    dispatch(authRequest())
     return (
         fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
@@ -90,3 +90,37 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
+
+
+
+// update grocery list connected to user 
+
+export const UPDATE_USER_GROCERY_LIST_SUCCESS = 'UPDATE_USER_GROCERY_LIST_SUCCESS';
+export const updateUserGroceryListSuccess = groceryList => ({
+    type: UPDATE_USER_GROCERY_LIST_SUCCESS,
+    groceryList
+})
+
+export const UPDATE_USER_GROCERY_LIST_ERROR = 'UPDATE_USER_GROCERY_LIST_ERROR';
+export const updateUserGroceryListError = error => ({
+    type: UPDATE_USER_GROCERY_LIST_ERROR,
+    error
+})
+
+export const updateUserGroceryList = (token, userId, groceryList) => dispatch => {
+    fetch(`${API_BASE_URL}/recipes/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json' 
+        },
+        body: JSON.stringify(groceryList)
+    }).then(res => {
+        return res.json()
+    }).then(json => {
+        console.log(json)
+        dispatch(updateUserGroceryListSuccess(json))
+    }).catch(err => {
+        dispatch(updateUserGroceryListError(err))
+    });
+}

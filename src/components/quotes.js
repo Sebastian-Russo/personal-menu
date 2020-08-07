@@ -4,7 +4,6 @@ class Quotes extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            runQuotes: false,
             randomQuote: "",
             quotes: [
                 {
@@ -92,31 +91,33 @@ class Quotes extends React.Component {
     }
 
     
-    componentDidMount() {
-        this.randomQuoteGenerator();
+    componentWillMount() {
+        this.interval = this.randomQuoteGenerator();
     };
 
-    // componentWillUnmount() {
-    //     clearTimeout(setTimeout);
-    // }
+    componentDidMount() {
+        this.setState({
+          randomQuote: this.state.quotes[Math.floor(Math.random() * this.state.quotes.length)]
+        })
+      }
+  
+      componentWillUnmount() {
+          clearInterval(this.interval);
+      }
+
 
     // recursion = function that calls itself, setTime calls itself once each time randomQuoteGenerator is called. setInterval would be making another sequence of calls each time, like nested into each other
-    randomQuoteGenerator = () => {
+    randomQuoteGenerator = () => setInterval(() => {
         const randomNum = Math.floor(Math.random() * this.state.quotes.length);
         const randomQuote = this.state.quotes[randomNum];
         this.setState({ randomQuote })
-        setTimeout(
-            this.randomQuoteGenerator,
-            5000,
-        );
-    };
+    }, 5000);
 
     render() {
 
         const {quote} = this.state.randomQuote;
         const {author} = this.state.randomQuote;
 
-        
         return (
             <div className="box-5">
                 {quote}

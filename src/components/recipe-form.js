@@ -120,20 +120,18 @@ export class RecipeForm extends React.Component {
         e.preventDefault();
         if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
             this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
+            this.setState({ redirect: true })
         } else {
             const recipe = this.state;
             recipe.userId = this.props.userId;
             this.props.dispatch(addRecipe(this.props.authToken, recipe))
-            this.setState({
-                redirect: true
-            })
+            this.setState({ redirect: true })
         }
-        // this.props.setEditing();
     }
 
     render() {
         const {
-            id,
+            // id,
             name,
             redirect,
             directions,
@@ -142,10 +140,10 @@ export class RecipeForm extends React.Component {
             otherCheckbox
         } = this.state;
         // console.log(categories)
-        
+        console.log(this.state)
 
         if (redirect === true) {
-            return <Redirect to={`/your-menu//${id}`} />
+            return <Redirect to={`/your-menu/${categories[0]}`} />
         }
 
         let showIngredients;
@@ -240,7 +238,6 @@ export class RecipeForm extends React.Component {
                         name="categories"
                         id="other"
                         type="checkbox"  
-                        value="other"
                         value={this.props.categories}
                         onChange={(e) => this.addCategory(e)}   
                         onChange={this.otherCheckbox}

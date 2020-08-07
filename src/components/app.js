@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
 import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';

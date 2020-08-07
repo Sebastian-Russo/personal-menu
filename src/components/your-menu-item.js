@@ -13,7 +13,8 @@ export class YourMenuItem extends React.Component {
         this.state = {
             groceryList: [],
             menuItem: {},
-            editing: false
+            editing: false,
+            redirect: false
         }
     }
 
@@ -34,6 +35,7 @@ export class YourMenuItem extends React.Component {
     handleDeleteClick = () => {
         console.log(this.state.menuItem.id)
         this.props.dispatch(deleteMenuItem(this.props.authToken, this.state.menuItem.id))
+        this.setState({ redirect: true })
     }
 
 
@@ -96,6 +98,10 @@ export class YourMenuItem extends React.Component {
                 )
             })
             : "";
+
+        if (this.state.redirect === true) {
+            return <Redirect to={`/your-menu/`} />
+        }
 
         return (
                 <div className="menu-item">
