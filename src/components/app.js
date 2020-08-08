@@ -42,7 +42,7 @@ export class App extends React.Component {
     );
   }
 
-  startPeriodicRefresh() {
+  stopPeriodicRefresh() {
     if (!this.refreshInterval) {
       return;
     }

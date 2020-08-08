@@ -21,7 +21,7 @@ export default function groceryReducer(state=initialState, action) {
         console.log('global store', action, answer)
         return answer
     }
-    console.log('global store', action, answer)
+    // console.log('global store', action, answer)
     return state;
 }
 

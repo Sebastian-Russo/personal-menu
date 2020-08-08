@@ -17,7 +17,7 @@
   margin: -20px 0px 5px 0px;
 }
 
-
+ /* ul */
 .navbar-list {
     position: relative;
     overflow-x: hidden; 
@@ -26,8 +26,8 @@
     justify-content: center;
     font-family: 'Bubbler One', sans-serif;
 }
-  
-  .navbar-list a {
+
+  .navbar-list a, .button-logout {
     padding: 6px 40px 6px 16px;
     text-decoration: none;
     font-size: 15px;
@@ -36,15 +36,18 @@
     font-size: 20px;
   }
 
-.navbar-list a:hover {
+
+.navbar-list a:hover, .button-logout:hover {
   color: white;
   transition: .5s;
 }
 
-.nav-list-items {
+
+.nav-list-items, .button-logout{
   background-color: #03f7f7; 
   font-family: 'Bubbler One', sans-serif;
 }
+
 
 .hamburger-button {
   font-size: 30px;
@@ -88,12 +91,12 @@
     padding-top: 10px;
   }
 
-  .nav-bar, .navbar-list, .nav-list-items {
+  .nav-bar, .navbar-list, .nav-list-items, .button-logout {
     display: block;
     margin: 50px 0;
     line-height: 30px;
   }
-  .nav-bar, .navbar-list, .nav-list-items, a {
+  .nav-bar, .navbar-list, .nav-list-items, a, .button-logout {
     background: none;
     color:  #03f7f7;
   }
