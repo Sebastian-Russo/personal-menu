@@ -108,13 +108,13 @@ export const updateUserGroceryListError = error => ({
 })
 
 export const updateUserGroceryList = (token, userId, groceryList) => dispatch => {
-    fetch(`${API_BASE_URL}/recipes/${userId}`, {
+    fetch(`${API_BASE_URL}/users/${userId}`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-type': 'application/json' 
         },
-        body: JSON.stringify(groceryList)
+        body: JSON.stringify({groceryList, id: userId})
     }).then(res => {
         return res.json()
     }).then(json => {

@@ -7,7 +7,9 @@ import {clearAuthToken} from '../local-storage';
 import './navbar.css';
 
 export class Navbar extends React.Component {
+
     logOut() {
+        console.log(this.props.authToken, this.props.userId, this.props.groceryList)
         this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -19,9 +21,9 @@ export class Navbar extends React.Component {
     let loginOrRegisterButton;
     if (this.props.loggedIn) {
         logOutButton = (
-            <span 
+            <Link to="/home"
             className="nav-list-items button-logout"
-            onClick={() => this.logOut()}><i className="fas fa-user"></i> Log out</span>
+            onClick={() => this.logOut()}><i className="fas fa-user"></i> Log out</Link>
         );
     } else if (!this.props.loggedIn) {
         loginOrRegisterButton = (
@@ -45,7 +47,7 @@ export class Navbar extends React.Component {
                         <div><Link to="/your-menu" className="nav-list-items"><i className="fas fa-utensils"></i>  Your Menu</Link></div>
                         <div><Link to="/recipe-form" className="nav-list-items"><i className="fas fa-book-open"></i>  Add Recipe</Link></div>
                         <div><Link to="/grocery-list" className="nav-list-items"><i className="fas fa-th-list"></i>  Grocery List</Link></div>
-                        <div> {logOutButton}</div>
+                        <div> {logOutButton} </div>
                         <div> {loginOrRegisterButton}</div>
                     </ul>
                 </nav>

@@ -7,10 +7,11 @@
   background-color: rgb(3, 247, 247); 
   width: 100%;
   overflow: hidden;
+  opacity: .5;
 }
 
 .logo {
-  /* background-image: url(/logo.png); */
+  background-image: url(/logo.png);
   float: left;
   width: 150px;
   height: 150px;
@@ -95,6 +96,7 @@
     display: block;
     margin: 50px 0;
     line-height: 30px;
+    opacity: 1;
   }
   .nav-bar, .navbar-list, .nav-list-items, a, .button-logout {
     background: none;

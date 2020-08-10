@@ -13,10 +13,9 @@ const initialState = {
     currentUser: null, // "5f2aa35d43ea5564f76bd73f", //"5f297175fe118d52b6b9c948" //the user obj response from server 
     username: "",
     firstname: "",
-    firstname: "",
     loading: false,
     error: null,
-    groceryList: null
+    groceryList: []
 };
 
 export default function authReducer(state = initialState, action) {
@@ -72,7 +71,7 @@ export default function authReducer(state = initialState, action) {
 
     if (action.type === UPDATE_USER_GROCERY_LIST_SUCCESS) {
         answer = Object.assign({}, state, {
-            groceryList: action.groceryList
+            groceryList: [...state.groceryList, action.groceryList]
         })
         console.log('global store', action, answer)
         return answer

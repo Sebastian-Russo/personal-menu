@@ -1,13 +1,22 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
+import {Redirect} from 'react-router-dom';
 import Input from './input';
 import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { 
+            redirect: false        
+        }
+    }
+
     onSubmit(values) {
         console.log(values)
         this.props.dispatch(login(values.username, values.password));
+        this.setState({redirect: true})
     }
 
     render() {
@@ -18,6 +27,9 @@ export class LoginForm extends React.Component {
                     {this.props.error}
                 </div>
             )
+        }
+        if (this.state.redirect === true) {
+            return <Redirect to={`/your-menu/`} />
         }
         return (
             <form

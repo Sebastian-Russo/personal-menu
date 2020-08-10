@@ -91,15 +91,12 @@ class Quotes extends React.Component {
     }
 
     
-    componentWillMount() {
-        this.interval = this.randomQuoteGenerator();
-    };
-
     componentDidMount() {
+        this.interval = this.randomQuoteGenerator();
         this.setState({
           randomQuote: this.state.quotes[Math.floor(Math.random() * this.state.quotes.length)]
         })
-      }
+    }
   
       componentWillUnmount() {
           clearInterval(this.interval);

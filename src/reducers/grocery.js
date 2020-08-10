@@ -1,7 +1,7 @@
 import { ADD_TO_GROCERY_LIST, DELETE_ITEM_FROM_GROCERY_LIST } from '../actions';
 
 const initialState = {
-    groceryList: ['test 1', 'test 2', 'test 3']
+    groceryList: []
 }
 
 export default function groceryReducer(state=initialState, action) {

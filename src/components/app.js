@@ -15,9 +15,6 @@ import Footer from "./footer";
 import { getRecipes } from '../actions';
 
 export class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   // componentDidMount() {
   //   console.log(this.props.authToken, this.props.userId)
@@ -33,7 +30,6 @@ export class App extends React.Component {
     }
     if (!prevProps.userId && this.props.userId) {
         this.startPeriodicRefresh();
-        // this.dispatch(getRecipes(token))
     } else if (prevProps.userId && !this.props.userId) {
         this.stopPeriodicRefresh();
     }
