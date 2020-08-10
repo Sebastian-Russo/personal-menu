@@ -1,11 +1,8 @@
 import React from 'react';
-import {reduxForm, 
-    // SubmissionError, 
-    focus,} from 'redux-form';
+import {reduxForm, focus,} from 'redux-form';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import RecipeInput from './recipe-input';
-// import RecipeField from './recipe-field';
 // import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../validators';
 import { addRecipe, updateMenuItem, addCategory, } from '../actions';
@@ -68,43 +65,12 @@ export class RecipeForm extends React.Component {
         })
     }
 
-    addCategory = (event) => {
-        const category = event.target.value;
-        // const checked = this.state.categories.includes(category);
-        // console.log(checked)
-        this.setState({
-             categories: [...this.state.categories, category]
-        })
-        
-        // if (!this.state.categories.includes(category)) {
-        //     this.setState({
-        //         categories: this.state.categories.filter(cat => cat !== category)
-        //     })
-        // }
-    }
-
     handleChange = e => { 
-        console.log(e)
         const {value, name} = e.target;
         this.setState({
             [name]: value
         })
     }
-
-    handleNewCategory = (e) => {
-        const change = e.target.value;
-        this.setState({ newCategory: change })
-    }
-    handleAddCategoryToState = (e) => {
-        e.preventDefault();
-        this.props.dispatch(addCategory(this.state.newCategory))
-    }
-
-    otherCheckbox = () => {
-        this.setState({
-            otherCheckbox: !this.state.otherCheckbox
-        })
-    };
 
     handleIngredientChange = (e, index, property) => {
         e.preventDefault();
@@ -115,6 +81,35 @@ export class RecipeForm extends React.Component {
             ingredients
         });
     };
+
+    // adds category checkbox's to local state 
+    addCategoryLocal = (event) => {
+        const category = event.target.value;
+        this.setState({
+             categories: [...this.state.categories, category]
+        })
+        // this.props.dispatch(addCategory(this.state.newCategory))
+    }
+
+    // adds new category checkbox to form to be able to click/check
+    handleNewCategory = (e) => {
+        const change = e.target.value;
+        this.setState({ newCategory: change })
+    }
+    
+    // 
+    handleAddCategoryToState = (e) => {
+        e.preventDefault();
+        this.props.dispatch(addCategory(this.state.newCategory))
+    }
+    
+    // shows input box to create new category checkbox
+    otherCheckbox = () => {
+        this.setState({
+            otherCheckbox: !this.state.otherCheckbox
+        })
+    };
+
 
     handleSubmit = e => {
         e.preventDefault();
@@ -188,7 +183,7 @@ export class RecipeForm extends React.Component {
                         value={category}
                         checked={checked}
                         // checked={this.state.checked}
-                        onChange={(e) => this.addCategory(e)}                    />
+                        onChange={(e) => this.addCategoryLocal(e)} />
                     <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
                     <br></br>
                 </div>
@@ -209,6 +204,7 @@ export class RecipeForm extends React.Component {
                         label="Recipe Name"
                         value={name}
                         validate={[required, nonEmpty]} 
+                        required
                         onChange={this.handleChange}
                     />
                     
@@ -226,6 +222,7 @@ export class RecipeForm extends React.Component {
                         label="Directions"
                         value={directions}
                         validate={[required, nonEmpty]}
+                        required
                         onChange={this.handleChange}
                     />
                     <br></br>
@@ -252,7 +249,8 @@ export class RecipeForm extends React.Component {
                     />
                     <button
                         hidden={!otherCheckbox ? false : true}
-                        onClick={this.handleAddCategoryToState}>
+                        onClick={this.handleAddCategoryToState}
+                        >
                         Add Category
                     </button>
 
@@ -268,10 +266,6 @@ export class RecipeForm extends React.Component {
                 </form>
 
                 <br></br>
-                {/* <RecipeField 
-                    menuItem={this.state}
-                    deleteIngredientAndAmount={this.deleteIngredientAndAmount}
-                    /> */}
             </div>
         );
     }

@@ -50,7 +50,7 @@ export class RegistrationForm extends React.Component {
                     validate={[required, nonEmpty, matchPassword]}
                 />
                 <button className="button"
-                    onSubmit={() => this.props.pristine || this.props.submitting}>
+                    disabled={() => this.props.pristine || this.props.submitting}>
                         Register
                     </button>
             

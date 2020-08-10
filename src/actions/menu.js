@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '../config';
+import {SubmissionError} from 'redux-form';
 
 /*** API AJAX REQUESTS ***/
 
@@ -72,7 +73,17 @@ export const addRecipe = (token, recipe) => dispatch => {
         console.log(json)
         dispatch(addRecipeSuccess(json))
     }).catch(err => {
-        dispatch(addRecipeError(err))
+            // const {code} = err;
+            // const message = 
+            // code === 401
+            //     ? 'Incorrect username or password'
+            //     : 'Unable to login, please try again';
+            dispatch(addRecipeError(err))
+            // return Promise.reject(
+            //     new SubmissionError({
+            //         _error: message
+            //     })
+            // );
     });
 }
 
@@ -113,7 +124,7 @@ export const updateMenuItem = (token, userId, recipe) => dispatch => {
         return res.json()
     }).then(json => {
         console.log(json)
-        dispatch(updateMenuItemSuccess(json))
+        dispatch(updateMenuItemSuccess(json)) 
     }).catch(err => {
         dispatch(updateMenuItemError(err))
     });
