@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import './your-menu.css'
 
-export function YourMenu({categoryList}) {
+export function YourMenu({categoryList, username}) {
 
-    console.log(categoryList)
+    console.log(categoryList, username)
     const categories = categoryList.map((category, i) => {
         return (
             <div key={`categories-${i}`}>
@@ -20,7 +20,7 @@ export function YourMenu({categoryList}) {
     
     return (
         <div className="menu-items container">
-            <h1 className="your-menu">Your Menu</h1>
+            <h1 className="your-menu">{`${username}'s`} Menu</h1>
             <div>{categories}</div>
         </div>
     );
@@ -28,7 +28,8 @@ export function YourMenu({categoryList}) {
 }
 
 const mapStateToProps = state => ({
-    categoryList: state.category.categoryList
+    categoryList: state.category.categoryList,
+    username: state.auth.username
 })
 
 export default connect(mapStateToProps)(YourMenu)

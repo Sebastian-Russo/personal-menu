@@ -15,14 +15,22 @@ import Footer from "./footer";
 import { getRecipes } from '../actions';
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   console.log(this.props.authToken, this.props.userId)
+  //   if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
+  //     this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+  //   }
+  // }
+
+  componentDidUpdate(prevProps) {
+    console.log(this.props.userId)
     if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
       this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
     }
-  }
-
-  componentDidUpdate(prevProps) {
     if (!prevProps.userId && this.props.userId) {
         this.startPeriodicRefresh();
         // this.dispatch(getRecipes(token))

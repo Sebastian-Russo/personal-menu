@@ -9,9 +9,11 @@ import {
 } from '../actions/auth';
 
 const initialState = {
-    authToken: 1234, // authToken !== null does not mean it has been validated
+    authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null, // "5f2aa35d43ea5564f76bd73f", //"5f297175fe118d52b6b9c948" //the user obj response from server 
-    username: null,
+    username: "",
+    firstname: "",
+    firstname: "",
     loading: false,
     error: null,
     groceryList: null
@@ -47,9 +49,13 @@ export default function authReducer(state = initialState, action) {
     } else if (action.type === AUTH_SUCCESS) {
         answer = Object.assign({}, state, {
             loading: false,
-            currentUser: action.currentUser
+            currentUser: action.currentUser.id,
+            username: action.currentUser.username,
+            firstname: action.currentUser.firstname,
+            lastname: action.currentUser.lastname,
+            groceryList: [action.currentUser.groceryList]
         });
-        console.log('global store', action, answer)
+        console.log('global store', action, action.currentUser, answer)
         return answer
 
     } else if (action.type === AUTH_ERROR) {

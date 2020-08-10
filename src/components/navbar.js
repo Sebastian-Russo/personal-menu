@@ -1,18 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {clearAuth} from '../actions/auth';
+import {clearAuth, updateUserGroceryList} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 
 import './navbar.css';
 
 export class Navbar extends React.Component {
     logOut() {
+        this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
         this.props.dispatch(clearAuth());
         clearAuthToken();
     }
 
     render() {
+
     let logOutButton;
     let loginOrRegisterButton;
     if (this.props.loggedIn) {
@@ -52,7 +54,10 @@ export class Navbar extends React.Component {
     }            
 }
     const mapStateToProps = state => ({
-        loggedIn: state.auth.currentUser !== null
+        loggedIn: state.auth.currentUser !== null,
+        authToken: state.auth.authToken,
+        userId: state.auth.currentUser,
+        groceryList: state.grocery.groceryList
     });
 
 
