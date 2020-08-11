@@ -1,10 +1,13 @@
 export const loadAuthToken = () => {
-    return localStorage.getItem('authToken');
+    console.log('getting local storage')
+    const user = localStorage.getItem('user');
+    return JSON.parse(user) //  returns { authToken: <whatever the token is>, userId: <whatever the userId is> }
 };
 
-export const saveAuthToken = authToken => {
+export const saveAuthToken = (authToken, userId) => {
     try {
-        localStorage.setItem('authToken', authToken);
+        console.log('storing in local storage')
+        localStorage.setItem('user', JSON.stringify({'authToken': authToken, 'id': userId}));
     } catch (e) {}
 };
 
@@ -13,4 +16,5 @@ export const clearAuthToken = () => {
         localStorage.removeItem('authToken');
     } catch (e) {}
 };
+
 

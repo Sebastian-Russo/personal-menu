@@ -6,9 +6,10 @@ import {saveAuthToken, clearAuthToken} from '../local-storage';
 import { getRecipes } from './menu';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = authToken => ({
+export const setAuthToken = (authToken, userId) => ({
     type: SET_AUTH_TOKEN,
-    authToken
+    authToken,
+    userId
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
@@ -33,11 +34,11 @@ export const authError = error => ({
     error
 });
 
-const storeAuthInfo = (authToken, dispatch) => {
+const storeAuthInfo = (authToken, userId, dispatch) => {
     const decodedToken = jwtDecode(authToken);
-    dispatch(setAuthToken(authToken));
+    dispatch(setAuthToken(authToken, userId));
     dispatch(authSuccess(decodedToken.user));
-    saveAuthToken(authToken);
+    saveAuthToken(authToken, userId);
 };
 
 export const login = (username, password) => dispatch => {
@@ -56,7 +57,7 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken, userId}) => {
-                storeAuthInfo(authToken, dispatch)
+                storeAuthInfo(authToken, userId, dispatch)
                 dispatch(getRecipes(authToken, userId))
             }) 
             .catch(err => {
