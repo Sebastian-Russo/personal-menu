@@ -59,7 +59,7 @@ export class Navbar extends React.Component {
         loggedIn: state.auth.currentUser !== null,
         authToken: state.auth.authToken,
         userId: state.auth.currentUser,
-        groceryList: state.grocery.groceryList
+        groceryList: state.auth.groceryList
     });
 
 

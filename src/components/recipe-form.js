@@ -82,27 +82,30 @@ export class RecipeForm extends React.Component {
         });
     };
 
-    // adds category checkbox's to local state 
+    // adds category checked checkboxes to local state 
     addCategoryLocal = (event) => {
         const category = event.target.value;
         this.setState({
              categories: [...this.state.categories, category]
         })
-        // this.props.dispatch(addCategory(this.state.newCategory))
     }
-
-    // adds new category checkbox to form to be able to click/check
-    handleNewCategory = (e) => {
-        const change = e.target.value;
-        this.setState({ newCategory: change })
-    }
-    
-    // 
+    // adds newly made category checkbox to "category checked checkboxes to local state" 
+    // adds newly made category checkbox to global store, with the other categories 
     handleAddCategoryToState = (e) => {
         e.preventDefault();
+        this.setState({
+            categories: [...this.state.categories, this.state.newCategory]
+       })
         this.props.dispatch(addCategory(this.state.newCategory))
     }
     
+    // adds new category checkbox to form to be able to click/check
+    handleNewCategory = (e) => {
+        const newCategory = e.target.value;
+        this.setState({ newCategory })
+        // this.props.dispatch(addCategory(this.state.newCategory))
+    }
+
     // shows input box to create new category checkbox
     otherCheckbox = () => {
         this.setState({

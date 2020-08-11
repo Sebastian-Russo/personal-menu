@@ -6,9 +6,7 @@ import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 import {authReducer,
     menuReducer,
-    groceryReducer,
     categoryReducer} from './reducers';
-
 
 
 const store = createStore(
@@ -16,7 +14,6 @@ const store = createStore(
         form: formReducer,
         menu: menuReducer,
         category: categoryReducer,
-        grocery: groceryReducer,
         auth: authReducer
     }),
     applyMiddleware(thunk) // applyMiddleware function to add Redux Thunk to our store

@@ -4,9 +4,16 @@ import {
     AUTH_REQUEST,
     AUTH_SUCCESS,
     AUTH_ERROR,
+    
     UPDATE_USER_GROCERY_LIST_SUCCESS,
     UPDATE_USER_GROCERY_LIST_ERROR
 } from '../actions/auth';
+
+import {
+    ADD_TO_GROCERY_LIST, 
+    DELETE_ITEM_FROM_GROCERY_LIST
+} from '../actions';
+
 
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
@@ -52,7 +59,7 @@ export default function authReducer(state = initialState, action) {
             username: action.currentUser.username,
             firstname: action.currentUser.firstname,
             lastname: action.currentUser.lastname,
-            groceryList: [action.currentUser.groceryList]
+            groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
         });
         console.log('global store', action, action.currentUser, answer)
         return answer
@@ -71,7 +78,7 @@ export default function authReducer(state = initialState, action) {
 
     if (action.type === UPDATE_USER_GROCERY_LIST_SUCCESS) {
         answer = Object.assign({}, state, {
-            groceryList: [...state.groceryList, action.groceryList]
+            groceryList: [...state.groceryList, ...action.groceryList]
         })
         console.log('global store', action, answer)
         return answer
@@ -79,6 +86,21 @@ export default function authReducer(state = initialState, action) {
     if (action.type === UPDATE_USER_GROCERY_LIST_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
+        })
+        console.log('global store', action, answer)
+        return answer
+    }
+    if (action.type === ADD_TO_GROCERY_LIST) {
+        answer = Object.assign({}, state, {
+            groceryList: [...state.groceryList.concat(action.items)]
+        })
+        console.log('global store', action, answer)
+        return answer
+    }
+    if (action.type === DELETE_ITEM_FROM_GROCERY_LIST) {
+        const selected = state.groceryList.filter((item, index) => index !== action.index)
+        answer = Object.assign({}, state, {
+                groceryList: selected
         })
         console.log('global store', action, answer)
         return answer

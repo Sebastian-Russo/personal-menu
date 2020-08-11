@@ -16,24 +16,18 @@ import { getRecipes } from '../actions';
 
 export class App extends React.Component {
 
-  // componentDidMount() {
-  //   console.log(this.props.authToken, this.props.userId)
-  //   if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
-  //     this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
-  //   }
-  // }
-
   componentDidUpdate(prevProps) {
-    console.log(this.props.userId)
-    if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
-      this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
-    }
+    // console.log(this.props.userId)
+    // if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
+    //   this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+    // }
     if (!prevProps.userId && this.props.userId) {
         this.startPeriodicRefresh();
     } else if (prevProps.userId && !this.props.userId) {
         this.stopPeriodicRefresh();
     }
 }
+
 // When the component will definitely rerender
   componentWillUpdate() {
     this.startPeriodicRefresh();

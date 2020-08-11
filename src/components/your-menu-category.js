@@ -4,14 +4,19 @@ import {Link} from 'react-router-dom';
 import './your-menu-category.css'
 
 export function YourMenuCategory(props) {   
+    console.log(props)
     const menuItems = props.menuItems;
-   
+
+    // menu item from selected category
     const selectedCategory = props.categoryList.filter(item => item === props.match.params.category)[0];
     console.log(selectedCategory)
+    
+    // menu items from selected category
     const selectedMenuItems = menuItems.filter(menuItem => menuItem.categories.find(category => { 
         // console.log(menuItems, menuItem, categories)
         return category === selectedCategory }))
 
+    // list of menu items from selected category
     const menuItem = selectedMenuItems.map((item, i) => {
         return (
             <div key={`menu-item-${i}`}>

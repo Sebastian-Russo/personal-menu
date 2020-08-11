@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {deleteItemFromGroceryList} from '../actions';
 import './grocery-list.css'
 
-export function GroceryList(props, {groceryList}) {
+export function GroceryList(props) {
 
     const deleteHanderler = (i) => {
         console.log('delete clicked', i)
@@ -33,7 +33,7 @@ export function GroceryList(props, {groceryList}) {
 }
 
 const mapStateToProps = state => ({
-    groceryList: state.grocery.groceryList
+    groceryList: state.auth.groceryList
 })
 
 export default connect(mapStateToProps)(GroceryList);
