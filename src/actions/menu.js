@@ -1,11 +1,7 @@
 import { API_BASE_URL } from '../config';
 import {SubmissionError} from 'redux-form';
 
-/*** API AJAX REQUESTS ***/
-
-/* - getRecipes, getSuccessRecipes; takes care of request. dispatching getRecipesSucces(json) (with json aka the response from the ajax request) 
-getRecipeSuccess takes the recipes that were returned and passes them through to the reducer as recipes, so your reducer doesn’t handle async requests, your actions do. 
-your actions take the information returned from the async request and passes them through to the reducer, so the reducer can add them to the store (success) */
+// GET recipes
 
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
 export const getRecipesSuccess = recipes => ({
@@ -37,15 +33,7 @@ export const getRecipes = (token, userId) => dispatch => {
 }
 
 
-// export const ADD_RECIPE = 'ADD_RECIPE';
-// export const addRecipe = ({name, ingredients, directions, id, categories}) => ({
-//     type: ADD_RECIPE,
-//     name, 
-//     ingredients,
-//     directions,
-//     id,
-//     categories
-// })
+// POST recipes
 
 export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
 export const addRecipeSuccess = recipe => ({
@@ -88,17 +76,7 @@ export const addRecipe = (token, recipe) => dispatch => {
 }
 
 
-
-
-// export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';
-// export const updateMenuItem = ({name, ingredients, directions, id, categories}) => ({
-//     type: UPDATE_MENU_ITEM,
-//     name, 
-//     ingredients,
-//     directions,
-//     id,
-//     categories,
-// })
+// PUT recipes
 
 export const UPDATE_MENU_ITEM_SUCCESS = 'UPDATE_MENU_ITEM_SUCCESS';
 export const updateMenuItemSuccess = recipe => ({
@@ -131,12 +109,7 @@ export const updateMenuItem = (token, userId, recipe) => dispatch => {
 }
 
 
-
-// export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
-// export const deleteMenuItem = id => ({
-//     type: DELETE_MENU_ITEM,
-//     id
-// })
+// DELETE recipes
 
 export const DELETE_MENU_ITEM_SUCCESS = 'DELETE_MENU_ITEM_SUCCESS';
 export const deleteMenuItemSuccess = recipe => ({
