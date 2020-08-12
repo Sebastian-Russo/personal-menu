@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
-import RecipeForm from './recipe-form';
+import RecipeForm from './recipe/recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Navbar from './navbar';

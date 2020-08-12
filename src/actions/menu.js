@@ -1,6 +1,4 @@
 import { API_BASE_URL } from '../config';
-import {SubmissionError} from 'redux-form';
-
 // GET recipes
 
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';

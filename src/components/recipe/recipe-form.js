@@ -2,24 +2,28 @@ import React from 'react';
 import {reduxForm, focus,} from 'redux-form';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Categories from './categories';
+import Ingredients from './ingredients';
 import RecipeInput from './recipe-input';
+import NewCategory from './new-category';
 // import RecipeCategories from './recipe-categories';
-import {required, nonEmpty} from '../validators';
-import { addRecipe, updateMenuItem, addCategory, } from '../actions';
+import {required, nonEmpty} from '../../validators';
+import { addRecipe, updateMenuItem, addCategory, } from '../../actions';
 import './recipe-form.css'
 
 export class RecipeForm extends React.Component {
     constructor(props){
         super(props);
-        this.state = { 
+        this.newCategory = React.createRef();
+        this.state = {
             name: "",
             ingredients: [],
             directions: "",
             categories: [],
-            otherCheckbox: true,
-            newCategory: [],
+            otherCheckbox: false,
             redirect: false,
-            checked: false
+            checked: false,
+            newCategory: ""
         }
     }
     // checks if props are coming from your-menu-item because of edit recipe button
@@ -33,23 +37,11 @@ export class RecipeForm extends React.Component {
                 ingredients: ingredients,
                 directions: directions,
                 categories: categories,
-                id: id,
-                otherCheckbox: true,
-                newCategory: [],
-                checked: false
-            })
-        }
-    }
-
-    // 1st arg. prevProps, 2nd arg. prevState
-    componentWillUpdate(prevProps, newProp) {
-        if (prevProps.menuItems.length > this.props.menuItems.length){
-            console.log('here')
-            this.setState({redirect: true})
-            // return <Redirect to={`/your-menu-item/${this.state.id}`} />
-        }
-    }
-
+                id: id
+            });
+        };
+    };
+    
     addIngredientAndAmount = (ingredient) => {
         this.setState({
             ingredients: [...this.state.ingredients, ingredient]
@@ -67,6 +59,7 @@ export class RecipeForm extends React.Component {
 
     handleChange = e => { 
         const {value, name} = e.target;
+        console.log(value, name)
         this.setState({
             [name]: value
         })
@@ -83,27 +76,30 @@ export class RecipeForm extends React.Component {
     };
 
     // adds category checked checkboxes to local state 
-    addCategoryLocal = (event) => {
+    checkOrUncheck = (event) => {
         const category = event.target.value;
-        this.setState({
-             categories: [...this.state.categories, category]
-        })
+        const { categories } = this.state
+        if(categories.includes(category)) {
+          console.log('category included');
+          this.setState({
+            categories: categories.filter(cat => cat !== category)
+          })
+        } else {
+            this.setState({
+              categories: [...this.state.categories, category]
+            })
+        }
     }
     // adds newly made category checkbox to "category checked checkboxes to local state" 
     // adds newly made category checkbox to global store, with the other categories 
-    handleAddCategoryToState = (e) => {
-        e.preventDefault();
+
+    addNewCategory = newCat => {
+      const { categories } = this.state;
+      if(!categories.includes(newCat)) {
         this.setState({
-            categories: [...this.state.categories, this.state.newCategory]
-       })
-        this.props.dispatch(addCategory(this.state.newCategory))
-    }
-    
-    // adds new category checkbox to form to be able to click/check
-    handleNewCategory = (e) => {
-        const newCategory = e.target.value;
-        this.setState({ newCategory })
-        // this.props.dispatch(addCategory(this.state.newCategory))
+          categories: [...this.state.categories, newCat]
+        })
+      }
     }
 
     // shows input box to create new category checkbox
@@ -112,7 +108,6 @@ export class RecipeForm extends React.Component {
             otherCheckbox: !this.state.otherCheckbox
         })
     };
-
 
     handleSubmit = e => {
         e.preventDefault();
@@ -127,81 +122,45 @@ export class RecipeForm extends React.Component {
         if (missedFields.length) {
           alert(`Please fill out ${missedFields[0]}`);
         } else if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
-            this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
-            this.setState({ redirect: true })
+          this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
+          this.setState({ redirect: true })
         } else {
-          console.log('adding new recipe', )
-            const recipe = this.state;
-            recipe.userId = this.props.userId;
-            this.props.dispatch(addRecipe(this.props.authToken, recipe))
-            this.setState({ redirect: true })
+          const recipe = this.state;
+          recipe.userId = this.props.userId;
+          this.props.dispatch(addRecipe(this.props.authToken, recipe))
+          this.setState({ redirect: true })
         }
     }
 
     render() {
         const {
-            // id,
             name,
             redirect,
             directions,
             categories,
             ingredients,
-            otherCheckbox
         } = this.state;
-        // console.log(categories)
-        console.log(this.state)
 
         if (redirect === true) {
-            return <Redirect to={`/your-menu/${categories[0]}`} />
+          return <Redirect to={`/your-menu/${categories[0]}`} />
         }
 
         let showIngredients;
         if(ingredients.length) {
-            showIngredients = ingredients.map((item, i) => {
-                // console.log(item._id)
-                return (
-                <div className="form-input" key={`ingredient-${i}`}>
-                    <label htmlFor="ingredient"> Ingredient </label>
-                    <input 
-                        name={item.ingredient}
-                        id={item.id}
-                        type="text"
-                        value={item.ingredient}
-                        onChange={e => this.handleIngredientChange(e, i, 'ingredient')} 
-                    />
-                    <label htmlFor="amount"> Amount </label>
-                    <input 
-                        name={item.amount}
-                        id={item.id}
-                        type="text"
-                        // controlled component when using value in input 
-                        value={item.amount}
-                        onChange={e => this.handleIngredientChange(e, i, 'amount')} 
-                        />
-                    <button type="button" onClick={(e) => this.deleteIngredientAndAmount(e, item._id)}>Delete</button>
-                </div>
-                )
-            })
+            showIngredients = (
+            <Ingredients
+              ingredients={ingredients}
+              handleIngredientChange={this.handleIngredientChange}
+              deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+            />
+          )
         }
 
+        let newCategory;
 
-        let cat = this.props.categoryList.map((category, i) => {
-            const checked = categories.includes(category);
-            const label = category[0].toUpperCase() + category.slice(1);
-            return (
-                <div key={`${category}-${i}`} className="ingredient-list">
-                    <input 
-                        name={category}
-                        id={category}
-                        type="checkbox"
-                        value={category}
-                        checked={checked}
-                        onChange={(e) => this.addCategoryLocal(e)} />
-                    <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
-                    <br></br>
-                </div>
-            )
-        })
+        if(this.state.otherCheckbox) {
+          newCategory = <NewCategory addNewCategory={this.addNewCategory} />
+        }
 
         return (
             <div>
@@ -242,35 +201,23 @@ export class RecipeForm extends React.Component {
                     <br></br>
 
                     <h3>Categories</h3>
-                    {cat}
-
+                    <Categories categories={categories} checkOrUncheck={this.checkOrUncheck} />
+                    <label htmlFor="other">Other</label>
                     <input
-                        name="categories"
+                        name="other"
                         id="other"
                         type="checkbox"  
                         value={this.props.categories}
-                        onChange={(e) => this.addCategory(e)}   
-                        onChange={this.otherCheckbox}
+                        onChange={() => this.otherCheckbox()}   
                     />
-                    <label htmlFor="create">Create a new category</label>
-                    <input 
-                        type="text"
-                        id="otherValue"
-                        name="other"
-                        hidden={!otherCheckbox ? false : true}
-                        onChange={this.handleNewCategory}
-                    />
-                    <button
-                        hidden={!otherCheckbox ? false : true}
-                        onClick={this.handleAddCategoryToState}
-                        >
-                        Add Category
-                    </button>
-
+                    {newCategory}
                     <br></br>
                     <br></br>
-                    <h3>Ingredients</h3>
-                    {showIngredients}
+                    <Ingredients
+                      ingredients={ingredients}
+                      handleIngredientChange={this.handleIngredientChange}
+                      deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+                    />
                     <button
                         type="submit"
                         >

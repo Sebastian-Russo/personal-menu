@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import RecipeForm from './recipe-form';
+import RecipeForm from './recipe/recipe-form';
 import {deleteMenuItem, addToGroceryList} from '../actions';
 import './your-menu-item.css';
 // *** AKA RECIPE COMPONENT ***
@@ -20,7 +20,7 @@ export class YourMenuItem extends React.Component {
 
     // when component mounts, check to see if menu item id from props matches the id from the route in match params. (whatever menu item was clicked on, those id's need to match)
     componentDidMount(){
-        const menuItem = this.props.menuItems.filter(menuItem => menuItem.id == this.props.match.params.id)[0];
+        const menuItem = this.props.menuItems.filter(menuItem => menuItem.id === this.props.match.params.id)[0];
         this.setState({
             menuItem
         })

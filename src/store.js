@@ -2,7 +2,7 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 import {loadAuthToken} from './local-storage';
-import {authSuccess, refreshAuthToken} from './actions/auth';
+import {authSuccess} from './actions/auth';
 
 import {authReducer,
     menuReducer,
