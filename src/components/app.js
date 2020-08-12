@@ -5,45 +5,41 @@ import RecipeForm from './recipe-form';
 import YourMenuItem from './your-menu-item';
 import YourMenu from './your-menu';
 import Navbar from './navbar';
-import Home from './home';
+import LandingPage from './landing-page';
 import YourMenuCategory from './your-menu-category';
 import RegistrationForm from './registration-form';
 import LoginForm from './login-form';
 import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
 import Footer from "./footer";
-import { getRecipes } from '../actions';
 
 export class App extends React.Component {
 
-  componentDidUpdate(prevProps) {
-    // console.log(this.props.userId)
-    // if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
-    //   this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
-    // }
-    if (!prevProps.userId && this.props.userId) {
-        this.startPeriodicRefresh();
-    } else if (prevProps.userId && !this.props.userId) {
-        this.stopPeriodicRefresh();
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.userId && !this.props.userId){
+      this.startPeriodicRefresh();
     }
-}
-
-// When the component will definitely rerender
-  componentWillUpdate() {
-    this.startPeriodicRefresh();
+    if(!nextProps.userId && this.props.userId){
+      this.stopPeriodicRefresh();
+    }
   }
 
-  startPeriodicRefresh() {
+  componentWillUnmount(){
+    this.stopPeriodicRefresh();
+  }
+
+  startPeriodicRefresh(){
     this.refreshInterval = setInterval(
       () => this.props.dispatch(refreshAuthToken()),
-      60 * 60 * 1000
+      60*60*1000
     );
   }
 
   stopPeriodicRefresh() {
-    if (!this.refreshInterval) {
+    if(!this.refreshInterval) {
       return;
     }
+
     clearInterval(this.refreshInterval);
   }
 
@@ -56,14 +52,10 @@ export class App extends React.Component {
               <Navbar />
                 <main className="main">
                   <Switch>
-                    <Redirect 
-                      exact
-                      from="/"
-                      to="/home" />
                     <Route
                       exact
-                      path="/home"
-                      component={Home} />
+                      path="/"
+                      component={LandingPage} />
                     <Route
                       exact
                       path="/your-menu"
@@ -78,7 +70,7 @@ export class App extends React.Component {
                       component={YourMenuItem} />
                     <Route
                       exact
-                      path="/recipe-form"
+                      path="/add-recipe"
                       component={RecipeForm} />
                     <Route 
                       exact
@@ -86,11 +78,11 @@ export class App extends React.Component {
                       component={GroceryList} />
                     <Route
                       exact
-                      path="/registration-form"
+                      path="/register"
                       component={RegistrationForm} />
                     <Route 
                       exact
-                      path="/login-form" 
+                      path="/login" 
                       component={LoginForm} />
                   </Switch>
                 </main>
@@ -103,9 +95,8 @@ export class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  authToken: state.auth.authToken,
+  authToken: state.auth.authToken !== null,
   userId: state.auth.currentUser,
-  username: state.auth.username
 });
 
 // export default withRouter(connect(mapStateToProps)(LandingPage));

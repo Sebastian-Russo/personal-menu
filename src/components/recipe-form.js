@@ -17,7 +17,7 @@ export class RecipeForm extends React.Component {
             directions: "",
             categories: [],
             otherCheckbox: true,
-            newCategory: "",
+            newCategory: [],
             redirect: false,
             checked: false
         }
@@ -116,10 +116,21 @@ export class RecipeForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
+        const requiredFields = ['name', 'ingredients', 'directions', 'categories'];
+        const missedFields = requiredFields.map(field => {
+          if (!this.state[field] || !this.state[field].length) {
+            return field
+          }
+          return false
+        }).filter(Boolean);
+
+        if (missedFields.length) {
+          alert(`Please fill out ${missedFields[0]}`);
+        } else if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
             this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
             this.setState({ redirect: true })
         } else {
+          console.log('adding new recipe', )
             const recipe = this.state;
             recipe.userId = this.props.userId;
             this.props.dispatch(addRecipe(this.props.authToken, recipe))
@@ -185,7 +196,6 @@ export class RecipeForm extends React.Component {
                         type="checkbox"
                         value={category}
                         checked={checked}
-                        // checked={this.state.checked}
                         onChange={(e) => this.addCategoryLocal(e)} />
                     <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
                     <br></br>

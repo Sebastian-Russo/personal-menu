@@ -6,21 +6,17 @@ import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = { 
-            redirect: false        
-        }
-    }
-
     onSubmit(values) {
-        console.log(values)
         this.props.dispatch(login(values.username, values.password));
-        this.setState({redirect: true})
     }
 
     render() {
         let error; 
+
+        if(this.props.submitSucceeded) {
+          return <Redirect to='/your-menu' />
+        }
+
         if (this.props.error){
             error = (
                 <div className="form-error" aria-live="polite">
@@ -28,9 +24,7 @@ export class LoginForm extends React.Component {
                 </div>
             )
         }
-        if (this.state.redirect === true) {
-            return <Redirect to={`/your-menu/`} />
-        }
+
         return (
             <form
                 className="login-form"
@@ -61,6 +55,8 @@ export class LoginForm extends React.Component {
 }
 
 export default reduxForm({
-    form: 'login', 
-    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+    form: 'LoginForm',
+    onSubmitFail: (errors, dispatch) => { 
+      dispatch(focus('LoginForm', Object.keys(errors)[0]))
+    }
 })(LoginForm)

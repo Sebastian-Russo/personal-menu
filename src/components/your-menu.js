@@ -5,8 +5,9 @@ import './your-menu.css'
 
 export function YourMenu({categoryList, username}) {
 
-    console.log(categoryList, username)
-    const categories = categoryList.map((category, i) => {
+    let categories;
+    if (categoryList && categoryList.length) {
+      categories = categoryList.map((category, i) => {
         return (
             <div key={`categories-${i}`}>
                 <h3>
@@ -16,7 +17,8 @@ export function YourMenu({categoryList, username}) {
                 </h3>
             </div>
         )
-    })
+      })
+    }
     
     return (
         <div className="menu-items container">

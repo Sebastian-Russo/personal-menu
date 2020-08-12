@@ -16,12 +16,12 @@ import {
 
 
 const initialState = {
-    authToken: null, // authToken !== null does not mean it has been validated
-    currentUser: null, // "5f2aa35d43ea5564f76bd73f", //"5f297175fe118d52b6b9c948" //the user obj response from server 
-    username: "",
-    firstname: "",
-    loading: false,
+    id: null, // "5f2aa35d43ea5564f76bd73f", //"5f297175fe118d52b6b9c948" //the user obj response from server 
     error: null,
+    loading: false,
+    username: "",
+    authToken: null, // authToken !== null does not mean it has been validated
+    firstname: "",
     groceryList: []
 };
 
@@ -29,13 +29,10 @@ export default function authReducer(state = initialState, action) {
     let answer;
     if (action.type === SET_AUTH_TOKEN) {
         answer = Object.assign({}, state, {
-            authToken: action.authToken,
-            currentUser: action.userId,
-            username: action.username
+          authToken: action.authToken,
         });
         console.log('global store', action, answer)
         return answer
-
     } else if (action.type === CLEAR_AUTH) {
         answer = Object.assign({}, state, {
             authToken: null,
@@ -53,15 +50,15 @@ export default function authReducer(state = initialState, action) {
         return answer
 
     } else if (action.type === AUTH_SUCCESS) {
+      console.log(action);
         answer = Object.assign({}, state, {
             loading: false,
-            currentUser: action.currentUser.id,
+            id: action.currentUser.id,
+            authToken: action.currentUser.authToken,
             username: action.currentUser.username,
-            firstname: action.currentUser.firstname,
-            lastname: action.currentUser.lastname,
             groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
         });
-        console.log('global store', action, action.currentUser, answer)
+        console.log('toUpdate', answer)
         return answer
 
     } else if (action.type === AUTH_ERROR) {

@@ -24,9 +24,11 @@ export class YourMenuCategory extends React.Component {
         console.log(selectedCategory)
         
         // menu items from selected category
-        const selectedMenuItems = menuItems.filter(menuItem => menuItem.categories.find(category => { 
+        const selectedMenuItems = menuItems 
+          ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
             // console.log(menuItems, menuItem, categories)
             return category === selectedCategory }))
+          : [];
     
         // list of menu items from selected category
         const menuItem = selectedMenuItems.map((item, i) => {

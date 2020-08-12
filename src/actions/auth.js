@@ -6,10 +6,9 @@ import {saveAuthToken, clearAuthToken} from '../local-storage';
 import { getRecipes } from './menu';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = (authToken, userId) => ({
+export const setAuthToken = (authToken) => ({
     type: SET_AUTH_TOKEN,
-    authToken,
-    userId
+    authToken
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
@@ -34,15 +33,14 @@ export const authError = error => ({
     error
 });
 
-const storeAuthInfo = (authToken, userId, dispatch) => {
+const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
-    dispatch(setAuthToken(authToken, userId));
     dispatch(authSuccess(decodedToken.user));
-    saveAuthToken(authToken, userId);
+    dispatch(setAuthToken(authToken));
 };
 
 export const login = (username, password) => dispatch => {
-    dispatch(authRequest())
+  console.log('logging in with', username, password);
     return (
         fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
@@ -56,9 +54,9 @@ export const login = (username, password) => dispatch => {
         })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({authToken, userId}) => {
-                storeAuthInfo(authToken, userId, dispatch)
-                dispatch(getRecipes(authToken, userId))
+            .then(({ authToken, id, username, groceryList }) => {
+                saveAuthToken(authToken, id, username, groceryList);
+                storeAuthInfo(authToken, dispatch);
             }) 
             .catch(err => {
                 const {code} = err;
@@ -77,8 +75,8 @@ export const login = (username, password) => dispatch => {
 };
 
 export const refreshAuthToken = () => (dispatch, getState) => {
-    dispatch(authRequest());
     const authToken = getState().auth.authToken;
+    console.log('refreshing', authToken)
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -87,9 +85,8 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({authToken, userId}) => {
+        .then(({authToken}) => {
             storeAuthInfo(authToken, dispatch)
-            dispatch(getRecipes(authToken, userId))
         })
         .catch(err => {
             dispatch(authError(err));
