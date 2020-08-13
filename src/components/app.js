@@ -96,7 +96,7 @@ export class App extends React.Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken !== null,
-  userId: state.auth.currentUser,
+  userId: state.auth.id,
 });
 
 // export default withRouter(connect(mapStateToProps)(LandingPage));

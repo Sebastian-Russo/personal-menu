@@ -127,7 +127,7 @@ export class YourMenuItem extends React.Component {
 
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
-    userId: state.auth.currentUser,
+    userId: state.auth.id,
     authToken: state.auth.authToken 
 });
 

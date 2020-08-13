@@ -28,7 +28,7 @@ export class Navbar extends React.Component {
           </Link>
         </div>
       );
-    } else {
+    } else if (!this.props.loggedIn){
       userAction = (
         <div className="user-action-container">
           <Link to="/register" className="nav-list-items"><i className="fas fa-kiwi-bird"></i>Register</Link>
@@ -58,9 +58,9 @@ export class Navbar extends React.Component {
   }            
 }
     const mapStateToProps = state => ({
-        loggedIn: state.auth.currentUser !== null,
+        loggedIn: state.auth.id,
         authToken: state.auth.authToken,
-        userId: state.auth.currentUser,
+        userId: state.auth.id,
         groceryList: state.auth.groceryList
     });
 

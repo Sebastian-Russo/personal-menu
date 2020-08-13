@@ -21,8 +21,9 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = currentUser => ({
+export const authSuccess = (authToken, currentUser) => ({
     type: AUTH_SUCCESS,
+    authToken,
     currentUser
 });
 
@@ -34,7 +35,8 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
-    dispatch(authSuccess(decodedToken.user));
+    console.log(authToken, decodedToken.user)
+    dispatch(authSuccess(authToken, decodedToken.user)); // authSuccess(authToken, decodedToken.user)
     dispatch(setAuthToken(authToken));
 };
 
@@ -54,6 +56,7 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({ authToken, id, username, groceryList }) => {
+                console.log(authToken, id, username, groceryList) // id and groceryList come up undefined 
                 saveAuthToken(authToken, id, username, groceryList);
                 storeAuthInfo(authToken, dispatch);
             }) 

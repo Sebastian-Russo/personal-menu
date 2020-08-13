@@ -29,7 +29,7 @@ export default function authReducer(state = initialState, action) {
     let answer;
     if (action.type === SET_AUTH_TOKEN) {
         answer = Object.assign({}, state, {
-          authToken: action.authToken,
+          authToken: action.authToken
         });
         console.log('global store', action, answer)
         return answer
@@ -50,15 +50,14 @@ export default function authReducer(state = initialState, action) {
         return answer
 
     } else if (action.type === AUTH_SUCCESS) {
-      console.log(action);
         answer = Object.assign({}, state, {
             loading: false,
             id: action.currentUser.id,
-            authToken: action.currentUser.authToken,
+            authToken: action.authToken,
             username: action.currentUser.username,
             groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
         });
-        console.log('toUpdate', answer)
+        console.log('toUpdate', action, answer, 'not getting authToken')
         return answer
 
     } else if (action.type === AUTH_ERROR) {
