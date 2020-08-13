@@ -18,6 +18,7 @@ export const saveAuthToken = (authToken, userId, username, groceryList) => {
 
 export const clearAuthToken = () => {
     try {
+        console.log('clear auth token and user data in local storage')  
         localStorage.removeItem('user');
     } catch (e) {}
 };

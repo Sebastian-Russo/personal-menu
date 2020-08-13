@@ -24,11 +24,11 @@ export class YourMenuCategory extends React.Component {
         console.log(selectedCategory)
         
         // menu items from selected category
-        const selectedMenuItems = menuItems  // CANNOT READ PROPERTY 'FIND' 
-          ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
-            // console.log(menuItems, menuItem, categories)
+        const selectedMenuItems = menuItems  // CANNOT READ PROPERTY 'FIND', are there props coming from two places?
+        ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
+            // console.log(selectedMenuItems, menuItems, menuItem.categories)
             return category === selectedCategory }))
-          : [];
+        : [];
     
         // list of menu items from selected category
         const menuItem = selectedMenuItems.map((item, i) => {
@@ -41,14 +41,14 @@ export class YourMenuCategory extends React.Component {
             )
         });
 
-    return (
-        <div className="container-categories">
-            <h1>{selectedCategory}</h1>
-            <div>{menuItem}</div>
-            <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>
-        </div>
-    ); 
-};
+        return (
+            <div className="container-categories">
+                <h1>{selectedCategory}</h1>
+                <div>{menuItem}</div>
+                <Link to={`/your-menu`}><h4>Back to Categories</h4></Link>
+            </div>
+        ); 
+    };
 }
 const mapStateToProps = state => ({
     categoryList: state.category.categoryList,
