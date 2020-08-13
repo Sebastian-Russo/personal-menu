@@ -36,9 +36,9 @@ export default function authReducer(state = initialState, action) {
     } else if (action.type === CLEAR_AUTH) {
         answer = Object.assign({}, state, {
             authToken: null,
-            currentUser: null
+            id: null
         });
-        console.log('global store', action, answer)
+        console.log('clear auth', action, answer)
         return answer
 
     } else if (action.type === AUTH_REQUEST) {

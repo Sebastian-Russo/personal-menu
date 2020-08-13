@@ -24,7 +24,7 @@ export class YourMenuCategory extends React.Component {
         console.log(selectedCategory)
         
         // menu items from selected category
-        const selectedMenuItems = menuItems 
+        const selectedMenuItems = menuItems  // CANNOT READ PROPERTY 'FIND' 
           ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
             // console.log(menuItems, menuItem, categories)
             return category === selectedCategory }))
@@ -53,7 +53,7 @@ export class YourMenuCategory extends React.Component {
 const mapStateToProps = state => ({
     categoryList: state.category.categoryList,
     menuItems: state.menu.menuItems,
-    userId: state.auth.currentUser,
+    userId: state.auth.id,
 });
 
 export default connect(mapStateToProps)(YourMenuCategory)

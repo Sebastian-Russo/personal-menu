@@ -9,7 +9,7 @@ import './navbar.css';
 export class Navbar extends React.Component {
 
     logOut() {
-        console.log(this.props.authToken, this.props.userId, this.props.groceryList)
+        console.log('clicked logout', this.props.authToken, this.props.userId, this.props.groceryList)
         this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -23,6 +23,7 @@ export class Navbar extends React.Component {
         <div className="user-action-container">
           <Link to="/"
             className="nav-list-items button-logout"
+            onClick={this.logOut()}
           >
             <i className="fas fa-user"></i>Log out
           </Link>
@@ -58,7 +59,7 @@ export class Navbar extends React.Component {
   }            
 }
     const mapStateToProps = state => ({
-        loggedIn: state.auth.id,
+        loggedIn: state.auth.id !== null,
         authToken: state.auth.authToken,
         userId: state.auth.id,
         groceryList: state.auth.groceryList
