@@ -23,7 +23,7 @@ export class Navbar extends React.Component {
         <div className="user-action-container">
           <Link to="/"
             className="nav-list-items button-logout"
-            onClick={this.logOut()}
+            onClick={() => this.logOut()}   
           >
             <i className="fas fa-user"></i>Log out
           </Link>
@@ -51,7 +51,7 @@ export class Navbar extends React.Component {
             <div><Link to="/your-menu" className="nav-list-items"><i className="fas fa-utensils"></i>  Your Menu</Link></div>
             <div><Link to="/add-recipe" className="nav-list-items"><i className="fas fa-book-open"></i>  Add Recipe</Link></div>
             <div><Link to="/grocery-list" className="nav-list-items"><i className="fas fa-th-list"></i>  Grocery List</Link></div>
-            {userAction}
+            <div>{userAction}</div>
           </ul>
         </nav>
       </div>
