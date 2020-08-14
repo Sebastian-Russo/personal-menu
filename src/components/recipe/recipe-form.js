@@ -7,7 +7,7 @@ import Ingredients from './ingredients';
 import RecipeInput from './recipe-input';
 import NewCategory from './new-category';
 import {required, nonEmpty} from '../../validators';
-import { addRecipe, updateMenuItem, addCategory, } from '../../actions';
+import { addRecipe, updateMenuItem } from '../../actions';
 import './recipe-form.css'
 
 export class RecipeForm extends React.Component {
@@ -120,14 +120,14 @@ export class RecipeForm extends React.Component {
 
         if (missedFields.length) {
           alert(`Please fill out ${missedFields[0]}`);
-        } else if (this.state.id) { // check if there's an id in state, don't rely on store prop (editing === true)
+        } else if (this.state.id) { 
           this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
           this.setState({ redirect: true })
         } else {
           const recipe = this.state;
           recipe.userId = this.props.userId;
           this.props.dispatch(addRecipe(this.props.authToken, recipe))
-          this.setState({ redirect: true })
+        //   this.setState({ redirect: true })
         }
     }
 

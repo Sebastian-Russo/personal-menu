@@ -14,6 +14,25 @@ export class YourMenuCategory extends React.Component {
     //     }
     // }
     
+    
+/* 
+undateMenuItem()
+addRecipe()
+
+- both are called successfully in 'recipe-form', the redirect to ‘your-menu-category’ for adding an item fires before the new category and/or menuItem can be added to state
+- i know this because, if you comment out redirect for addRecipe, then go to ‘your-menu-categories’, you still get the error, but after you refresh the page, it renders correctly 
+- so maybe there’s an issue with getting local state, or the new menuItem getting to the store/global state before the render causing the undefined 
+
+- the question is, where/when does ‘your-menu-categories’ receive props for the new menuItem… the menu reducer? local state? 
+- seems like it’s not necessary for the edit menu since it’s already there in state, by the time another render goes by everything is updated with any additional info 
+
+- i think i new to add getRecipes to the addRecipes action 
+- i think addRecipes is going to the db, but the ‘your-menu-categories’ is searching for it in state or local storage, before it’s been retrieved from the db and brought back to the store 
+
+- i added getRecipes to the end of addRecipes action to call immediately after, so to retrieve the proper state before ‘your-menu-categories’ renders, but it still came up with the error 
+- there's also a componentDidMount() at calls getRecipes in this component, which should have called it soon enough but didn't
+*/
+
     render() {
         
         console.log(this.props)
@@ -24,9 +43,11 @@ export class YourMenuCategory extends React.Component {
         console.log(selectedCategory)
         
         // menu items from selected category
-        const selectedMenuItems = menuItems  // CANNOT READ PROPERTY 'FIND', are there props coming from two places?
+        const selectedMenuItems = menuItems  
+        // error: CANNOT READ PROPERTY 'FIND' of undefined, aka menuItem.categores comes up undefined
         ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
-            // console.log(selectedMenuItems, menuItems, menuItem.categories)
+            // console.log(menuItems, menuItem.categories)
+            console.log('need to load new recipe before this point, have getRecipes called before here')
             return category === selectedCategory }))
         : [];
     

@@ -18,10 +18,9 @@ const store = createStore(
     applyMiddleware(thunk) // applyMiddleware function to add Redux Thunk to our store
 );
 
-
 const user = loadAuthToken();
 if (user) {
-//   console.log('user info', user);
+  console.log('user info', user);
   store.dispatch(authSuccess(user.authToken, user)); // authSuccess(authToken, user)
 }
 
