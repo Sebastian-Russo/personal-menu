@@ -21,7 +21,7 @@ const store = createStore(
 
 const user = loadAuthToken();
 if (user) {
-  console.log('user info', user);
+//   console.log('user info', user);
   store.dispatch(authSuccess(user.authToken, user)); // authSuccess(authToken, user)
 }
 

@@ -6,20 +6,20 @@ import './your-menu-category.css'
 
 export class YourMenuCategory extends React.Component {   
 
-    // That way whenever the component loads for the recipes, you will make the request for then
-    componentDidMount() {
-        console.log(this.props.userId)
-        if (this.props.userId) { // if a user logs in (userId is truthy), dispatch getRecipes
-            this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
-        }
-    }
+    // whenever the component loads for the recipes, you will make the request for them
+    // componentDidMount() {
+    //     console.log('getting recipes', this.props.authToken)
+    //     if (this.props.userId) { 
+    //         this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+    //     }
+    // }
     
     render() {
         
         console.log(this.props)
         const menuItems = this.props.menuItems;
     
-        // menu item from selected category
+        // menu item from selected category              (i.e. 'item = breakfast')
         const selectedCategory = this.props.categoryList.filter(item => item === this.props.match.params.category)[0];
         console.log(selectedCategory)
         

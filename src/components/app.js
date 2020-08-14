@@ -13,7 +13,17 @@ import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
 import Footer from "./footer";
 
+import { getRecipes } from '../actions';
+
+
 export class App extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props.userId, this.props.authToken)
+    if (this.props.userId) { 
+        this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+    }
+}
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.userId && !this.props.userId){

@@ -31,7 +31,7 @@ export default function authReducer(state = initialState, action) {
         answer = Object.assign({}, state, {
           authToken: action.authToken
         });
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     } else if (action.type === CLEAR_AUTH) {
         answer = Object.assign({}, state, {
@@ -46,7 +46,7 @@ export default function authReducer(state = initialState, action) {
             loading: true,
             error: null
         });
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
 
     } else if (action.type === AUTH_SUCCESS) {
@@ -57,7 +57,7 @@ export default function authReducer(state = initialState, action) {
             username: action.currentUser.username,
             groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
         });
-        console.log('toUpdate', action, answer, 'not getting authToken')
+        // console.log('toUpdate', action, answer)
         return answer
 
     } else if (action.type === AUTH_ERROR) {
@@ -76,21 +76,21 @@ export default function authReducer(state = initialState, action) {
         answer = Object.assign({}, state, {
             groceryList: [...state.groceryList, ...action.groceryList]
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === UPDATE_USER_GROCERY_LIST_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === ADD_TO_GROCERY_LIST) {
         answer = Object.assign({}, state, {
             groceryList: [...state.groceryList.concat(action.items)]
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === DELETE_ITEM_FROM_GROCERY_LIST) {
@@ -98,7 +98,7 @@ export default function authReducer(state = initialState, action) {
         answer = Object.assign({}, state, {
                 groceryList: selected
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
 

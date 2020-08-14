@@ -6,7 +6,6 @@ import Categories from './categories';
 import Ingredients from './ingredients';
 import RecipeInput from './recipe-input';
 import NewCategory from './new-category';
-// import RecipeCategories from './recipe-categories';
 import {required, nonEmpty} from '../../validators';
 import { addRecipe, updateMenuItem, addCategory, } from '../../actions';
 import './recipe-form.css'
@@ -28,6 +27,7 @@ export class RecipeForm extends React.Component {
     }
     // checks if props are coming from your-menu-item because of edit recipe button
     componentDidMount() {
+        console.log(this.props.menuItem)
         if (this.props.menuItem) {
             console.log('edit menu item', this.props)
             const {menuItem} = this.props;
@@ -56,7 +56,7 @@ export class RecipeForm extends React.Component {
             })
         })
     }
-
+    // name and directions, ingredients and amount, 
     handleChange = e => { 
         const {value, name} = e.target;
         console.log(value, name)
@@ -90,9 +90,8 @@ export class RecipeForm extends React.Component {
             })
         }
     }
-    // adds newly made category checkbox to "category checked checkboxes to local state" 
-    // adds newly made category checkbox to global store, with the other categories 
 
+    // adds newly made category checkbox to "category checked checkboxes to local state" 
     addNewCategory = newCat => {
       const { categories } = this.state;
       if(!categories.includes(newCat)) {

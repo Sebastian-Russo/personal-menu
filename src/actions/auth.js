@@ -56,7 +56,7 @@ export const login = (username, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({ authToken, userObj }) => {
-                console.log(authToken, userObj.id, userObj.username, userObj.groceryList) // id and groceryList are undefined 
+                // console.log(authToken, userObj.id, userObj.username, userObj.groceryList) 
                 saveAuthToken(authToken, userObj.id, userObj.username, userObj.groceryList);
                 storeAuthInfo(authToken, dispatch);
             }) 
