@@ -10,6 +10,14 @@ export class YourMenuCategory extends React.Component {
         console.log('getting recipes', this.props.authToken)
         if (this.props.userId) { 
             this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+        } 
+        
+        if (this.props.userId) {
+            console.log(this.props.userId)
+        }
+
+        if (!this.props.userId) {
+            console.log(this.props.userId)
         }
     }
 

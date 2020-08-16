@@ -57,7 +57,7 @@ export default function authReducer(state = initialState, action) {
             username: action.currentUser.username,
             groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
         });
-        // console.log('toUpdate', action, answer)
+        console.log('toUpdate', action)
         return answer
 
     } else if (action.type === AUTH_ERROR) {

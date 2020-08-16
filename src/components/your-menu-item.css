@@ -27,5 +27,6 @@
 }
 
 .button-addItem:focus {
-    color: red;
+    outline: 0;
+    background-color: rgb(3, 247, 247);
 }
