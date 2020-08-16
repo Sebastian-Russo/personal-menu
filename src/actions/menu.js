@@ -69,7 +69,7 @@ export const addRecipe = (token, recipe) => dispatch => {
     }).catch(err => {
         dispatch(addRecipeError(err))
     })
-    .then(dispatch(getRecipes(token, recipe.userId)))
+    // .then(dispatch(getRecipes(token, recipe.userId)))
 }
 
 

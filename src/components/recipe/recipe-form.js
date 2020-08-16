@@ -127,7 +127,7 @@ export class RecipeForm extends React.Component {
           const recipe = this.state;
           recipe.userId = this.props.userId;
           this.props.dispatch(addRecipe(this.props.authToken, recipe))
-        //   this.setState({ redirect: true })
+          this.setState({ redirect: true })
         }
     }
 

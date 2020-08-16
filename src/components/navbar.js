@@ -9,7 +9,6 @@ import './navbar.css';
 export class Navbar extends React.Component {
 
     logOut() {
-        console.log('clicked logout', this.props.authToken, this.props.userId, this.props.groceryList)
         this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
         this.props.dispatch(clearAuth());
         clearAuthToken();
