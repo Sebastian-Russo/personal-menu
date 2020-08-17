@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '../config';
+import { updateUserLists } from './users';
 // GET recipes
 
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
@@ -20,12 +21,12 @@ export const getRecipes = (token, userId) => dispatch => {
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }).then(res => {
+    })
+    .then(res => {
         return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(getRecipesSuccess(json))
-    }).catch(err => {
+    })
+    .then(json => dispatch(getRecipesSuccess(json)))
+    .catch(err => {
         dispatch(getRecipesError(err))
     });
 }
@@ -54,6 +55,10 @@ export const addRecipeError = error => ({
 })
 
 export const addRecipe = (token, recipe) => dispatch => {
+  const user = localStorage.getItem('user');
+  const { id: userId } = JSON.parse(user);
+  recipe.userId = userId;
+  console.log('POSTING', recipe);
     fetch(`${API_BASE_URL}/recipes`, {
         method: 'POST',
         headers: {
@@ -61,12 +66,15 @@ export const addRecipe = (token, recipe) => dispatch => {
             'Content-type': 'application/json' // lets the server know what it's expecting
         },
         body: JSON.stringify(recipe)
-    }).then(res => {
+    })
+    .then(res => {
         return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(addRecipeSuccess(json))
-    }).catch(err => {
+    })
+    .then(json => {
+      dispatch(addRecipeSuccess(json))
+      dispatch(updateUserLists())
+    })
+    .catch(err => {
         dispatch(addRecipeError(err))
     })
     // .then(dispatch(getRecipes(token, recipe.userId)))

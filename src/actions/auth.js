@@ -3,6 +3,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
+import {updateUserLists} from './users';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = (authToken) => ({
@@ -33,11 +34,19 @@ export const authError = error => ({
     error
 });
 
+export const ADD_FROM_USER_PROFILE = 'ADD_FROM_USER_PROFILE';
+export const addFromUserProfile = (categoryList, groceryList) => ({
+  type: ADD_FROM_USER_PROFILE,
+  groceryList,
+  categoryList
+});
+
 const storeAuthInfo = (authToken, dispatch) => {
-    const decodedToken = jwtDecode(authToken);
-    console.log(decodedToken)
-    dispatch(authSuccess(authToken, decodedToken.user)); // authSuccess(authToken, decodedToken.user)
-    dispatch(setAuthToken(authToken));
+    const { user } = jwtDecode(authToken);
+    console.log(user)
+    dispatch(authSuccess(authToken, user)); // authSuccess(authToken, decodedToken.user)
+    dispatch(addFromUserProfile(user.categoryList, user.groceryList));
+    saveAuthToken(authToken, user)
 };
 
 export const login = (username, password) => dispatch => {
@@ -55,9 +64,8 @@ export const login = (username, password) => dispatch => {
         })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({ authToken, userObj }) => {
-                console.log(authToken, userObj.id, userObj.username, userObj.groceryList, userObj.categoryList) 
-                saveAuthToken(authToken, userObj.id, userObj.username, userObj.groceryList, userObj.categoryList);
+            .then(({ authToken }) => {
+                console.log(authToken);
                 storeAuthInfo(authToken, dispatch);
             }) 
             .catch(err => {
@@ -97,68 +105,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         });
 };
 
+export const logOut = () => async (dispatch) => {
+  dispatch(updateUserLists());
+  dispatch(clearAuth());
+  clearAuthToken();
+}
 
 // update grocery list connected to user 
-
-export const UPDATE_USER_GROCERY_LIST_SUCCESS = 'UPDATE_USER_GROCERY_LIST_SUCCESS';
-export const updateUserGroceryListSuccess = groceryList => ({
-    type: UPDATE_USER_GROCERY_LIST_SUCCESS,
-    groceryList
-})
-
-export const UPDATE_USER_GROCERY_LIST_ERROR = 'UPDATE_USER_GROCERY_LIST_ERROR';
-export const updateUserGroceryListError = error => ({
-    type: UPDATE_USER_GROCERY_LIST_ERROR,
-    error
-})
-
-export const updateUserGroceryList = (token, userId, groceryList) => dispatch => {
-    fetch(`${API_BASE_URL}/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json' 
-        },
-        body: JSON.stringify({groceryList, id: userId})
-    }).then(res => {
-        return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(updateUserGroceryListSuccess(json))
-    }).catch(err => {
-        dispatch(updateUserGroceryListError(err))
-    });
-}
-
-
-// update categoryList connected to user 
-
-export const UPDATE_USER_CATEGORY_LIST_SUCCESS = 'UPDATE_USER_CATEGORY_LIST_SUCCESS';
-export const updateUserCategoryListSuccess = categoryList => ({
-    type: UPDATE_USER_CATEGORY_LIST_SUCCESS,
-    categoryList
-})
-
-export const UPDATE_USER_CATEGORY_LIST_ERROR = 'UPDATE_USER_CATEGORY_LIST_ERROR';
-export const updateUserCategoryListError = error => ({
-    type: UPDATE_USER_CATEGORY_LIST_ERROR,
-    error
-})
-
-export const updateUserCategoryList = (token, userId, categoryList) => dispatch => {
-    fetch(`${API_BASE_URL}/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json' 
-        },
-        body: JSON.stringify({categoryList, id: userId})
-    }).then(res => {
-        return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(updateUserCategoryListSuccess(json))
-    }).catch(err => {
-        dispatch(updateUserCategoryListError(err))
-    });
-}

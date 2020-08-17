@@ -6,9 +6,8 @@ import Categories from "./categories";
 import Ingredients from "./ingredients";
 import RecipeInput from "./recipe-input";
 import NewCategory from "./new-category";
-// import RecipeCategories from './recipe-categories';
 import { required, nonEmpty } from "../../validators";
-import { addRecipe, updateMenuItem, addCategory } from "../../actions";
+import { menu, users } from "../../actions";
 import "./recipe-form.css";
 
 export class RecipeForm extends React.Component {
@@ -56,9 +55,8 @@ export class RecipeForm extends React.Component {
     });
   };
 
-  handleChange = e => {
+  onChange = e => {
     const { value, name } = e.target;
-    console.log(value, name);
     this.setState({
       [name]: value
     });
@@ -93,11 +91,8 @@ export class RecipeForm extends React.Component {
   // adds newly made category checkbox to global store, with the other categories
 
   addNewCategory = newCat => {
-    const { categories } = this.state;
-    if (!categories.includes(newCat)) {
-      this.setState({
-        categories: [...this.state.categories, newCat]
-      });
+    if (!this.props.categoryList.includes(newCat)) {
+      this.props.dispatch(users.addCategoriesToUser(newCat));
     }
   };
 
@@ -108,39 +103,27 @@ export class RecipeForm extends React.Component {
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const requiredFields = ["name", "ingredients", "directions", "categories"];
-    const missedFields = requiredFields
-      .map(field => {
-        if (!this.state[field] || !this.state[field].length) {
-          return field;
-        }
-        return false;
-      })
-      .filter(Boolean);
-
-    if (missedFields.length) {
-      alert(`Please fill out ${missedFields[0]}`);
-    } else if (this.state.id) {
+  // reduxForm already has a handleSubmit method, need to change it to onSubmit
+  onSubmit = recipe => {
+    console.log('recipe', recipe);
+    if (this.state.id) {
       // check if there's an id in state, don't rely on store prop (editing === true)
       this.props.dispatch(
-        updateMenuItem(this.props.authToken, this.state.id, this.state)
+        menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
       );
-      this.setState({ redirect: true });
     } else {
       const recipe = this.state;
       recipe.userId = this.props.userId;
-      this.props.dispatch(addRecipe(this.props.authToken, recipe));
-      this.setState({ redirect: true });
+      this.props.dispatch(menu.addRecipe(this.props.authToken, recipe));
     }
   };
 
   render() {
-    const { name, redirect, directions, categories, ingredients } = this.state;
+    const { name, directions, categories, ingredients } = this.state;
+    console.log(this.props, categories);
 
-    if (redirect === true) {
-      return <Redirect to={`/your-menu/${categories[0]}`} />;
+    if(this.props.submitSucceeded) {
+      return <Redirect to='/your-menu' />
     }
 
     let newCategory;
@@ -150,7 +133,7 @@ export class RecipeForm extends React.Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit(recipe => this.onSubmit(recipe))}>
           <h2>Add a new favorite recipe!</h2>
 
           <label htmlFor="name"> Recipe Name </label>
@@ -162,7 +145,7 @@ export class RecipeForm extends React.Component {
             value={name}
             validate={[required, nonEmpty]}
             required
-            onChange={this.handleChange}
+            onChange={this.onChange}
           />
 
           <RecipeInput addIngredientAndAmount={this.addIngredientAndAmount} />
@@ -178,7 +161,7 @@ export class RecipeForm extends React.Component {
             value={directions}
             validate={[required, nonEmpty]}
             required
-            onChange={this.handleChange}
+            onChange={this.onChange}
           />
           <br></br>
           <br></br>
@@ -215,7 +198,7 @@ export class RecipeForm extends React.Component {
 
 const mapStateToProps = state => ({
   menuItems: state.menu.menuItems,
-  categoryList: state.category.categoryList,
+  categoryList: state.users.categoryList,
   userId: state.auth.currentUser,
   authToken: state.auth.authToken
 });

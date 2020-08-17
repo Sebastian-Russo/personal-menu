@@ -7,7 +7,7 @@ import {
     UPDATE_MENU_ITEM_ERROR,
     DELETE_MENU_ITEM_SUCCESS,
     DELETE_MENU_ITEM_ERROR
-} from '../actions';
+} from '../actions/menu';
 
 const initialState = {
     editing: false, 
@@ -66,14 +66,14 @@ export default function menuReducer(state=initialState, action) {
                 directions: action.directions
             } : menuItem)
         })
-        console.log('global store', action, answer)
+        console.log('UPDATE_MENU_ITEM_SUCCESS', action, answer)
         return answer
     }
     if (action.type === UPDATE_MENU_ITEM_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        console.log('global store', action, answer)
+        console.log('UPDATE_MENU_ITEM_ERROR', action, answer)
         return answer
     }
 
@@ -83,14 +83,14 @@ export default function menuReducer(state=initialState, action) {
         answer = Object.assign({}, state, {
             menuItems: selected
         })
-        console.log('global store', action, answer)
+        console.log('DELETE_MENU_ITEM_SUCCESS', action, answer)
         return answer
     }
     if (action.type === DELETE_MENU_ITEM_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        console.log('global store', action, answer)
+        console.log('DELETE_MENU_ITEM_ERROR', action, answer)
         return answer
     }
 

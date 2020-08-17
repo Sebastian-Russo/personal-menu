@@ -1,25 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import { getRecipes } from '../actions';
 import './your-menu-category.css'
 
 export class YourMenuCategory extends React.Component {   
-
-    // componentDidMount() {
-    //     console.log('getting recipes', this.props.authToken)
-    //     if (this.props.userId) { 
-    //         this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
-    //     } 
-        
-    //     if (this.props.userId) {
-    //         console.log(this.props.userId)
-    //     }
-
-    //     if (!this.props.userId) {
-    //         console.log(this.props.userId)
-    //     }
-    // }
 
     render() {
         
@@ -58,7 +42,7 @@ export class YourMenuCategory extends React.Component {
     };
 }
 const mapStateToProps = state => ({
-    categoryList: state.auth.categoryList,
+    categoryList: state.users.categoryList,
     menuItems: state.menu.menuItems,
     userId: state.auth.id,
     authToken: state.auth.authToken

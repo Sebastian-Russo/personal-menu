@@ -1,13 +1,13 @@
 import React from 'react'; 
 import {connect} from 'react-redux';
-import {deleteItemFromGroceryList} from '../actions';
+import {users} from '../actions';
 import './grocery-list.css'
 
 export function GroceryList(props) {
 
-    const deleteHanderler = (i) => {
+    const deleteHandler = (i) => {
         console.log('delete clicked', i)
-        props.dispatch(deleteItemFromGroceryList(i))
+        props.dispatch(users.deleteItemFromGroceryList(i))
     }
 
     const items = props.groceryList.map((item, i) => {
@@ -18,7 +18,7 @@ export function GroceryList(props) {
                 <button 
                     className="button-delete-grocery-item"
                     type="button"
-                    onClick={() => deleteHanderler(i)}
+                    onClick={() => deleteHandler(i)}
                     >Delete Item</button>
             </div>
         )
@@ -33,7 +33,7 @@ export function GroceryList(props) {
 }
 
 const mapStateToProps = state => ({
-    groceryList: state.auth.groceryList
+    groceryList: state.users.groceryList
 })
 
 export default connect(mapStateToProps)(GroceryList);

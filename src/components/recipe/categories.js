@@ -4,9 +4,7 @@ import {connect} from 'react-redux';
 function Categories(props) {
   const { categoryList, categories } = props;
   console.log(categoryList, categories)
-  const allCats = [...new Set([...categoryList, ...categories])];
-  console.log(allCats)
-      return allCats.map((category, i) => {
+      return categoryList.map((category, i) => {
           const checked = categories.includes(category);
           const label = category[0].toUpperCase() + category.slice(1);
             return (
@@ -26,7 +24,7 @@ function Categories(props) {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.auth.categoryList,
+  categoryList: state.users.categoryList,
 })
 
 export default connect(mapStateToProps)(Categories);

@@ -1,34 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {clearAuth, updateUserGroceryList} from '../actions/auth';
-import {clearAuthToken} from '../local-storage';
-
+import {logOut} from '../actions/auth';
+ 
 import './navbar.css';
 
-export class Navbar extends React.Component {
-
-    logOut() {
-        this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
-        this.props.dispatch(clearAuth());
-        clearAuthToken();
-    }
-
-    render() {
-
+export function Navbar(props){
+  const { loggedIn, authToken, userId, groceryList } = props;
     let userAction;
-    if (this.props.loggedIn) {
+    if (loggedIn) {
       userAction = (
         <div className="user-action-container">
           <Link to="/"
             className="nav-list-items button-logout"
-            onClick={() => this.logOut()}   
+            onClick={() => props.dispatch(logOut(authToken, userId, groceryList))} 
           >
             <i className="fas fa-user"></i>Log out
           </Link>
         </div>
       );
-    } else if (!this.props.loggedIn){
+    } else {
       userAction = (
         <div className="user-action-container">
           <Link to="/register" className="nav-list-items"><i className="fas fa-kiwi-bird"></i>Register</Link>
@@ -55,14 +46,14 @@ export class Navbar extends React.Component {
         </nav>
       </div>
     );
-  }            
 }
-    const mapStateToProps = state => ({
-        loggedIn: state.auth.id !== null,
-        authToken: state.auth.authToken,
-        userId: state.auth.id,
-        groceryList: state.auth.groceryList
-    });
+
+const mapStateToProps = state => ({
+    loggedIn: state.auth.id !== null,
+    authToken: state.auth.authToken,
+    userId: state.auth.id,
+    groceryList: state.auth.groceryList
+});
 
 
 export default connect(mapStateToProps)(Navbar)

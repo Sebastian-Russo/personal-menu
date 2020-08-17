@@ -4,13 +4,18 @@ import thunk from 'redux-thunk';
 import {loadAuthToken} from './local-storage';
 import {authSuccess} from './actions/auth';
 
-import {authReducer, menuReducer} from './reducers';
+import {
+  authReducer,
+  menuReducer,
+  userReducer
+} from './reducers';
 
 const store = createStore(
     combineReducers({
         form: formReducer,
         menu: menuReducer,
-        auth: authReducer
+        auth: authReducer,
+        users: userReducer
     }),
     applyMiddleware(thunk) // applyMiddleware function to add Redux Thunk to our store
 );
