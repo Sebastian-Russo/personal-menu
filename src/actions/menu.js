@@ -32,6 +32,14 @@ export const getRecipes = (token, userId) => dispatch => {
 
 
 // POST recipes
+// export const addRecipe = ({name, ingredients, directions, id, categories}) => ({
+//     type: ADD_RECIPE,
+//     name, 
+//     ingredients,
+//     directions,
+//     id,
+//     categories
+// })
 
 export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
 export const addRecipeSuccess = recipe => ({
@@ -59,18 +67,9 @@ export const addRecipe = (token, recipe) => dispatch => {
         console.log(json)
         dispatch(addRecipeSuccess(json))
     }).catch(err => {
-            // const {code} = err;
-            // const message = 
-            // code === 401
-            //     ? 'Incorrect username or password'
-            //     : 'Unable to login, please try again';
-            dispatch(addRecipeError(err))
-            // return Promise.reject(
-            //     new SubmissionError({
-            //         _error: message
-            //     })
-            // );
-    });
+        dispatch(addRecipeError(err))
+    })
+    // .then(dispatch(getRecipes(token, recipe.userId)))
 }
 
 

@@ -21,8 +21,9 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = currentUser => ({
+export const authSuccess = (authToken, currentUser) => ({
     type: AUTH_SUCCESS,
+    authToken,
     currentUser
 });
 
@@ -34,7 +35,8 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
-    dispatch(authSuccess(decodedToken.user));
+    console.log(decodedToken)
+    dispatch(authSuccess(authToken, decodedToken.user)); // authSuccess(authToken, decodedToken.user)
     dispatch(setAuthToken(authToken));
 };
 
@@ -53,8 +55,9 @@ export const login = (username, password) => dispatch => {
         })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({ authToken, id, username, groceryList }) => {
-                saveAuthToken(authToken, id, username, groceryList);
+            .then(({ authToken, userObj }) => {
+                console.log(authToken, userObj.id, userObj.username, userObj.groceryList, userObj.categoryList) 
+                saveAuthToken(authToken, userObj.id, userObj.username, userObj.groceryList, userObj.categoryList);
                 storeAuthInfo(authToken, dispatch);
             }) 
             .catch(err => {
@@ -95,7 +98,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 };
 
 
-
 // update grocery list connected to user 
 
 export const UPDATE_USER_GROCERY_LIST_SUCCESS = 'UPDATE_USER_GROCERY_LIST_SUCCESS';
@@ -128,3 +130,35 @@ export const updateUserGroceryList = (token, userId, groceryList) => dispatch =>
     });
 }
 
+
+// update categoryList connected to user 
+
+export const UPDATE_USER_CATEGORY_LIST_SUCCESS = 'UPDATE_USER_CATEGORY_LIST_SUCCESS';
+export const updateUserCategoryListSuccess = categoryList => ({
+    type: UPDATE_USER_CATEGORY_LIST_SUCCESS,
+    categoryList
+})
+
+export const UPDATE_USER_CATEGORY_LIST_ERROR = 'UPDATE_USER_CATEGORY_LIST_ERROR';
+export const updateUserCategoryListError = error => ({
+    type: UPDATE_USER_CATEGORY_LIST_ERROR,
+    error
+})
+
+export const updateUserCategoryList = (token, userId, categoryList) => dispatch => {
+    fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json' 
+        },
+        body: JSON.stringify({categoryList, id: userId})
+    }).then(res => {
+        return res.json()
+    }).then(json => {
+        console.log(json)
+        dispatch(updateUserCategoryListSuccess(json))
+    }).catch(err => {
+        dispatch(updateUserCategoryListError(err))
+    });
+}

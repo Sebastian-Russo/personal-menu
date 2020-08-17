@@ -13,7 +13,17 @@ import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
 import Footer from "./footer";
 
+import { getRecipes } from '../actions';
+
+
 export class App extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props.userId, this.props.authToken)
+    if (this.props.userId) { 
+        this.props.dispatch(getRecipes(this.props.authToken, this.props.userId))
+    }
+}
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.userId && !this.props.userId){
@@ -96,7 +106,7 @@ export class App extends React.Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken !== null,
-  userId: state.auth.currentUser,
+  userId: state.auth.id,
 });
 
 // export default withRouter(connect(mapStateToProps)(LandingPage));

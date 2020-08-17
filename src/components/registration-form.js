@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
+import {Redirect} from 'react-router-dom';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import Input from './input';
@@ -19,6 +20,11 @@ export class RegistrationForm extends React.Component {
     }
 
     render() {
+
+        if (this.props.submitSucceeded) {
+            return <Redirect to='/your-menu' />
+        }
+
         return (
             <form
                 className='login-form'
@@ -50,7 +56,7 @@ export class RegistrationForm extends React.Component {
                     validate={[required, nonEmpty, matchPassword]}
                 />
                 <button className="button"
-                    disabled={() => this.props.pristine || this.props.submitting}>
+                    disabled={this.props.pristine || this.props.submitting}>
                         Register
                     </button>
             

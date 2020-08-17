@@ -6,12 +6,15 @@ import {
     AUTH_ERROR,
     
     UPDATE_USER_GROCERY_LIST_SUCCESS,
-    UPDATE_USER_GROCERY_LIST_ERROR
+    UPDATE_USER_GROCERY_LIST_ERROR,
+    UPDATE_USER_CATEGORY_LIST_SUCCESS,
+    UPDATE_USER_CATEGORY_LIST_ERROR
 } from '../actions/auth';
 
 import {
     ADD_TO_GROCERY_LIST, 
-    DELETE_ITEM_FROM_GROCERY_LIST
+    DELETE_ITEM_FROM_GROCERY_LIST,
+    ADD_CATEGORY
 } from '../actions';
 
 
@@ -22,23 +25,24 @@ const initialState = {
     username: "",
     authToken: null, // authToken !== null does not mean it has been validated
     firstname: "",
-    groceryList: []
+    groceryList: [],
+    categoryList: []
 };
 
 export default function authReducer(state = initialState, action) {
     let answer;
     if (action.type === SET_AUTH_TOKEN) {
         answer = Object.assign({}, state, {
-          authToken: action.authToken,
+          authToken: action.authToken
         });
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     } else if (action.type === CLEAR_AUTH) {
         answer = Object.assign({}, state, {
             authToken: null,
-            currentUser: null
+            id: null
         });
-        console.log('global store', action, answer)
+        console.log('clear auth', action, answer)
         return answer
 
     } else if (action.type === AUTH_REQUEST) {
@@ -46,19 +50,19 @@ export default function authReducer(state = initialState, action) {
             loading: true,
             error: null
         });
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
 
     } else if (action.type === AUTH_SUCCESS) {
-      console.log(action);
         answer = Object.assign({}, state, {
             loading: false,
             id: action.currentUser.id,
-            authToken: action.currentUser.authToken,
+            authToken: action.authToken,
             username: action.currentUser.username,
-            groceryList: [...state.groceryList.concat(action.currentUser.groceryList)]
+            groceryList: [...state.groceryList.concat(action.currentUser.groceryList)],
+            categoryList: [...state.categoryList.concat(action.currentUser.categoryList)]
         });
-        console.log('toUpdate', answer)
+        console.log('toUpdate', action)
         return answer
 
     } else if (action.type === AUTH_ERROR) {
@@ -77,21 +81,21 @@ export default function authReducer(state = initialState, action) {
         answer = Object.assign({}, state, {
             groceryList: [...state.groceryList, ...action.groceryList]
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === UPDATE_USER_GROCERY_LIST_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === ADD_TO_GROCERY_LIST) {
         answer = Object.assign({}, state, {
             groceryList: [...state.groceryList.concat(action.items)]
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
     if (action.type === DELETE_ITEM_FROM_GROCERY_LIST) {
@@ -99,10 +103,49 @@ export default function authReducer(state = initialState, action) {
         answer = Object.assign({}, state, {
                 groceryList: selected
         })
-        console.log('global store', action, answer)
+        console.log(action, answer)
         return answer
     }
 
-    // console.log('global store', action, answer)
+// update categoryList connected to user 
+
+    if (action.type === UPDATE_USER_CATEGORY_LIST_SUCCESS) {
+        answer = Object.assign({}, state, {
+            categoryList: [...state.categoryList, ...action.categoryList]
+        })
+        console.log(action, answer)
+        return answer
+    }
+    if (action.type === UPDATE_USER_CATEGORY_LIST_ERROR) {
+        answer = Object.assign({}, state, {
+            error: action.error
+        })
+        console.log(action, answer)
+        return answer
+    }
+    // if (action.type === ADD_TO_CATEGORY_LIST) {
+    //     answer = Object.assign({}, state, {
+    //         categoryList: [...state.categoryList.concat(action.items)]
+    //     })
+    //     console.log(action, answer)
+    //     return answer
+    // }
+    // if (action.type === DELETE_ITEM_FROM_CATEGORY_LIST) {
+    //     const selected = state.categoryList.filter((item, index) => index !== action.index)
+    //     answer = Object.assign({}, state, {
+    //             categoryList: selected
+    //     })
+    //     console.log(action, answer)
+    //     return answer
+    // }
+
+    if (action.type === ADD_CATEGORY) {
+        answer = Object.assign({}, state, {
+            categoryList: [...state.categoryList, action.category]
+        })
+        console.log(action, answer)
+        return answer
+    }
+
     return state;
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import RecipeForm from './recipe/recipe-form';
+import { Alert, AlertContainer } from "react-bs-notifier";
 import {deleteMenuItem, addToGroceryList} from '../actions';
+import {updateUserGroceryList} from '../actions/auth';
 import './your-menu-item.css';
 // *** AKA RECIPE COMPONENT ***
 
@@ -12,24 +14,22 @@ export class YourMenuItem extends React.Component {
 
         this.state = {
             groceryList: [],
+            groceryItem: "",
             menuItem: {},
             editing: false,
-            redirect: false
+            redirect: false,
+            alert: false
         }
     }
 
     // when component mounts, check to see if menu item id from props matches the id from the route in match params. (whatever menu item was clicked on, those id's need to match)
     componentDidMount(){
         const menuItem = this.props.menuItems.filter(menuItem => menuItem.id === this.props.match.params.id)[0];
-        this.setState({
-            menuItem
-        })
+        this.setState({ menuItem })
     }
 
     setEditing = () => {
-        this.setState({
-            editing: !this.state.editing // oposite of true or false 
-        })
+        this.setState({ editing: !this.state.editing })
     }
 
     handleDeleteClick = () => {
@@ -38,21 +38,28 @@ export class YourMenuItem extends React.Component {
         this.setState({ redirect: true })
     }
 
-
-    // adds ingredient to grocery list (local state)
+    // adds ingredient to grocery list (local state )
     handleAddToGroceryList = ingredient => {
-        const groceryItem = `${ingredient.amount} of ${ingredient.ingredient}`
+        const groceryItem = `${ingredient.amount} : ${ingredient.ingredient}`
         console.log(groceryItem)
-        this.setState({ groceryList: [...this.state.groceryList, groceryItem]})
-        console.log(this.state)
+        this.setState({ 
+            groceryItem,
+            groceryList: [...this.state.groceryList, groceryItem],
+            alert: true
+        })
+        this.props.dispatch(addToGroceryList([groceryItem]));
+        // this.handleAddToGroceryListDB();
     }
-    // adds grocery list (to store)
-    addToStoreGroceryList = (e) => {
-        e.preventDefault();
-        this.props.dispatch(addToGroceryList(this.state.groceryList));
+
+    handleAddToGroceryListDB() {
+        console.log('grocery db', this.props.authToken, this.props.userId, this.props.groceryList) 
+        // this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
     }
+    
 
     render() {
+
+        console.log('grocery list state', this.state)
         const { menuItem } = this.state;
         
         // if no menu item (aka has been deleted) redirect to menu 
@@ -76,13 +83,12 @@ export class YourMenuItem extends React.Component {
                     <div   
                         className="box-addItem"  
                         key={`ingredient-${i}`}
-                        // key={ingredient.id}
                         >
                         <div className="grocery-item">{ingredient.amount} of {ingredient.ingredient}</div>
                         <button 
                             className="button-addItem"
                             onClick={() => this.handleAddToGroceryList(ingredient)}
-                        >Add Item</button>
+                        >Add Item to Grocery List</button>
                         <br></br>
                         <br></br>
                     </div>
@@ -99,20 +105,26 @@ export class YourMenuItem extends React.Component {
             })
             : "";
 
+            const alert =                     
+                <AlertContainer position="top-right">
+                    {this.state.alert ? (
+                        <Alert type="info" headline="Success!">
+                        {this.state.groceryItem} has been added to your grocery list. 
+                        </Alert>
+                    ) : null}
+                </AlertContainer>
+
+
         if (this.state.redirect === true) {
             return <Redirect to={`/your-menu/`} />
         }
 
         return (
                 <div className="menu-item">
+                    {alert}
                     <h1 className="title-categories">{menuItem.name}</h1>
                     <h3>Ingredients:</h3>
                     <div>{ingredients}</div>
-                    <button 
-                        className="button-send-grocery-list"
-                        onClick={this.addToStoreGroceryList}
-                        >Send items to Your Grocery List
-                    </button>
                     <h3>Directions: </h3>
                     <div>{menuItem.directions}</div>
                     <Link to={'/your-menu'}><h3>Categories:</h3></Link>
@@ -127,15 +139,9 @@ export class YourMenuItem extends React.Component {
 
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
-    userId: state.auth.currentUser,
-    authToken: state.auth.authToken 
+    userId: state.auth.id,
+    authToken: state.auth.authToken,
+    groceryList: state.auth.groceryList
 });
 
 export default connect(mapStateToProps)(YourMenuItem)
-
-
-
-// why the [0] if it's the only one in the array?
-// filtered menu item obj from array of objs, by filtering params id
-// previously, i thought i'd have to map array of obj, then map array obj again, to get to ingredients obj
-// const menuItem = menuItems.filter(menuItem => menuItem.id === props.match.params.id)[0];

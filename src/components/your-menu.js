@@ -30,7 +30,7 @@ export function YourMenu({categoryList, username}) {
 }
 
 const mapStateToProps = state => ({
-    categoryList: state.category.categoryList,
+    categoryList: state.auth.categoryList,
     username: state.auth.username
 })
 
