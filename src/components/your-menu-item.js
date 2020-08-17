@@ -4,6 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 import RecipeForm from './recipe/recipe-form';
 import { Alert, AlertContainer } from "react-bs-notifier";
 import {deleteMenuItem, addToGroceryList} from '../actions';
+import {updateUserGroceryList} from '../actions/auth';
 import './your-menu-item.css';
 // *** AKA RECIPE COMPONENT ***
 
@@ -37,7 +38,7 @@ export class YourMenuItem extends React.Component {
         this.setState({ redirect: true })
     }
 
-    // adds ingredient to grocery list (local state and store)
+    // adds ingredient to grocery list (local state )
     handleAddToGroceryList = ingredient => {
         const groceryItem = `${ingredient.amount} : ${ingredient.ingredient}`
         console.log(groceryItem)
@@ -46,15 +47,19 @@ export class YourMenuItem extends React.Component {
             groceryList: [...this.state.groceryList, groceryItem],
             alert: true
         })
-        this.props.dispatch(addToGroceryList(this.state.groceryList));
-
+        this.props.dispatch(addToGroceryList([groceryItem]));
+        // this.handleAddToGroceryListDB();
     }
 
+    handleAddToGroceryListDB() {
+        console.log('grocery db', this.props.authToken, this.props.userId, this.props.groceryList) 
+        // this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList)) 
+    }
     
 
     render() {
 
-        console.log(this.state)
+        console.log('grocery list state', this.state)
         const { menuItem } = this.state;
         
         // if no menu item (aka has been deleted) redirect to menu 
@@ -101,7 +106,7 @@ export class YourMenuItem extends React.Component {
             : "";
 
             const alert =                     
-                <AlertContainer position="middle-right">
+                <AlertContainer position="top-right">
                     {this.state.alert ? (
                         <Alert type="info" headline="Success!">
                         {this.state.groceryItem} has been added to your grocery list. 
@@ -135,7 +140,8 @@ export class YourMenuItem extends React.Component {
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
     userId: state.auth.id,
-    authToken: state.auth.authToken 
+    authToken: state.auth.authToken,
+    groceryList: state.auth.groceryList
 });
 
 export default connect(mapStateToProps)(YourMenuItem)

@@ -7,7 +7,8 @@ import Ingredients from './ingredients';
 import RecipeInput from './recipe-input';
 import NewCategory from './new-category';
 import {required, nonEmpty} from '../../validators';
-import { addRecipe, updateMenuItem } from '../../actions';
+import { addRecipe, updateMenuItem, addCategory } from '../../actions';
+import {updateUserCategoryList} from '../../actions/auth';
 import './recipe-form.css'
 
 export class RecipeForm extends React.Component {
@@ -33,11 +34,11 @@ export class RecipeForm extends React.Component {
             const {menuItem} = this.props;
             const {name, ingredients, directions, categories, id,} = menuItem;
             this.setState({ 
-                name: name,
-                ingredients: ingredients,
-                directions: directions,
-                categories: categories,
-                id: id
+                name,
+                ingredients,
+                directions,
+                categories,
+                id
             });
         };
     };
@@ -46,7 +47,6 @@ export class RecipeForm extends React.Component {
         this.setState({
             ingredients: [...this.state.ingredients, ingredient]
         });
-        console.log(this.state)
     };
 
     deleteIngredientAndAmount = (e, id) => {
@@ -56,7 +56,7 @@ export class RecipeForm extends React.Component {
             })
         })
     }
-    // name and directions, ingredients and amount, 
+    // onChange handler for: name and directions 
     handleChange = e => { 
         const {value, name} = e.target;
         console.log(value, name)
@@ -64,15 +64,13 @@ export class RecipeForm extends React.Component {
             [name]: value
         })
     }
-
+    // onChange handler for: ingredients and amount 
     handleIngredientChange = (e, index, property) => {
         e.preventDefault();
         const { ingredients } = this.state;
         ingredients[index][property] = e.target.value;
         console.log('new new', ingredients);
-        this.setState({
-            ingredients
-        });
+        this.setState({ ingredients });
     };
 
     // adds category checked checkboxes to local state 
@@ -99,6 +97,8 @@ export class RecipeForm extends React.Component {
           categories: [...this.state.categories, newCat]
         })
       }
+      console.log(newCat)
+      this.props.dispatch(addCategory(newCat))
     }
 
     // shows input box to create new category checkbox
@@ -122,16 +122,20 @@ export class RecipeForm extends React.Component {
           alert(`Please fill out ${missedFields[0]}`);
         } else if (this.state.id) { 
           this.props.dispatch(updateMenuItem(this.props.authToken, this.state.id, this.state))
+          // this.props.dispatch(updateUserCategoryList(this.props.authToken, this.props.userId, this.props.categoryList))
           this.setState({ redirect: true })
         } else {
           const recipe = this.state;
           recipe.userId = this.props.userId;
           this.props.dispatch(addRecipe(this.props.authToken, recipe))
+          console.log(this.props.categoryList)
+          this.props.dispatch(updateUserCategoryList(this.props.authToken, this.props.userId, this.props.categoryList))
           this.setState({ redirect: true })
         }
     }
 
     render() {
+        console.log(this.state)
         const {
             name,
             redirect,
@@ -157,7 +161,7 @@ export class RecipeForm extends React.Component {
 
         let newCategory;
 
-        if(this.state.otherCheckbox) {
+        if (this.state.otherCheckbox) {
           newCategory = <NewCategory addNewCategory={this.addNewCategory} />
         }
 
@@ -232,7 +236,7 @@ export class RecipeForm extends React.Component {
 
 const mapStateToProps = state => ({
     menuItems: state.menu.menuItems,
-    categoryList: state.category.categoryList,
+    categoryList: state.auth.categoryList,
     userId: state.auth.id,
     authToken: state.auth.authToken 
 })

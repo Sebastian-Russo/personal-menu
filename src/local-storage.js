@@ -4,14 +4,15 @@ export const loadAuthToken = () => {
     return JSON.parse(user) //  returns { authToken: <whatever the token is>, userId: <whatever the userId is> }
 };
 
-export const saveAuthToken = (authToken, userId, username, groceryList) => {
+export const saveAuthToken = (authToken, userId, username, groceryList, categoryList) => {
     try {
         console.log('storing in local storage') // authToken, userId, username, groceryList
         localStorage.setItem('user', JSON.stringify({
           authToken,
           id: userId,
           username,
-          groceryList
+          groceryList,
+          categoryList
         }));
     } catch (e) {}
 };
