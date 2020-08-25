@@ -48,18 +48,7 @@ export class YourMenuItem extends React.Component {
       alert: true,
       groceryItem
     });
-    // this.handleAddToGroceryListDB();
   };
-
-  handleAddToGroceryListDB() {
-    console.log(
-      "grocery db",
-      this.props.authToken,
-      this.props.userId,
-      this.props.groceryList
-    );
-    // this.props.dispatch(updateUserGroceryList(this.props.authToken, this.props.userId, this.props.groceryList))
-  }
 
   render() {
     console.log("grocery list state", this.state);

@@ -87,9 +87,9 @@ export class RecipeForm extends React.Component {
       });
     }
   };
-  // adds newly made category checkbox to "category checked checkboxes to local state"
-  // adds newly made category checkbox to global store, with the other categories
 
+
+  // adds newly made category checkbox to global store, with the other categories
   addNewCategory = newCat => {
     if (!this.props.categoryList.includes(newCat)) {
       this.props.dispatch(users.addCategoriesToUser(newCat));
@@ -106,14 +106,13 @@ export class RecipeForm extends React.Component {
   // reduxForm already has a handleSubmit method, need to change it to onSubmit
   onSubmit = recipe => {
     console.log('recipe', recipe);
-    if (this.state.id) {
-      // check if there's an id in state, don't rely on store prop (editing === true)
+    if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
       this.props.dispatch(
         menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
       );
     } else {
       const recipe = this.state;
-      recipe.userId = this.props.userId;
+      recipe.userId = this.props.userId; // add user id to new recipe 
       this.props.dispatch(menu.addRecipe(this.props.authToken, recipe));
     }
   };
@@ -122,7 +121,7 @@ export class RecipeForm extends React.Component {
     const { name, directions, categories, ingredients } = this.state;
     console.log(this.props, categories);
 
-    if(this.props.submitSucceeded) {
+    if(this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
       return <Redirect to='/your-menu' />
     }
 

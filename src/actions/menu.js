@@ -57,13 +57,13 @@ export const addRecipeError = error => ({
 export const addRecipe = (token, recipe) => dispatch => {
   const user = localStorage.getItem('user');
   const { id: userId } = JSON.parse(user);
-  recipe.userId = userId;
+  recipe.userId = userId; // grab user id from local storage and add it to recipe object 
   console.log('POSTING', recipe);
     fetch(`${API_BASE_URL}/recipes`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json' // lets the server know what it's expecting
+            'Content-type': 'application/json' 
         },
         body: JSON.stringify(recipe)
     })
@@ -77,7 +77,6 @@ export const addRecipe = (token, recipe) => dispatch => {
     .catch(err => {
         dispatch(addRecipeError(err))
     })
-    // .then(dispatch(getRecipes(token, recipe.userId)))
 }
 
 
