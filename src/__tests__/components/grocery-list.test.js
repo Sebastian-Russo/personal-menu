@@ -8,19 +8,13 @@ import "../../__tests__/setup/setupTests"
 describe('GroceryList', () => {
   
   it('Renders without crashing', () => {
-    shallow(<GroceryList />);
+
+    const groceryList = ['item1', 'item2', 'item3']
+
+    shallow(<GroceryList 
+      groceryList={groceryList}
+      />);
   });
-
-  // it('Renders something', () => {
-  //   shallow(<GroceryList />);
-
-  //   const wrapper = (<GroceryList />)
-  
-  //   wrapper.simulate('click'); // delete button 
-
-  //   expect(wrapper)// expect one less item/button ?
-  
-  // })
 
 });
 

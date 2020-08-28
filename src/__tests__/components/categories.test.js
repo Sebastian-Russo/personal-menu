@@ -7,20 +7,19 @@ import "../../__tests__/setup/setupTests"
 describe('Categories', () => {
   
   it('Renders without crashing', () => {
-    shallow(<Categories />);
-  });
+    const categoryList = ['breakfast', 'lunch', 'dinner', 'dessert'];
+    const categories = ['breakfast', 'lunch', 'dinner']
+    
+    const checkOrUncheck = jest.fn(); // 'jest.fn()' takes place of a function, and keeps track if it's called or not
 
-  // it('Renders components', () => {
-  //   const wrapper = shallow((
-  //     <div>
-  //       {['breakfast'].map((i) => <li key={`${category}-${i}`}> </li>)}    
-  //     </div>
-  //   )).find('li')
-
-  //   expect(wrapper.at(0).key()).to.equal('breakfast');
-
-  // })
-
+    shallow( <Categories
+      categoryList={categoryList}
+      categories={categories}
+      checkOrUncheck={checkOrUncheck}
+      />
+    )
+    
+  })
 
 });
 
