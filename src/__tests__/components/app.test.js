@@ -4,8 +4,6 @@ import { App } from '../../components/app';
 import "../../__tests__/setup/setupTests"
 
 
-spy(App.prototype, 'componentDidMount');
-
 describe('App', () => {
   
   it('Renders without crashing', () => {
