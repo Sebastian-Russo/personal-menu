@@ -8,16 +8,16 @@ describe('Input', () => {
   
   it('Renders without crashing', () => {
     
-    const touched = true;
-    const active = true;
-    const meta
+    const meta = {
+      active: false,
+      touched: false
+    }
+
     const input = 'breakfast';
     const label = 'breakfast';
     const name = 'pizza';
 
     mount(<Input 
-      touched={touched}
-      active={active}
       meta={meta}
       input={input}
       label={label}
@@ -27,5 +27,5 @@ describe('Input', () => {
 
 });
 
-
-// Lifecycle methods need full DOM rendering 
+// Since field is a HoC, it will be passing its own props 
+// to that component along with whatever others you declare

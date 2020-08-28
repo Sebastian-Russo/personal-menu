@@ -7,21 +7,12 @@ describe('RecipeInput', () => {
   
   it('Renders without crashing', () => {
 
-    const state = {
-      ingredient: "",
-      amount: ""
-    }
-
     const ingredient = "sugar"
     const amount = "1 cup"
-    const addIngredientAndAmount = state;
 
     mount(<RecipeInput 
-      state={state}
       ingredient={ingredient}
       amount={amount}
-      addIngredientAndAmount={addIngredientAndAmount}
-
       />);
   
   });
