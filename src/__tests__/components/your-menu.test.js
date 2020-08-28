@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import YourMenu from '../../src/components/your-menu';
+import YourMenu from '../../components/your-menu';
+import "../../__tests__/setup/setupTests"
 
 describe('YourMenu', () => {
   
@@ -11,3 +12,4 @@ describe('YourMenu', () => {
 });
 
 
+// Lifecycle methods need full DOM rendering 

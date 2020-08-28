@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import RegistrationForm from '../../src/components/registration-form';
+import RegistrationForm from '../../components/registration-form';
+import "../../__tests__/setup/setupTests"
 
 describe('RegistrationForm', () => {
   

@@ -1,6 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Input from '../../src/components/input';
+import Input from '../../components/input';
+import "../../__tests__/setup/setupTests"
+
 
 describe('Input', () => {
   
@@ -11,3 +13,4 @@ describe('Input', () => {
 });
 
 
+// Lifecycle methods need full DOM rendering 

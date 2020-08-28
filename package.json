@@ -18,13 +18,14 @@
     "npm-run-all": "^4.0.2",
     "react": "^16.13.1",
     "react-bs-notifier": "^5.0.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.13.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-scripts": "3.4.1",
     "redux": "^3.7.1",
     "redux-form": "6.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sinon": "^9.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
