@@ -23,7 +23,7 @@ export function Navbar(props){
       userAction = (
         <div className="user-action-container">
           <Link to="/register" className="nav-list-items"><i className="fas fa-kiwi-bird"></i>Register</Link>
-          <Link to="/login" className="nav-list-items"><i className="fas fa-user"></i>Login</Link>
+          <Link to="/login" className="nav-list-items login"><i className="fas fa-user"></i>Login</Link>
         </div>
       )
     }

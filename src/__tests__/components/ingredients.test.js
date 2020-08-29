@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Ingredients from '../../components/recipe/ingredients';
 import "../../__tests__/setup/setupTests"
 
@@ -25,9 +25,59 @@ describe('Ingredients', () => {
       handleIngredientChange={handleIngredientChange}
       />
     );
+  });
+
+  it('adds ingredient', () => {
+
+    const ingredients = [
+      {
+      ingredient: 'sugar',
+      amount: '1 cup'
+      },
+      {
+        ingredient: 'sunshine',
+        amount: '1 cup'
+      }
+    ]
+
+    const handleIngredientChange = jest.fn();
+    
+    const wrapper = shallow( <Ingredients 
+      ingredients={ingredients}
+      handleIngredientChange={handleIngredientChange}
+      />
+    )
+    
+
+    expect(ingredients).toEqual([{"amount": "1 cup", "ingredient": "sugar"}, {"amount": "1 cup", "ingredient": "sunshine"}])
 
   });
 
+  it('Clicking delete button removes item', () => {
 
+    const ingredients = [
+      {
+      ingredient: 'sugar',
+      amount: '1 cup'
+      },
+      {
+        ingredient: 'sunshine',
+        amount: '1 cup'
+      }
+    ]
 
+    const deleteIngredientAndAmount = jest.fn();
+
+    const wrapper = mount( <Ingredients 
+      ingredients={ingredients}
+      onClick={deleteIngredientAndAmount}
+      />
+    )
+    
+    wrapper.simulate('click');
+
+    expect(deleteIngredientAndAmount).toHaveBeenCalled();
+      // why isn't this being called??
+  });
+    
 });
