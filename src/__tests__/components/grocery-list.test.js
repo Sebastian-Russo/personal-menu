@@ -7,40 +7,35 @@ import "../../__tests__/setup/setupTests"
 describe('GroceryList', () => {
   
   it('Renders without crashing', () => {
-
     const groceryList = ['item1', 'item2', 'item3']
 
     shallow(<GroceryList 
       groceryList={groceryList}
-      />);
+    />);
   });
 
   it('Renders grocery list array of items', () => {
-
     const groceryList = ['item1', 'item2', 'item3']
 
     const wrapper = shallow(<GroceryList 
       groceryList={groceryList}
-      />);
+    />);
 
-    expect(wrapper.hasClass('grocery-item')).toEqual(true);
-      // why is it not showing className of array
+    // expect(wrapper.find('button').hasClass('grocery-item')).to.equal(true);
+    expect(wrapper.find('.box-grocery-list').to.have.lengthOf(3))
   });
 
   it('Deletes item from grocery list', () => {
-
     const groceryList = ['item1', 'item2', 'item3']
-    const deleteItemFromGroceryList = jest.fn();
 
     const wrapper = shallow(<GroceryList 
       groceryList={groceryList}
-      deleteItemFromGroceryLis={deleteItemFromGroceryList}
-      />);
+    />);
 
-      wrapper.simulate('click')
+    wrapper.find('.button-delete-grocery-item').at(0).simulate('click')
+      
+    expect(wrapper.deleteHandler).toHaveBeenCalled();
 
-      expect(deleteItemFromGroceryList).toHaveBeenCalled();
-      // why isn't it being called??
   });
 
 });

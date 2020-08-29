@@ -5,7 +5,10 @@ import "../../__tests__/setup/setupTests"
 import store from '../../store'
 
 describe('RecipeForm', () => {
-  
+  // const mockStore = configureStore([thunk]);
+  // let store;
+  // store={mockStore({})}
+
   it('Renders without crashing', () => {
     shallow(<RecipeForm store={store} />);
   });

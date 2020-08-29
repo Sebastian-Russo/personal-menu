@@ -10,19 +10,22 @@ export function GroceryList(props) {
         props.dispatch(users.deleteItemFromGroceryList(i))
     }
 
-    const items = props.groceryList.map((item, i) => {
-        console.log(item)
-        return (
-            <div className="box-grocery-list" key={`item-${i}`}>
-                <div className="grocery-item">{item}</div>
-                <button 
-                    className="button-delete-grocery-item"
-                    type="button"
-                    onClick={() => deleteHandler(i)}
-                    >Delete Item</button>
-            </div>
-        )
-    })
+    let items;
+        if (props.groceryList) {
+            items = props.groceryList.map((item, i) => {
+            console.log(item)
+                return (
+                    <div className="box-grocery-list" key={`item-${i}`}>
+                        <div className="grocery-item">{item}</div>
+                        <button 
+                            className="button-delete-grocery-item"
+                            type="button"
+                            onClick={() => deleteHandler(i)}
+                            >Delete Item</button>
+                    </div>
+                )
+            })
+        }
 
     return (
         <div className="container-grocery-list">

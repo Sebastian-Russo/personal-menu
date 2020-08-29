@@ -48,8 +48,10 @@ describe('Ingredients', () => {
       />
     )
     
+    wrapper.simulate('click')
 
-    expect(ingredients).toEqual([{"amount": "1 cup", "ingredient": "sugar"}, {"amount": "1 cup", "ingredient": "sunshine"}])
+    expect(handleIngredientChange).toHaveBeenCalled();
+    // expect(ingredients).toEqual([{"amount": "1 cup", "ingredient": "sugar"}, {"amount": "1 cup", "ingredient": "sunshine"}])
 
   });
 
