@@ -3,13 +3,12 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
-import { getRecipes } from './menu';
+import {updateUserLists} from './users';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = (authToken, userId) => ({
+export const setAuthToken = (authToken) => ({
     type: SET_AUTH_TOKEN,
-    authToken,
-    userId
+    authToken
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
@@ -23,8 +22,9 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = currentUser => ({
+export const authSuccess = (authToken, currentUser) => ({
     type: AUTH_SUCCESS,
+    authToken,
     currentUser
 });
 
@@ -34,15 +34,23 @@ export const authError = error => ({
     error
 });
 
-const storeAuthInfo = (authToken, userId, dispatch) => {
-    const decodedToken = jwtDecode(authToken);
-    dispatch(setAuthToken(authToken, userId));
-    dispatch(authSuccess(decodedToken.user));
-    saveAuthToken(authToken, userId);
+export const ADD_FROM_USER_PROFILE = 'ADD_FROM_USER_PROFILE';
+export const addFromUserProfile = (categoryList, groceryList) => ({
+  type: ADD_FROM_USER_PROFILE,
+  groceryList,
+  categoryList
+});
+
+const storeAuthInfo = (authToken, dispatch) => {
+    const { user } = jwtDecode(authToken);
+    console.log(user)
+    dispatch(authSuccess(authToken, user)); // authSuccess(authToken, decodedToken.user)
+    dispatch(addFromUserProfile(user.categoryList, user.groceryList));
+    saveAuthToken(authToken, user)
 };
 
 export const login = (username, password) => dispatch => {
-    dispatch(authRequest())
+  console.log('logging in with', username, password);
     return (
         fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
@@ -56,9 +64,9 @@ export const login = (username, password) => dispatch => {
         })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({authToken, userId}) => {
-                storeAuthInfo(authToken, userId, dispatch)
-                dispatch(getRecipes(authToken, userId))
+            .then(({ authToken }) => {
+                console.log(authToken);
+                storeAuthInfo(authToken, dispatch);
             }) 
             .catch(err => {
                 const {code} = err;
@@ -77,8 +85,8 @@ export const login = (username, password) => dispatch => {
 };
 
 export const refreshAuthToken = () => (dispatch, getState) => {
-    dispatch(authRequest());
     const authToken = getState().auth.authToken;
+    console.log('refreshing', authToken)
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -87,9 +95,8 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({authToken, userId}) => {
+        .then(({authToken}) => {
             storeAuthInfo(authToken, dispatch)
-            dispatch(getRecipes(authToken, userId))
         })
         .catch(err => {
             dispatch(authError(err));
@@ -98,37 +105,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         });
 };
 
-
-
-// update grocery list connected to user 
-
-export const UPDATE_USER_GROCERY_LIST_SUCCESS = 'UPDATE_USER_GROCERY_LIST_SUCCESS';
-export const updateUserGroceryListSuccess = groceryList => ({
-    type: UPDATE_USER_GROCERY_LIST_SUCCESS,
-    groceryList
-})
-
-export const UPDATE_USER_GROCERY_LIST_ERROR = 'UPDATE_USER_GROCERY_LIST_ERROR';
-export const updateUserGroceryListError = error => ({
-    type: UPDATE_USER_GROCERY_LIST_ERROR,
-    error
-})
-
-export const updateUserGroceryList = (token, userId, groceryList) => dispatch => {
-    fetch(`${API_BASE_URL}/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json' 
-        },
-        body: JSON.stringify({groceryList, id: userId})
-    }).then(res => {
-        return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(updateUserGroceryListSuccess(json))
-    }).catch(err => {
-        dispatch(updateUserGroceryListError(err))
-    });
+export const logOut = () => async (dispatch) => {
+  dispatch(updateUserLists());
+  dispatch(clearAuth());
+  clearAuthToken();
 }
 
+// update grocery list connected to user 

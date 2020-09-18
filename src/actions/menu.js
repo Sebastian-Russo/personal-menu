@@ -1,6 +1,5 @@
 import { API_BASE_URL } from '../config';
-import {SubmissionError} from 'redux-form';
-
+import { updateUserLists } from './users';
 // GET recipes
 
 export const GET_RECIPES_SUCCESS = 'GET_RECIPES_SUCCESS';
@@ -22,18 +21,26 @@ export const getRecipes = (token, userId) => dispatch => {
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }).then(res => {
+    })
+    .then(res => {
         return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(getRecipesSuccess(json))
-    }).catch(err => {
+    })
+    .then(json => dispatch(getRecipesSuccess(json)))
+    .catch(err => {
         dispatch(getRecipesError(err))
     });
 }
 
 
 // POST recipes
+// export const addRecipe = ({name, ingredients, directions, id, categories}) => ({
+//     type: ADD_RECIPE,
+//     name, 
+//     ingredients,
+//     directions,
+//     id,
+//     categories
+// })
 
 export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
 export const addRecipeSuccess = recipe => ({
@@ -48,31 +55,28 @@ export const addRecipeError = error => ({
 })
 
 export const addRecipe = (token, recipe) => dispatch => {
+  const user = localStorage.getItem('user');
+  const { id: userId } = JSON.parse(user);
+  recipe.userId = userId; // grab user id from local storage and add it to recipe object 
+  console.log('POSTING', recipe);
     fetch(`${API_BASE_URL}/recipes`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json' // lets the server know what it's expecting
+            'Content-type': 'application/json' 
         },
         body: JSON.stringify(recipe)
-    }).then(res => {
+    })
+    .then(res => {
         return res.json()
-    }).then(json => {
-        console.log(json)
-        dispatch(addRecipeSuccess(json))
-    }).catch(err => {
-            // const {code} = err;
-            // const message = 
-            // code === 401
-            //     ? 'Incorrect username or password'
-            //     : 'Unable to login, please try again';
-            dispatch(addRecipeError(err))
-            // return Promise.reject(
-            //     new SubmissionError({
-            //         _error: message
-            //     })
-            // );
-    });
+    })
+    .then(json => {
+      dispatch(addRecipeSuccess(json))
+      dispatch(updateUserLists())
+    })
+    .catch(err => {
+        dispatch(addRecipeError(err))
+    })
 }
 
 

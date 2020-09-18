@@ -29,7 +29,7 @@ export default class RecipeInput extends React.Component {
     handleClick = (e) => {
         e.preventDefault();
         this.props.addIngredientAndAmount(this.state);
-        // below is to clear the amount and ingredient after each click ?
+        // below is to clear the amount and ingredient after each click 
         this.setState({
             amount: "",
             ingredient: ""
@@ -44,8 +44,7 @@ export default class RecipeInput extends React.Component {
                     name="ingredient"
                     id="ingredient"
                     type="text"
-                    // why keep value here?
-                    value={this.state.ingredient}
+                    value={this.state.ingredient} // controlled component when using value in input 
                     onChange={this.handleChange} 
                 />
                 <label htmlFor="amount"> Amount </label>
@@ -53,7 +52,6 @@ export default class RecipeInput extends React.Component {
                     name="amount"
                     id="amount"
                     type="text"
-                    // controlled component when using value in input 
                     value={this.state.amount}
                     onChange={this.handleChange} 
                     />

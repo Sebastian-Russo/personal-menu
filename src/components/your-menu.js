@@ -1,12 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { menu } from '../actions';
 import './your-menu.css'
 
-export function YourMenu({categoryList, username}) {
-
-    console.log(categoryList, username)
-    const categories = categoryList.map((category, i) => {
+export class YourMenu extends React.Component {
+  componentDidMount() {
+    console.log(this.props.userId, this.props.authToken)
+    if (this.props.userId) { 
+        this.props.dispatch(menu.getRecipes(this.props.authToken, this.props.userId))
+    }
+  }
+  
+  render(){
+    const { categoryList, username } = this.props;
+    console.log('categoryList', categoryList);
+    let categories;
+    if (categoryList && categoryList.length) {
+      categories = categoryList.map((category, i) => {
         return (
             <div key={`categories-${i}`}>
                 <h3>
@@ -16,7 +27,8 @@ export function YourMenu({categoryList, username}) {
                 </h3>
             </div>
         )
-    })
+      })
+    }
     
     return (
         <div className="menu-items container">
@@ -24,12 +36,14 @@ export function YourMenu({categoryList, username}) {
             <div>{categories}</div>
         </div>
     );
-    
+  } 
 }
 
 const mapStateToProps = state => ({
-    categoryList: state.category.categoryList,
-    username: state.auth.username
+    categoryList: state.users.categoryList,
+    username: state.auth.username,
+    authToken: state.auth.authToken,
+    userId: state.auth.id
 })
 
 export default connect(mapStateToProps)(YourMenu)
