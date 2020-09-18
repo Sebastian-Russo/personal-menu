@@ -15,26 +15,34 @@ describe('GroceryList', () => {
   });
 
   it('Renders grocery list array of items', () => {
-    const groceryList = ['item1', 'item2', 'item3']
+    const groceryList = ['item1', 'item2', 'item3'];
 
     const wrapper = shallow(<GroceryList 
       groceryList={groceryList}
     />);
 
-    // expect(wrapper.find('button').hasClass('grocery-item')).to.equal(true);
-    expect(wrapper.find('.box-grocery-list').to.have.lengthOf(3))
+    const groceryItem = wrapper.find('.box-grocery-list').at(0).hasClass('button-delete-grocery-item');
+
+    // need a way to to confirm the groceryItems array 
+    expect(groceryItem).toBe(true)
+
   });
 
   it('Deletes item from grocery list', () => {
     const groceryList = ['item1', 'item2', 'item3']
+    const dispatch = jest.fn();
 
-    const wrapper = shallow(<GroceryList 
+    const wrapper = shallow(<GroceryList // make component a variable 
       groceryList={groceryList}
+      dispatch={dispatch}
     />);
-
-    wrapper.find('.button-delete-grocery-item').at(0).simulate('click')
+    wrapper.deleteHandler = jest.fn();
+    // need to find a way to select just one
+    const deleteButton = wrapper.find('.button-delete-grocery-item').at(0)
+    console.log(deleteButton.debug())
+    deleteButton.simulate('click'); // click deleteButton
       
-    expect(wrapper.deleteHandler).toHaveBeenCalled();
+    expect(wrapper.deleteHandler).toHaveBeenCalled(); // expect deleteButton in component to have been called
 
   });
 

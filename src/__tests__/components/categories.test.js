@@ -10,7 +10,7 @@ describe('Categories', () => {
     const categoryList = ['breakfast', 'lunch', 'dinner', 'dessert'];
     const categories = ['breakfast', 'lunch', 'dinner']
     
-    const checkOrUncheck = jest.fn(); // 'jest.fn()' takes place of a function, and keeps track if it's called or not
+    const checkOrUncheck = jest.fn(); // 'jest.fn()' for testing callbacks, takes place of a function, and keeps track if it's called or not
 
     shallow( <Categories
       categoryList={categoryList}
