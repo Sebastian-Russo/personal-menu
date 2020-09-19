@@ -17,7 +17,7 @@ describe('RecipeInput', () => {
   
   });
 
-  it('Add button adds ingredient', () => {
+  it('Add button fires addIngredientAndAmout handler', () => {
 
     const ingredient = "sugar"
     const amount = "1 cup"
@@ -37,8 +37,6 @@ describe('RecipeInput', () => {
   
     const handleClick = wrapper.find('.button')
     handleClick.simulate('click');
-
-      console.log(wrapper.find('.button'))
  
     expect(addIngredientAndAmount).toHaveBeenCalled();
 

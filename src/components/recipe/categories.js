@@ -10,6 +10,7 @@ export function Categories(props) {
             return (
                 <div key={`${category}-${i}`} className="ingredient-list">
                     <input 
+                        className="categories-input"
                         name={category}
                         id={category}
                         type="checkbox"

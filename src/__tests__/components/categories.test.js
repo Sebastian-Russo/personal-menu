@@ -21,8 +21,22 @@ describe('Categories', () => {
     
   })
 
+  it('second test', () => {
+    const categoryList = ['breakfast', 'lunch', 'dinner', 'dessert']; // 4
+    const categories = ['breakfast', 'lunch', 'dinner']
+    const checkOrUncheck = jest.fn(); // 'jest.fn()' for testing callbacks, takes place of a function, and keeps track if it's called or not
+
+    const wrapper = shallow( <Categories
+      categoryList={categoryList}
+      categories={categories}
+      checkOrUncheck={checkOrUncheck}
+      />
+    )
+
+    const checked = wrapper.find('.ingredient-list')
+
+    expect(checked).toHaveLength(4)
+  })
+
 });
 
-// Testing props is essentially is testing that react is working
-// You want to test the components that are rendered and make sure 
-// that they look like how you want, so write elements, classNames, keys, id’s, etc
