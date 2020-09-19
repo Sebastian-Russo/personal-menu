@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import RecipeForm from "./recipe/recipe-form";
 import { Alert, AlertContainer } from "react-bs-notifier";
 import { menu, users } from "../actions";
@@ -56,7 +56,7 @@ export class YourMenuItem extends React.Component {
 
     // if no menu item (aka has been deleted) redirect to menu
     if (!menuItem) {
-      return <Redirect to="/your-menu" />;
+      return <Router><Redirect to="/your-menu" /></Router>;
     }
     // if editing is true (aka user clicked edit) send to recipe form instead of showing menu item
     if (this.state.editing === true) {
@@ -117,9 +117,10 @@ export class YourMenuItem extends React.Component {
         <div>{ingredients}</div>
         <h3>Directions: </h3>
         <div>{menuItem.directions}</div>
+        <Router>
         <Link to={"/your-menu"}>
           <h3>Categories:</h3>
-        </Link>
+        </Link></Router>
         <div>{categories}</div>
         <br></br>
         <button onClick={this.setEditing}>Edit Recipe</button>

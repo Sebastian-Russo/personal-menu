@@ -20,9 +20,9 @@ describe('LoginForm', () => {
   });
 
 
-  // it('Renders without crashing', () => {
-  //   mount(<LoginForm store={store}/>);
-  // });
+  it('Renders without crashing', () => {
+    mount(<LoginForm store={store}/>);
+  });
   // Invariant Violation: Could not find "store" in either the context or props of "Connect(ConnectedField)". Either wrap the root component in a <Provider>, or explicitly pass "store" as a prop to "Connect(ConnectedField)".
 
   it('Username input, Should capture title correctly onChange', () => {
@@ -45,5 +45,4 @@ describe('LoginForm', () => {
 
 });
 
-
-// 
+})

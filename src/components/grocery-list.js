@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {users} from '../actions';
 import './grocery-list.css'
 
-export function GroceryList(props) {
+export const deleteHandler = (i, dispatch) => {
+    console.log('delete clicked', i)
+    dispatch(users.deleteItemFromGroceryList(i))
+}
 
-    const deleteHandler = (i) => {
-        console.log('delete clicked', i)
-        props.dispatch(users.deleteItemFromGroceryList(i))
-    }
+export function GroceryList(props) {
 
     let items;
         if (props.groceryList) {
@@ -20,7 +20,7 @@ export function GroceryList(props) {
                         <button 
                             className="button-delete-grocery-item"
                             type="button"
-                            onClick={() => deleteHandler(i)}
+                            onClick={() => deleteHandler(i, props.dispatch)}
                             >Delete Item</button>
                     </div>
                 )

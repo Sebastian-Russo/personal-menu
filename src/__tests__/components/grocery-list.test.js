@@ -3,6 +3,7 @@ import {shallow} from 'enzyme';
 import {GroceryList} from '../../components/grocery-list';
 import "../../__tests__/setup/setupTests"
 
+// const {GroceryList} = component;
 
 describe('GroceryList', () => {
   
@@ -14,37 +15,40 @@ describe('GroceryList', () => {
     />);
   });
 
-  it('Renders grocery list array of items', () => {
-    const groceryList = ['item1', 'item2', 'item3'];
+  // it('Renders grocery list array of items', () => {
+  //   const groceryList = ['item1', 'item2', 'item3'];
 
-    const wrapper = shallow(<GroceryList 
-      groceryList={groceryList}
-    />);
+  //   const wrapper = shallow(<GroceryList 
+  //     groceryList={groceryList}
+  //   />);
 
-    const groceryItem = wrapper.find('.box-grocery-list').at(0).hasClass('button-delete-grocery-item');
+  //   const groceryItem = wrapper.find('.box-grocery-list').at(0).hasClass('button-delete-grocery-item');
+  //   console.log(groceryItem)
+  //   // need a way to to confirm the groceryItems array 
+  //   expect(groceryItem).toBe(true)
+  //   // expect(wrapper.find('.box-grocery-list').children()).to.have.lengthOf(groceryList.length);
 
-    // need a way to to confirm the groceryItems array 
-    expect(groceryItem).toBe(true)
+  // });
 
-  });
+  // it('Deletes item from grocery list', () => {
+  //   const groceryList = ['item1', 'item2', 'item3']
+  //   const dispatch = jest.fn();
+  //   const mockDeleteHandler = jest.spyOn(component, 'deleteHandler');
 
-  it('Deletes item from grocery list', () => {
-    const groceryList = ['item1', 'item2', 'item3']
-    const dispatch = jest.fn();
-
-    const wrapper = shallow(<GroceryList // make component a variable 
-      groceryList={groceryList}
-      dispatch={dispatch}
-    />);
-    wrapper.deleteHandler = jest.fn();
-    // need to find a way to select just one
-    const deleteButton = wrapper.find('.button-delete-grocery-item').at(0)
-    console.log(deleteButton.debug())
-    deleteButton.simulate('click'); // click deleteButton
+  //   const wrapper = shallow(<GroceryList // make component a variable 
+  //     groceryList={groceryList}
+  //     dispatch={dispatch}
+  //   />);
       
-    expect(wrapper.deleteHandler).toHaveBeenCalled(); // expect deleteButton in component to have been called
+  //   // need to find a way to select just one
+  //   const deleteButton = wrapper.find('.button-delete-grocery-item').at(0)
+  //   deleteButton.simulate('click'); // click deleteButton
+    
+  //   expect(mockDeleteHandler).toHaveBeenCalled()
+  //   expect(mockDeleteHandler).toHaveBeenCalledWith(0, dispatch)
 
-  });
+
+  // });
 
 });
 

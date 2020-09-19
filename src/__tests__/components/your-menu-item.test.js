@@ -1,5 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 import YourMenuItem from '../../components/your-menu-item';
 import "../setup/setupTests"
 import store from '../../store'
@@ -36,13 +37,15 @@ describe('YourMenuItem', () => {
     const userId = "5f2aa35d43ea5564f76bd73f";
     const authToken = 1234;
   
-    mount(<YourMenuItem 
+    mount(<Router>
+      <YourMenuItem 
       store={store} 
       categoryList={categoryList}
       menuItems={menuItems}
       userId={userId}
       authToken={authToken}  
-    />);
+    />
+    </Router>);
   
   });
 
