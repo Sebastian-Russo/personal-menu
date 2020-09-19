@@ -17,26 +17,32 @@ describe('RecipeInput', () => {
   
   });
 
-  // it('Add button add ingredient', () => {
+  it('Add button adds ingredient', () => {
 
-  //   const ingredient = "sugar"
-  //   const amount = "1 cup"
-  //   const handleClick = jest.fn();
+    const ingredient = "sugar"
+    const amount = "1 cup"
+    const htmlFor = "ingredient"
+    const id = "ingredient"
+    const value = "ingredient"
+    const addIngredientAndAmount = jest.fn();
 
-  //   const wrapper = mount(<RecipeInput 
-  //     ingredient={ingredient}
-  //     amount={amount}
-  //     handleClick={handleClick}
-  //   />);
+    const wrapper = mount(<RecipeInput 
+      ingredient={ingredient}
+      amount={amount}
+      htmlFor={htmlFor}
+      id={id}
+      value={value}
+      addIngredientAndAmount={addIngredientAndAmount}
+    />);
   
-  //   const value = 'ingredient';
+    const handleClick = wrapper.find('.button')
+    handleClick.simulate('click');
 
-  //   wrapper.simulate('click');
+      console.log(wrapper.find('.button'))
+ 
+    expect(addIngredientAndAmount).toHaveBeenCalled();
 
-  //   expect(handleClick).toHaveBeenCalled();
-  //   expect(state('ingredient').toHaveBeenCalledWith(value));
-
-  // });
+  });
 
 });
 
