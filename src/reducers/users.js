@@ -14,7 +14,7 @@ const user = userJSON ? JSON.parse(userJSON) : {};
 
 const initialState = {
   groceryList: user.groceryList || [],
-  categoryList: user.categoryList || []
+  categoryList: user.categoryList || ["Breakfast", "Lunch", "Dinner"]
 };
 
 export default function userReducer(state = initialState, action) {
