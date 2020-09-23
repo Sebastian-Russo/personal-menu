@@ -54,9 +54,9 @@ export class YourMenuItem extends React.Component {
     console.log("grocery list state", this.state);
     const { menuItem } = this.state;
 
-    // if no menu item (aka has been deleted) redirect to menu
+//    if no menu item (aka has been deleted) redirect to menu
     if (!menuItem) {
-      return <Router><Redirect to="/your-menu" /></Router>;
+      return <Router><Redirect to={`/your-menu/:${categories}`} /></Router>;
     }
     // if editing is true (aka user clicked edit) send to recipe form instead of showing menu item
     if (this.state.editing === true) {
