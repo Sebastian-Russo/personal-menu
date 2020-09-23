@@ -28,28 +28,29 @@ describe('Input', () => {
 // Since field is a HoC, it will be passing its own props 
 // to that component along with whatever others you declare
 
-  // it('Renders without crashing', () => {
+  it('Should render breakfast input', () => {
     
-  //   const meta = {
-  //     active: false,
-  //     touched: false
-  //   }
+    const meta = {
+      active: false,
+      touched: false
+    }
 
-  //   const input = 'breakfast';
-  //   const label = 'breakfast';
-  //   const name = 'pizza';
+    const input = ['breakfast','lunch', 'dinner'];
+    const label = 'breakfast';
+    const name = 'pizza';
 
-  //   const wrapper = mount(<Input 
-  //     meta={meta}
-  //     input={input}
-  //     label={label}
-  //     name={name}
-  //     />);
+    const wrapper = mount(<Input 
+      meta={meta}
+      input={input}
+      label={label}
+      name={name}
+      />);
 
-  //   expect(wrapper.find(Input)).toHaveLength(1)
-  //   expect(wrapper.instance().refInput).toEqual('breakfast');
-  //   // why is input undeifined? 
-  // });
+    expect(wrapper.find(Input)).toHaveLength(1)
+    // expect(wrapper.instance().refInput).toEqual('breakfast');
+    // expect(wrapper.find(Input)).prop('name').toEqual('breakfast');
+
+  });
 
 });
 

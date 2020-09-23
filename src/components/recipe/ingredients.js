@@ -15,6 +15,7 @@ export default function Ingredients(props) {
           <div className="form-input" key={`ingredient-${i}`}>
             <label htmlFor="ingredient"> Ingredient </label>
             <input
+              className="input"
               name={item.ingredient}
               id={item.id}
               type="text"
@@ -30,7 +31,7 @@ export default function Ingredients(props) {
               value={item.amount}
               onChange={e => props.handleIngredientChange(e, i, "amount")}
             />
-            <button
+            <button className="delete-button"
               type="button"
               onClick={e => props.deleteIngredientAndAmount(e, item._id)}
             >

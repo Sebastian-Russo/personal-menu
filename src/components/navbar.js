@@ -21,7 +21,7 @@ export function Navbar(props){
       );
     } else {
       userAction = (
-        <div className="user-action-container">
+        <div className="user-action-container button-login">
           <Link to="/register" className="nav-list-items"><i className="fas fa-kiwi-bird"></i>Register</Link>
           <Link to="/login" className="nav-list-items login"><i className="fas fa-user"></i>Login</Link>
         </div>
