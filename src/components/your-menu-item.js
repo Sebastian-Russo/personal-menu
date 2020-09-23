@@ -89,7 +89,7 @@ export class YourMenuItem extends React.Component {
       ? menuItem.categories.map((category, i) => {
           return (
             <div key={`categories-${i}`}>
-              <Link to={`/your-menu-categories/${category}`}>{category}</Link>
+              <Link to={`/your-menu/${category}`}>{category}</Link>
             </div>
           );
         })
