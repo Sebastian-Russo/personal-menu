@@ -1,68 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Personal Menu 
+(Frontend portion)
 
-## Available Scripts
+Here's a link to the site: https://personal-menu.netlify.app/
 
-In the project directory, you can run:
+The Menu 
 
-### `npm start`
+Know how to cook, but can't think of what to make? Or just starting out and you want to remember the meals you like. Add all your favorite recipes and be able to browse by category. Like a menu database for all the meals you have in your arsenal. When your kids ask what's for dinner, tell them to look at what's on the menu. Categorize it in stardard meals such as breakfast, lunch, or dinner. Or create your own unique categories, speciallizing in different cuisines, quick-and-easy meals, budget meals, 3 ingredient meals, grilled meals, seasonal meals, etc. Create categories and tag meals in multiple categories to organize them how ever you'd like. And be sure you'll see them when you're browsing your menu depending on your mood and apetite.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Recipe Book 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+If you're beginning or seasoned to cooking, slowly start adding to your arsenal all your recipes you come by. Have classic favorite you know by heart, share them in your book for others, or for yourself when you view your menu. New recipes you tear out of a magaize, see on pintrest, instagram, youtube, google, etc, can now all be combine in one place. And the best part is, you can edit and rearange. While you cook, maybe you'd like to remind yourself to add 1 tbsp more of butter and garlic, each recipe can be edited and customized to you, not just specifically what the recipe online says with some notes scribbled on the 
 
-### `npm test`
+Grocery List 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Create your grocery list of items you need. When I go to the grocery store, I need a list, and that list comes from what meals I'm going to make for the week. View your meals, then click the items in the list of ingredients that you need to pick up as you browse your kitchen cubboard and fridge.

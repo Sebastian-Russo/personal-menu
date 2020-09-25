@@ -19,7 +19,7 @@ return (
         </div>
         <div className="info-box">
           <p className="title-category">Grocery List</p>
-          <p>Export your grocery list of items you need. When I go to the grocery store, I need a list, and that list comes from what meals I'm going to make for the week. View your meals, then click the items in the list of ingredients that you need to pick up as you browse your kitchen cubboard and fridge.</p>
+          <p>Create your grocery list of items you need. When I go to the grocery store, I need a list, and that list comes from what meals I'm going to make for the week. View your meals, then click the items in the list of ingredients that you need to pick up as you browse your kitchen cubboard and fridge.</p>
         </div>
       </div>
 
