@@ -1,5 +1,6 @@
 .container-home {
     display: flex;
+    /* display: inline; */
     justify-content: space-between;
 }
 
@@ -11,26 +12,8 @@
 }
 
 .container-bottom {
-    display: flex;
-    justify-content: space-between;
-}
-
-.container-bottom div{
     padding-top: 20px;
-    flex-basis: 25%;
     margin: auto;
-}
-
-.box-1 {
-    flex: 1;
-}
-
-.box-2 {
-    flex: 1;
-}
-
-.box-3 {
-    flex: 1;
 }
 
 .title-home {
@@ -39,31 +22,35 @@
     text-align: center;
 }
 
-p.title-category {
-    margin-bottom: 20px;
-}
-
-p.title-category:hover {
-    text-decoration: underline;
-}
-
-.box-4 {
-    flex-direction: column;
-    font-family: 'Bubbler One', sans-serif;
-    font-size: 200%;
-}
-
 .link:hover {
-    text-decoration: underline;
-    /* color: #f1f1f1; */
-    color: lightblue;
+    color: white;
 }
 
-.box-5 {
+.box-quotes {
     flex-direction: column;
     align-items: center;
     font-family: 'Bubbler One', sans-serif;
     font-size: 140%;
     margin-top: 15px;
     transition: ease-in-out;
+}
+
+p.links {
+    font-size: 40px;
+}
+
+
+@media only screen and (max-width: 640px) {
+    .container-home {
+        display: inline;
+    }
+    /* .landing-page-menu{
+        visibility: hidden;
+    }
+    .landing-page-recipe-book {
+        visibility: hidden;
+    }
+    .landing-page-grocery-list {
+        visibility: hidden;
+    } */
 }

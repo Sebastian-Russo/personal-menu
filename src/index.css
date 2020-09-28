@@ -42,8 +42,8 @@ button:hover {
   transition: .3s;
 }
 
-
 a {
+  color: rgb(50, 255, 228);
   text-decoration: none;
   text-transform: capitalize;
   font-family: "Dancing Script";

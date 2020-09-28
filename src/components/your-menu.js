@@ -14,6 +14,7 @@ export class YourMenu extends React.Component {
   
   render(){
     const { categoryList, username } = this.props;
+    const user = !username ? "Your" : username + "'s";
     console.log('categoryList', categoryList);
     let categories;
     if (categoryList && categoryList.length) {
@@ -32,7 +33,7 @@ export class YourMenu extends React.Component {
     
     return (
         <div className="menu-items container">
-            <h1 className="your-menu">{`${username}'s`} Menu</h1>
+            <h1 className="your-menu">{user} Menu</h1>
             <div>{categories}</div>
         </div>
     );
