@@ -48,11 +48,7 @@ describe('YourMenu', () => {
       dispatch={dispatch}
     />
     </Router>);
-  
-  
+    
   });
 
 });
-
-
-// Lifecycle methods need full DOM rendering 

@@ -47,8 +47,6 @@ describe('Input', () => {
       />);
 
     expect(wrapper.find(Input)).toHaveLength(1)
-    // expect(wrapper.instance().refInput).toEqual('breakfast');
-    // expect(wrapper.find(Input)).prop('name').toEqual('breakfast');
 
   });
 

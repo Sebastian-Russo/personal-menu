@@ -11,8 +11,3 @@ describe('App', () => {
   });
 
 });
-
-// expect().toBe()
-// expect something, to be something
-
-// Lifecycle methods need full DOM rendering  
