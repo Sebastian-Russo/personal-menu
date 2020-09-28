@@ -1,6 +1,7 @@
 body {
   background-image: url(/menu-background.jpg);
   background-size: cover;
+  background-position: center;
   margin: auto;
   box-shadow: 0px 0px 10px 2px;
 }
