@@ -1,7 +1,6 @@
 .container-home {
     display: flex;
-    /* display: inline; */
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .container-home div{
@@ -26,6 +25,7 @@
     color: white;
 }
 
+
 .box-quotes {
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@ p.links {
 }
 
 
-@media only screen and (max-width: 640px) {
+@media (max-width: 800px) {
     .container-home {
         display: inline;
     }
