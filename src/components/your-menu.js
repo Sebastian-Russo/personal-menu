@@ -6,7 +6,6 @@ import './your-menu.css'
 
 export class YourMenu extends React.Component {
   componentDidMount() {
-    console.log(this.props.userId, this.props.authToken)
     if (this.props.userId) { 
         this.props.dispatch(menu.getRecipes(this.props.authToken, this.props.userId))
     }
@@ -15,7 +14,6 @@ export class YourMenu extends React.Component {
   render(){
     const { categoryList, username } = this.props;
     const user = !username ? "Your" : username + "'s";
-    console.log('categoryList', categoryList);
     let categories;
     if (categoryList && categoryList.length) {
       categories = categoryList.map((category, i) => {

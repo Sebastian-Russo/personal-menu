@@ -105,8 +105,8 @@ export class RecipeForm extends React.Component {
 
   // reduxForm already has a handleSubmit method, need to change it to onSubmit
   onSubmit = recipe => {
-    console.log('recipe', recipe);
-    if (!this.state.id) {
+    console.log('recipe', recipe, 'userId', this.props.userId);
+    if (!this.props.userId) {
       return alert('Please login or register before adding to your menu & recipe book')
     }
     if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
@@ -201,7 +201,7 @@ export class RecipeForm extends React.Component {
 const mapStateToProps = state => ({
   menuItems: state.menu.menuItems,
   categoryList: state.users.categoryList,
-  userId: state.auth.currentUser,
+  userId: state.auth.id,
   authToken: state.auth.authToken
 });
 

@@ -24,7 +24,7 @@ return (
       </div>
 
       <div className="container-links">
-        <p class="links"><Link to="/register" className="link">Register </Link> or <Link to="/login" className="link"> Login</Link></p>
+        <p className="links"><Link to="/register" className="link">Register </Link> or <Link to="/login" className="link"> Login</Link></p>
       </div>
 
       <div className="container-quotes">

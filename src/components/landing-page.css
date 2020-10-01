@@ -40,7 +40,7 @@ p.links {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .container-home {
         display: inline;
     }
@@ -53,4 +53,4 @@ p.links {
     .landing-page-grocery-list {
         visibility: hidden;
     } */
-}
+} 
