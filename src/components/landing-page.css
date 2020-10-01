@@ -1,12 +1,15 @@
 .container-home {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
 }
 
 .container-home div{
     border: 1px #ccc solid;
     padding: 10px;
-    flex-basis: 25%;
+    margin: 2px;
+    flex-basis: 33.33%;
     font-family: 'Bubbler One', sans-serif;
 }
 
@@ -25,7 +28,6 @@
     color: white;
 }
 
-
 .box-quotes {
     flex-direction: column;
     align-items: center;
@@ -42,15 +44,16 @@ p.links {
 
 @media (max-width: 700px) {
     .container-home {
-        display: inline;
+        display: flex;
+        flex-direction: column;
     }
-    /* .landing-page-menu{
-        visibility: hidden;
+    .landing-page-menu{
+        order: 1;
     }
     .landing-page-recipe-book {
-        visibility: hidden;
+        order: 2;
     }
     .landing-page-grocery-list {
-        visibility: hidden;
-    } */
+        order: 3;
+    }
 } 
