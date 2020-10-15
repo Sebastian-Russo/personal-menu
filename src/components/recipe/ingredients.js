@@ -27,8 +27,7 @@ export default function Ingredients(props) {
               name={item.amount}
               id={item.id}
               type="text"
-              // controlled component when using value in input
-              value={item.amount}
+              value={item.amount} // controlled component when using value in input
               onChange={e => props.handleIngredientChange(e, i, "amount")}
             />
             <button className="delete-button"

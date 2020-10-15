@@ -2,6 +2,7 @@ import React from "react";
 import { reduxForm, focus } from "redux-form";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Alert, AlertContainer } from "react-bs-notifier";
 import Categories from "./categories";
 import Ingredients from "./ingredients";
 import RecipeInput from "./recipe-input";
@@ -21,7 +22,8 @@ export class RecipeForm extends React.Component {
       categories: [],
       otherCheckbox: false,
       redirect: false,
-      checked: false
+      checked: false,
+      alert: false
     };
   }
   // checks if props are coming from your-menu-item because of edit recipe button
@@ -132,6 +134,16 @@ export class RecipeForm extends React.Component {
     if (this.state.otherCheckbox) {
       newCategory = <NewCategory addNewCategory={this.addNewCategory} />;
     }
+
+    // const alert = (
+    //   <AlertContainer position="top-right">
+    //     {this.state.alert ? (
+    //       <Alert type="info" headline="Success!">
+    //         {this.state.ingredients} Please add an ingredient and amount.
+    //       </Alert>
+    //     ) : null}
+    //   </AlertContainer>
+    // );
 
     return (
       <div className="form">
