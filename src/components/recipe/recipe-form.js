@@ -107,11 +107,16 @@ export class RecipeForm extends React.Component {
 
   // reduxForm already has a handleSubmit method, need to change it to onSubmit
   onSubmit = recipe => {
-    console.log('recipe', recipe, 'userId', this.props.userId);
     if (!this.props.userId) {
       return alert('Please login or register before adding to your menu & recipe book')
     }
-    if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
+
+    if (this.state.ingredients.length === 0 || this.state.categories.length === 0) {
+      console.log('please fill in ingredient and category!')
+      console.log('ingredient length', this.state.ingredients.length)
+      console.log('category length', this.state.categories.length)
+
+    } else if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
       this.props.dispatch(
         menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
       );
@@ -123,10 +128,10 @@ export class RecipeForm extends React.Component {
   };
 
   render() {
-    const { name, directions, categories, ingredients } = this.state;
-    console.log(this.props, categories);
+    const { name, directions, categories, ingredients, pristine, submitting, valid } = this.state;
 
     if(this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
+      console.log('redirect to categories')
       return <Redirect to='/your-menu' />
     }
 
@@ -134,6 +139,8 @@ export class RecipeForm extends React.Component {
     if (this.state.otherCheckbox) {
       newCategory = <NewCategory addNewCategory={this.addNewCategory} />;
     }
+
+    // alert to enter at least one ingredient and amount 
 
     // const alert = (
     //   <AlertContainer position="top-right">
@@ -144,6 +151,14 @@ export class RecipeForm extends React.Component {
     //     ) : null}
     //   </AlertContainer>
     // );
+
+
+    // alter to click on at least one category checkbox 
+
+    // alter for successful submit of new recipe, not just redirect to categories 
+    
+    // prevent submitting without above (ingredient and category filled out)
+
 
     return (
       <div className="form">
@@ -201,7 +216,9 @@ export class RecipeForm extends React.Component {
             handleIngredientChange={this.handleIngredientChange}
             deleteIngredientAndAmount={this.deleteIngredientAndAmount}
           />
-          <button type="submit">Submit</button>
+          <button type="submit"
+            disabled={!valid || pristine || submitting}
+          >Submit</button>
         </form>
 
         <br></br>

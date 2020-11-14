@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { outer as Router } from 'react-router-dom';
 import {YourMenu} from '../../components/your-menu';
 import "../../__tests__/setup/setupTests"
 import store from '../../store'
