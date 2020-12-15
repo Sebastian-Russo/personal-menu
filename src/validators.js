@@ -21,4 +21,8 @@ export const matches = field => (value, allValues) =>
         ? undefined
         : 'Does not match';
 
-// second argument provided by Redux Form, allValues. This is an object which contains the values entered into each form field. If the two fields don't match, then we return an error message. You can see this in use in the passwordConfirm field: Here we say that the passwordConfirm field should match the password field.
+// second argument provided by Redux Form, allValues. 
+// This is an object which contains the values entered into each form field. 
+// If the two fields don't match, then we return an error message. 
+//You can see this in use in the passwordConfirm field: 
+// Here we say that the passwordConfirm field should match the password field.

@@ -5,17 +5,11 @@ import { connect } from "react-redux";
 import 'react-toastify/dist/ReactToastify.css';
 
 class Alerts extends Component {
-  constructor(props){
-    super(props)
-    // this.state = { 
-    //   alertLogin: ''
-    // }
-  }
 
   componentDidMount() {
     // alert user to login before adding recipe
     if (!this.props.authToken) {
-      console.log('there is a user', this.props.authToken)
+      // console.log('there is a user', this.props.authToken)
       this.notify()
     }
   }

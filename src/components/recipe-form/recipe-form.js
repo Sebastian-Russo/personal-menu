@@ -107,13 +107,6 @@ export class RecipeForm extends React.Component {
       return alert('Please login or register before adding to your menu & recipe book')
     }
 
-    // WANT TO MAKE ALERT FOR PARTS OF FORM 
-    // if (this.state.ingredients.length === 0 || this.state.categories.length === 0) {
-    //   console.log('please fill in ingredient and category!')
-    //   console.log('ingredient length', this.state.ingredients.length)
-    //   console.log('category length', this.state.categories.length)
-    // } else 
-
     if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
       this.props.dispatch(
         menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
@@ -127,7 +120,7 @@ export class RecipeForm extends React.Component {
 
   render() {
 
-    const { name, directions, categories, ingredients, pristine, submitting, valid } = this.state;
+    const { name, directions, categories, ingredients } = this.state;
 
     if(this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
       alert("You have successfully added a new recipe")
@@ -182,6 +175,7 @@ export class RecipeForm extends React.Component {
           <Categories
             categories={categories}
             checkOrUncheck={this.checkOrUncheck}
+            validate={[required]}
           />
           <input
             name="other"
@@ -200,7 +194,7 @@ export class RecipeForm extends React.Component {
             deleteIngredientAndAmount={this.deleteIngredientAndAmount}
           />
           <button type="submit"
-            // disabled={!valid || pristine || submitting}
+            // disabled={this.props.pristine || this.props.submitting}
           >Submit</button>
         </form>
 
