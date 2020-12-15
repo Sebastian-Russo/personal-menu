@@ -1,6 +1,6 @@
 import React from 'react'; 
 import {connect} from 'react-redux';
-import {users} from '../actions';
+import {users} from '../../actions';
 import './grocery-list.css'
 
 export const deleteHandler = (i, dispatch) => {

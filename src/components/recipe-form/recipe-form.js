@@ -8,7 +8,7 @@ import RecipeInput from "./recipe-input";
 import NewCategory from "./new-category";
 import { required, nonEmpty } from "../../validators";
 import { menu, users } from "../../actions";
-import Alerts from '../alerts';
+import Alerts from '../helpers/alerts';
 import "./recipe-form.css";
 
 export class RecipeForm extends React.Component {

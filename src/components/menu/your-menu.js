@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import { menu } from '../actions';
+import { menu } from '../../actions';
 import './your-menu.css'
 
 export class YourMenu extends React.Component {

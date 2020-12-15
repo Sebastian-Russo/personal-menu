@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
-import RecipeForm from './recipe/recipe-form';
-import YourMenuItem from './your-menu-item';
-import YourMenu from './your-menu';
+import RecipeForm from './recipe-form/recipe-form';
+import YourMenuItem from './menu/your-menu-item';
+import YourMenu from './menu/your-menu';
 import Navbar from './navbar';
 import LandingPage from './landing-page';
-import YourMenuCategory from './your-menu-category';
+import YourMenuCategory from './menu/your-menu-category';
 import RegistrationForm from './registration-login-forms/registration-form';
-import LoginForm from './login-form';
-import GroceryList from './grocery-list';
+import LoginForm from './registration-login-forms/login-form';
+import GroceryList from './grocery-list/grocery-list';
 import { refreshAuthToken } from '../actions/auth';
 import Footer from "./footer";
 

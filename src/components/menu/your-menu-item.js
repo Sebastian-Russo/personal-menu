@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
-import RecipeForm from "./recipe/recipe-form";
+import RecipeForm from "../recipe-form/recipe-form";
 import { Alert, AlertContainer } from "react-bs-notifier";
-import { menu, users } from "../actions";
+import { menu, users } from "../../actions";
 import "./your-menu-item.css";
 // *** AKA RECIPE COMPONENT ***
 

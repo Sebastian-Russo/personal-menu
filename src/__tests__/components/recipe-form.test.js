@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import { RecipeForm } from '../../components/recipe/recipe-form';
+import { RecipeForm } from '../../components/recipe-form/recipe-form';
 import "../../__tests__/setup/setupTests"
 import store from '../../store'
 
