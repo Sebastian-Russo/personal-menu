@@ -1,6 +1,6 @@
 export const loadAuthToken = () => {
     const user = localStorage.getItem('user');
-    console.log('getting user')
+    // console.log('getting user')
     return JSON.parse(user) //  returns { authToken: <whatever the token is>, userId: <whatever the userId is> }
 };
 

@@ -21,21 +21,21 @@ export default function authReducer(state = initialState, action) {
     answer = Object.assign({}, state, {
       authToken: action.authToken,
     });
-    console.log("SET_AUTH_TOKEN", action, answer);
+    // console.log("SET_AUTH_TOKEN", action, answer);
     return answer;
   } else if (action.type === CLEAR_AUTH) {
     answer = Object.assign({}, state, {
       authToken: null,
       id: null,
     });
-    console.log("CLEAR_AUTH", action, answer);
+    // console.log("CLEAR_AUTH", action, answer);
     return answer;
   } else if (action.type === AUTH_REQUEST) {
     answer = Object.assign({}, state, {
       loading: true,
       error: null,
     });
-    console.log("AUTH_REQUEST", action, answer);
+    // console.log("AUTH_REQUEST", action, answer);
     return answer;
   } else if (action.type === AUTH_SUCCESS) {
     answer = Object.assign({}, state, {
@@ -44,14 +44,14 @@ export default function authReducer(state = initialState, action) {
       authToken: action.authToken,
       username: action.currentUser.username,
     });
-    console.log("AUTH_SUCCESS", action, answer);
+    // console.log("AUTH_SUCCESS", action, answer);
     return answer;
   } else if (action.type === AUTH_ERROR) {
     answer = Object.assign({}, state, {
       loading: false,
       error: action.error,
     });
-    console.log("AUTH_ERROR", action, answer);
+    // console.log("AUTH_ERROR", action, answer);
     return answer;
   }
 

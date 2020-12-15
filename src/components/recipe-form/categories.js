@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 export function Categories(props) {
   const { categoryList, categories } = props;
-  console.log(categoryList, categories)
+  // console.log(categoryList, categories)
       return categoryList.map((category, i) => {
           const checked = categories.includes(category);
           const label = category[0].toUpperCase() + category.slice(1);

@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 class Alerts extends Component {
   constructor(props){
     super(props)
-    this.state = { 
-      alertLogin: ''
-    }
+    // this.state = { 
+    //   alertLogin: ''
+    // }
   }
 
   componentDidMount() {
@@ -18,12 +18,16 @@ class Alerts extends Component {
       console.log('there is a user', this.props.authToken)
       this.notify()
     }
+    // if (this.props.alertSuccess.lenght >= 1) {
+    //   console.log('ALERT!', this.props.alertSuccess)
+    // }
     
   }
   notify = () => toast("Please login before adding a recipe!");
 
 
   render() {
+    console.log(this.props)
 
     return ( 
     <div>

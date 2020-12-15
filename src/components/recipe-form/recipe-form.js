@@ -29,7 +29,6 @@ export class RecipeForm extends React.Component {
   // checks if props are coming from your-menu-item because of edit recipe button
   componentDidMount() {
     if (this.props.menuItem) {
-      console.log("edit menu item", this.props);
       const { menuItem } = this.props;
       const { name, ingredients, directions, categories, id } = menuItem;
       this.setState({
@@ -46,7 +45,6 @@ export class RecipeForm extends React.Component {
     this.setState({
       ingredients: [...this.state.ingredients, ingredient]
     });
-    console.log(this.state);
   };
 
   deleteIngredientAndAmount = (e, id) => {
@@ -68,7 +66,6 @@ export class RecipeForm extends React.Component {
     e.preventDefault();
     const { ingredients } = this.state;
     ingredients[index][property] = e.target.value;
-    console.log("new new", ingredients);
     this.setState({
       ingredients
     });
@@ -79,7 +76,6 @@ export class RecipeForm extends React.Component {
     const category = event.target.value;
     const { categories } = this.state;
     if (categories.includes(category)) {
-      console.log("category included");
       this.setState({
         categories: categories.filter(cat => cat !== category)
       });
@@ -107,17 +103,18 @@ export class RecipeForm extends React.Component {
 
   // reduxForm already has a handleSubmit method, need to change it to onSubmit
   onSubmit = recipe => {
-    console.log('submit clicked')
     if (!this.props.userId) {
       return alert('Please login or register before adding to your menu & recipe book')
     }
 
-    if (this.state.ingredients.length === 0 || this.state.categories.length === 0) {
-      console.log('please fill in ingredient and category!')
-      console.log('ingredient length', this.state.ingredients.length)
-      console.log('category length', this.state.categories.length)
+    // WANT TO MAKE ALERT FOR PARTS OF FORM 
+    // if (this.state.ingredients.length === 0 || this.state.categories.length === 0) {
+    //   console.log('please fill in ingredient and category!')
+    //   console.log('ingredient length', this.state.ingredients.length)
+    //   console.log('category length', this.state.categories.length)
+    // } else 
 
-    } else if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
+    if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
       this.props.dispatch(
         menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
       );
@@ -133,7 +130,7 @@ export class RecipeForm extends React.Component {
     const { name, directions, categories, ingredients, pristine, submitting, valid } = this.state;
 
     if(this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
-      console.log('redirect to categories')
+      alert("You have successfully added a new recipe")
       return <Redirect to='/your-menu' />
     }
 
