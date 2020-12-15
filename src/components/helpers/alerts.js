@@ -13,15 +13,11 @@ class Alerts extends Component {
   }
 
   componentDidMount() {
-    // alert to login 
+    // alert user to login before adding recipe
     if (!this.props.authToken) {
       console.log('there is a user', this.props.authToken)
       this.notify()
     }
-    // if (this.props.alertSuccess.lenght >= 1) {
-    //   console.log('ALERT!', this.props.alertSuccess)
-    // }
-    
   }
   notify = () => toast("Please login before adding a recipe!");
 
