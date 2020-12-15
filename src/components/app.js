@@ -7,7 +7,7 @@ import YourMenu from './your-menu';
 import Navbar from './navbar';
 import LandingPage from './landing-page';
 import YourMenuCategory from './your-menu-category';
-import RegistrationForm from './registration-form';
+import RegistrationForm from './registration-login-forms/registration-form';
 import LoginForm from './login-form';
 import GroceryList from './grocery-list';
 import { refreshAuthToken } from '../actions/auth';
