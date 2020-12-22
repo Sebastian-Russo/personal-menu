@@ -38,9 +38,9 @@ export function Navbar(props){
           <label htmlFor="check" className="hamburger-button"><i className="fas fa-bars"></i></label>
           <ul className="navbar-list">
             <div><Link to="/" className="nav-list-items"><i className="fas fa-home"></i>Home</Link></div>
-            <div><Link to="/your-menu" className="nav-list-items"><i className="fas fa-utensils"></i>  Your Menu</Link></div>
-            <div><Link to="/add-recipe" className="nav-list-items"><i className="fas fa-book-open"></i>  Add Recipe</Link></div>
-            <div><Link to="/grocery-list" className="nav-list-items"><i className="fas fa-th-list"></i>  Grocery List</Link></div>
+            <div><Link to="/your-menu" className="nav-list-items"><i className="fas fa-utensils"></i>Your Menu</Link></div>
+            <div><Link to="/add-recipe" className="nav-list-items"><i className="fas fa-book-open"></i>Add Recipe</Link></div>
+            <div><Link to="/grocery-list" className="nav-list-items"><i className="fas fa-th-list"></i>Grocery List</Link></div>
             <div>{userAction}</div>
           </ul>
         </nav>

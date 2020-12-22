@@ -101,8 +101,7 @@ export class RecipeForm extends React.Component {
     });
   };
 
-  // reduxForm already has a handleSubmit method, need to change it to onSubmit
-  onSubmit = recipe => {
+  onSubmit = values => {
     if (!this.props.userId) {
       return alert('Please login or register before adding to your menu & recipe book')
     }
@@ -204,7 +203,7 @@ export class RecipeForm extends React.Component {
             deleteIngredientAndAmount={this.deleteIngredientAndAmount}
           />
           <button type="submit"
-            disabled={!valid}
+            disabled={this.props.valid}
             // disabled={this.props.pristine || this.props.submitting}
           >Submit</button>
         </form>
