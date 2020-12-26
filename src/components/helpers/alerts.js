@@ -17,7 +17,7 @@ class Alerts extends Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
 
     return ( 
     <div>
