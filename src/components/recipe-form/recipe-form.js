@@ -126,8 +126,18 @@ export class RecipeForm extends React.Component {
 
   render() {
 
-    const { name, directions, categories, ingredients, otherCheckbox } = this.state;
-    const { submitSucceeded, handleSubmit, valid } = this.props;
+    const { 
+      name, 
+      directions, 
+      categories, 
+      ingredients, 
+      otherCheckbox 
+    } = this.state;
+    const { 
+      submitSucceeded, 
+      handleSubmit, 
+      // valid 
+    } = this.props;
     console.log(this.props)
 
     if (submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
