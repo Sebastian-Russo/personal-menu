@@ -43,7 +43,7 @@ export const addFromUserProfile = (categoryList, groceryList) => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
   const { user } = jwtDecode(authToken);
-  console.log(user);
+  // console.log(user);
   dispatch(authSuccess(authToken, user)); // authSuccess(authToken, decodedToken.user)
   dispatch(addFromUserProfile(user.categoryList, user.groceryList));
   saveAuthToken(authToken, user);

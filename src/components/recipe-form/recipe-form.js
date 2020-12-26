@@ -6,7 +6,7 @@ import Categories from "./categories";
 import Ingredients from "./ingredients";
 import RecipeInput from "./recipe-input";
 import NewCategory from "./new-category";
-import { required, nonEmpty } from "../../validators";
+// import { required, nonEmpty } from "../../validators";
 import { menu, users } from "../../actions";
 import Alerts from '../helpers/alerts';
 import "./recipe-form.css";
@@ -101,8 +101,7 @@ export class RecipeForm extends React.Component {
     });
   };
 
-  // reduxForm already has a handleSubmit method, need to change it to onSubmit
-  onSubmit = recipe => {
+  onSubmit = values => {
     if (!this.props.userId) {
       return alert('Please login or register before adding to your menu & recipe book')
     }
@@ -118,27 +117,35 @@ export class RecipeForm extends React.Component {
     }
   };
 
+  required = value => {
+    if (!value || value === '') {
+      return 'This field is required';
+    }
+    return undefined;
+  }
+
   render() {
 
-    const { name, directions, categories, ingredients } = this.state;
+    const { name, directions, categories, ingredients, otherCheckbox } = this.state;
+    const { submitSucceeded, handleSubmit, valid } = this.props;
+    console.log(this.props)
 
-    if(this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
+    if (submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
       alert("You have successfully added a new recipe")
       return <Redirect to='/your-menu' />
     }
 
     let newCategory;
-    if (this.state.otherCheckbox) {
+    if (otherCheckbox) {
       newCategory = <NewCategory addNewCategory={this.addNewCategory} />;
     }
-
 
 
     return (
       <div className="form">
         <Alerts />
 
-        <form onSubmit={this.props.handleSubmit(recipe => this.onSubmit(recipe))}>
+        <form onSubmit={handleSubmit(recipe => this.onSubmit(recipe))}>
           <h2>Add a new favorite recipe!</h2>
 
           <label htmlFor="name"> Recipe Name </label>
@@ -148,8 +155,9 @@ export class RecipeForm extends React.Component {
             type="text"
             label="Recipe Name"
             value={name}
-            validate={[required, nonEmpty]}
-            required
+            validate={[this.required]}
+            // validate={[required, nonEmpty]}
+            // required
             onChange={this.onChange}
           />
 
@@ -164,7 +172,7 @@ export class RecipeForm extends React.Component {
             cols="25"
             label="Directions"
             value={directions}
-            validate={[required, nonEmpty]}
+            // validate={[required, nonEmpty]}
             required
             onChange={this.onChange}
           />
@@ -175,7 +183,8 @@ export class RecipeForm extends React.Component {
           <Categories
             categories={categories}
             checkOrUncheck={this.checkOrUncheck}
-            validate={[required]}
+            // validate={[required]}
+            required
           />
           <input
             name="other"
@@ -194,6 +203,7 @@ export class RecipeForm extends React.Component {
             deleteIngredientAndAmount={this.deleteIngredientAndAmount}
           />
           <button type="submit"
+            // disabled={this.props.valid}
             // disabled={this.props.pristine || this.props.submitting}
           >Submit</button>
         </form>
