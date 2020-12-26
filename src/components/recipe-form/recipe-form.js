@@ -141,7 +141,6 @@ export class RecipeForm extends React.Component {
     }
 
 
-
     return (
       <div className="form">
         <Alerts />
@@ -185,6 +184,7 @@ export class RecipeForm extends React.Component {
             categories={categories}
             checkOrUncheck={this.checkOrUncheck}
             // validate={[required]}
+            required
           />
           <input
             name="other"
@@ -203,7 +203,7 @@ export class RecipeForm extends React.Component {
             deleteIngredientAndAmount={this.deleteIngredientAndAmount}
           />
           <button type="submit"
-            disabled={this.props.valid}
+            // disabled={this.props.valid}
             // disabled={this.props.pristine || this.props.submitting}
           >Submit</button>
         </form>
