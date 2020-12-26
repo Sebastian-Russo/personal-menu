@@ -3,22 +3,21 @@ body {
   background-size: cover;
   background-position: center;
   margin: auto;
-  box-shadow: 0px 0px 10px 2px;
+  /* box-shadow: 0px 0px 10px 2px; */
 }
- 
+
 main {
   font-family: "Dancing Script";
   flex-basis: 80%;
   background-color: beige;
   opacity: 0.7;
   padding: 20px;
-  margin: auto;
   border-radius: 15px;
-  overflow: scroll;
   width: 80%;
   margin: auto;
+  margin-top: 10vh;
   text-align: center;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 p {
@@ -29,7 +28,7 @@ p {
 button {
   color: black;
   background-color: beige;
-  font-family: 'Bubbler One', sans-serif;
+  font-family: "Bubbler One", sans-serif;
   font-size: 16px;
   font-weight: bold;
   padding: 8px 16px;
@@ -40,7 +39,7 @@ button {
 button:hover {
   color: rgb(0, 255, 255);
   background-color: white;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 a {
@@ -51,6 +50,6 @@ a {
 }
 
 a:hover {
-  color:#ffffff;
+  color: #ffffff;
   transform: scale(1.2);
 }

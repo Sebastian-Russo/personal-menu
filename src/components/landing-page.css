@@ -1,59 +1,69 @@
 .container-home {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
 }
 
-.container-home div{
-    border: 1px #ccc solid;
-    padding: 10px;
-    margin: 2px;
-    flex-basis: 33.33%;
-    font-family: 'Bubbler One', sans-serif;
+.container-home div {
+  border: 1px #ccc solid;
+  padding: 10px;
+  margin: 2px;
+  flex-basis: 33.33%;
+  font-family: "Bubbler One", sans-serif;
+}
+
+.container-home > div > p {
+  font-size: large;
+  line-height: 1.4;
 }
 
 .container-bottom {
-    padding-top: 20px;
-    margin: auto;
+  padding-top: 20px;
+  margin: auto;
 }
 
 .title-home {
-    margin: auto;
-    margin-bottom: 10px;
-    text-align: center;
+  margin: auto;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .link:hover {
-    color: white;
+  color: white;
 }
 
 .box-quotes {
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Bubbler One', sans-serif;
-    font-size: 140%;
-    margin-top: 15px;
-    transition: ease-in-out;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  font-family: "Bubbler One", sans-serif;
+  font-size: 140%;
+  margin-top: 15px;
+  transition: ease-in-out;
+  margin-bottom: 10vh;
 }
 
 p.links {
-    font-size: 40px;
+  font-size: 40px;
 }
 
+@media (max-width: 888px) {
+  .container-home {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-1 {
+    order: 1;
+  }
+  .col-2 {
+    order: 2;
+  }
+  .col-3 {
+    order: 3;
+  }
 
-@media (max-width: 700px) {
-    .container-home {
-        display: flex;
-        flex-direction: column;
-    }
-    .landing-page-menu{
-        order: 1;
-    }
-    .landing-page-recipe-book {
-        order: 2;
-    }
-    .landing-page-grocery-list {
-        order: 3;
-    }
-} 
+  .box-quotes {
+    margin-bottom: 30vh;
+  }
+}
