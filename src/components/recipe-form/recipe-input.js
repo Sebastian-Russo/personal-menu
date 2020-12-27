@@ -28,12 +28,17 @@ export default class RecipeInput extends React.Component {
 
     handleClick = (e) => {
         e.preventDefault();
-        this.props.addIngredientAndAmount(this.state);
-        // below is to clear the amount and ingredient after each click 
-        this.setState({
-            amount: "",
-            ingredient: ""
-        })
+        if (this.state.ingredient && this.state.amount) {
+            this.props.addIngredientAndAmount(this.state);
+            // below is to clear the amount and ingredient after each click 
+            this.setState({
+                amount: "",
+                ingredient: ""
+            })
+        } else {
+            console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
+            this.props.alertEmpty()
+        }
     }
 
     render() {

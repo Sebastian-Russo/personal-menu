@@ -46,11 +46,22 @@ export class RecipeForm extends React.Component {
       ingredients: [...this.state.ingredients, ingredient]
     });
   };
+  alertEmpty = () => {
+    console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
+  }
 
-  deleteIngredientAndAmount = (e, id) => {
+  deleteIngredientAndAmount = (e, id, index) => {
+    console.log('index', index)
     this.setState({
-      ingredients: this.state.ingredients.filter(ingredient => {
-        return ingredient._id !== id;
+      ingredients: this.state.ingredients.filter((ingredient, i) => {
+          // check if there is an _id created by mongoDB, happens user is editing recipe and ingredients were already saved previously
+          if (ingredient._id) {
+            return ingredient._id !== id;
+          // if no _id created, it's a new pending recipe, use index 
+          } else {
+            console.log('this.state.ingredients', this.state.ingredients)
+            return i !== index;
+        }
       })
     });
   };
@@ -103,7 +114,7 @@ export class RecipeForm extends React.Component {
 
   onSubmit = values => {
     if (!this.props.userId) {
-      return alert('Please login or register before adding to your menu & recipe book')
+      return alert('Alert! Please login or register before adding to your menu & recipe book')
     }
 
     if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
@@ -126,6 +137,8 @@ export class RecipeForm extends React.Component {
 
   render() {
 
+    console.log(this.state.ingredients[0])
+
     const { 
       name, 
       directions, 
@@ -138,10 +151,10 @@ export class RecipeForm extends React.Component {
       handleSubmit, 
       // valid 
     } = this.props;
-    console.log(this.props)
+    // console.log(this.props)
 
     if (submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
-      alert("You have successfully added a new recipe")
+      alert("Alert! You have successfully added a new recipe")
       return <Redirect to='/your-menu' />
     }
 
@@ -171,7 +184,10 @@ export class RecipeForm extends React.Component {
             onChange={this.onChange}
           />
 
-          <RecipeInput addIngredientAndAmount={this.addIngredientAndAmount} />
+          <RecipeInput 
+            addIngredientAndAmount={this.addIngredientAndAmount} 
+            alertEmpty={this.alertEmpty}
+          />
 
           <label htmlFor="directions"> Directions </label>
           <textarea

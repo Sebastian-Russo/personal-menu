@@ -9,16 +9,15 @@ class Alerts extends Component {
   componentDidMount() {
     // alert user to login before adding recipe
     if (!this.props.authToken) {
-      // console.log('there is a user', this.props.authToken)
       this.notify()
     }
+    
   }
   notify = () => toast("Please login before adding a recipe!");
 
 
   render() {
-    // console.log(this.props)
-
+    
     return ( 
     <div>
       <ToastContainer />
@@ -34,13 +33,8 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Alerts);
 
 
+// alert to enter at least one ingredient and amount (or make required before submit)
 
-// alert to register/login before they can submit a recipe 
-
-// alert to enter at least one ingredient and amount 
-
-// alter to click on at least one category checkbox 
-
-// alter for successful submit of new recipe, not just redirect to categories 
+// alert to click on at least one category checkbox (or make required before submit)
 
 // prevent submitting without above (ingredient and category filled out)
