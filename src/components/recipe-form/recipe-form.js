@@ -20,7 +20,7 @@ export class RecipeForm extends React.Component {
       ingredients: [],
       directions: "",
       categories: [],
-      otherCheckbox: false,
+      toggleCheckbox: false,
       redirect: false,
       checked: false,
       alert: false
@@ -106,9 +106,9 @@ export class RecipeForm extends React.Component {
   };
 
   // shows input box to create new category checkbox
-  otherCheckbox = () => {
+  toggleCheckbox = () => {
     this.setState({
-      otherCheckbox: !this.state.otherCheckbox
+      toggleCheckbox: !this.state.toggleCheckbox
     });
   };
 
@@ -128,12 +128,12 @@ export class RecipeForm extends React.Component {
     }
   };
 
-  required = value => {
-    if (!value || value === '') {
-      return 'This field is required';
-    }
-    return undefined;
-  }
+  // required = value => {
+  //   if (!value || value === '') {
+  //     return 'This field is required';
+  //   }
+  //   return undefined;
+  // }
 
   render() {
 
@@ -144,7 +144,7 @@ export class RecipeForm extends React.Component {
       directions, 
       categories, 
       ingredients, 
-      otherCheckbox 
+      toggleCheckbox 
     } = this.state;
     const { 
       submitSucceeded, 
@@ -159,7 +159,7 @@ export class RecipeForm extends React.Component {
     }
 
     let newCategory;
-    if (otherCheckbox) {
+    if (toggleCheckbox) {
       newCategory = <NewCategory addNewCategory={this.addNewCategory} />;
     }
 
@@ -169,72 +169,62 @@ export class RecipeForm extends React.Component {
         <Alerts />
 
         <form onSubmit={handleSubmit(recipe => this.onSubmit(recipe))}>
-          <h2>Add a new favorite recipe!</h2>
+          <h1>Add a new favorite recipe!</h1>
 
-          <label htmlFor="name"> Recipe Name </label>
-          <input
-            name="name"
-            id="name"
-            type="text"
-            label="Recipe Name"
-            value={name}
-            validate={[this.required]}
-            // validate={[required, nonEmpty]}
-            // required
-            onChange={this.onChange}
-          />
+            <label htmlFor="name">Recipe Name *</label>
+            <input
+              name="name"
+              id="name"
+              type="text"
+              label="Recipe Name"
+              value={name}
+              onChange={this.onChange}
+              placeholder=""
+              />
 
-          <RecipeInput 
-            addIngredientAndAmount={this.addIngredientAndAmount} 
-            alertEmpty={this.alertEmpty}
-          />
+            <h2>"Create" & "Select" one or more categories *: </h2>
+            <Categories
+              categories={categories}
+              checkOrUncheck={this.checkOrUncheck}
+              required
+            />
+            <input
+              name="other"
+              id="other"
+              type="checkbox"
+              value={this.props.categories}
+              onChange={() => this.toggleCheckbox()}
+            />
+            <label htmlFor="other">New Category</label>
+            {newCategory}
 
-          <label htmlFor="directions"> Directions </label>
-          <textarea
-            name="directions"
-            id="directions"
-            type="text"
-            rows="4"
-            cols="25"
-            label="Directions"
-            value={directions}
-            // validate={[required, nonEmpty]}
-            required
-            onChange={this.onChange}
-          />
-          <br></br>
-          <br></br>
+            <h2>Add each ingredient and amount needed *:</h2>
+            <RecipeInput 
+              addIngredientAndAmount={this.addIngredientAndAmount} 
+              alertEmpty={this.alertEmpty}
+            />
 
-          <h3>Categories</h3>
-          <Categories
-            categories={categories}
-            checkOrUncheck={this.checkOrUncheck}
-            // validate={[required]}
-            required
-          />
-          <input
-            name="other"
-            id="other"
-            type="checkbox"
-            value={this.props.categories}
-            onChange={() => this.otherCheckbox()}
-          />
-          <label htmlFor="other">New Category</label>
-          {newCategory}
-          <br></br>
-          <br></br>
-          <Ingredients
-            ingredients={ingredients}
-            handleIngredientChange={this.handleIngredientChange}
-            deleteIngredientAndAmount={this.deleteIngredientAndAmount}
-          />
-          <button type="submit"
-            // disabled={this.props.valid}
-            // disabled={this.props.pristine || this.props.submitting}
-          >Submit</button>
+            <label htmlFor="directions">Directions *</label>
+            <textarea
+              name="directions"
+              id="directions"
+              type="text"
+              rows="4"
+              cols="25"
+              label="Directions"
+              value={directions}
+              required
+              onChange={this.onChange}
+            />
+
+            <Ingredients
+              ingredients={ingredients}
+              handleIngredientChange={this.handleIngredientChange}
+              deleteIngredientAndAmount={this.deleteIngredientAndAmount}
+            />
+            <button type="submit"
+            >Create Recipe</button>
         </form>
-
-        <br></br>
       </div>
     );
   }

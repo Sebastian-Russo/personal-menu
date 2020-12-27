@@ -19,14 +19,14 @@ export default class RecipeInput extends React.Component {
         }
     }
 
-    handleChange = (e) => {
+    handleChange = e => {
         const {value, name} = e.target;
         this.setState({
             [name]: value
         })
     }
 
-    handleClick = (e) => {
+    handleClick = e => {
         e.preventDefault();
         if (this.state.ingredient && this.state.amount) {
             this.props.addIngredientAndAmount(this.state);
@@ -44,7 +44,7 @@ export default class RecipeInput extends React.Component {
     render() {
         return (
             <div className="form-input">
-                <label htmlFor="ingredient"> Ingredient </label>
+                <label htmlFor="ingredient">Ingredient *</label>
                 <input 
                     name="ingredient"
                     id="ingredient"
@@ -52,7 +52,7 @@ export default class RecipeInput extends React.Component {
                     value={this.state.ingredient} // controlled component when using value in input 
                     onChange={this.handleChange} 
                 />
-                <label htmlFor="amount"> Amount </label>
+                <label htmlFor="amount">Amount *</label>
                 <input 
                     name="amount"
                     id="amount"
