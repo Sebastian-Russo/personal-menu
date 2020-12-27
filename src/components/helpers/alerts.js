@@ -13,11 +13,12 @@ class Alerts extends Component {
     }
     
   }
-  notify = () => toast("Please login before adding a recipe!");
 
+  notify = (num) => { 
+      return toast("Please login before adding a recipe!");
+  }
 
   render() {
-    
     return ( 
     <div>
       <ToastContainer />
@@ -33,8 +34,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Alerts);
 
 
-// alert to enter at least one ingredient and amount (or make required before submit)
-
 // alert to click on at least one category checkbox (or make required before submit)
-
 // prevent submitting without above (ingredient and category filled out)

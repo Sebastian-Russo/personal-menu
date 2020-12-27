@@ -23,7 +23,8 @@ export class RecipeForm extends React.Component {
       toggleCheckbox: false,
       redirect: false,
       checked: false,
-      alert: false
+      alert: false,
+      alertNum: ""
     };
   }
   // checks if props are coming from your-menu-item because of edit recipe button
@@ -46,9 +47,10 @@ export class RecipeForm extends React.Component {
       ingredients: [...this.state.ingredients, ingredient]
     });
   };
-  alertEmpty = () => {
-    console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
-  }
+  // alertEmpty = () => {
+  //   // console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
+  //   this.setState({ alertNum: 2 })
+  // }
 
   deleteIngredientAndAmount = (e, id, index) => {
     console.log('index', index)
@@ -128,16 +130,7 @@ export class RecipeForm extends React.Component {
     }
   };
 
-  // required = value => {
-  //   if (!value || value === '') {
-  //     return 'This field is required';
-  //   }
-  //   return undefined;
-  // }
-
   render() {
-
-    console.log(this.state.ingredients[0])
 
     const { 
       name, 
@@ -166,7 +159,7 @@ export class RecipeForm extends React.Component {
 
     return (
       <div className="form">
-        <Alerts />
+        <Alerts alertNum={this.alertNum} />
 
         <form onSubmit={handleSubmit(recipe => this.onSubmit(recipe))}>
           <h1>Add a new favorite recipe!</h1>
@@ -179,14 +172,13 @@ export class RecipeForm extends React.Component {
               label="Recipe Name"
               value={name}
               onChange={this.onChange}
-              placeholder=""
-              />
+              required
+            />
 
             <h2>"Create" & "Select" one or more categories *: </h2>
             <Categories
               categories={categories}
               checkOrUncheck={this.checkOrUncheck}
-              required
             />
             <input
               name="other"
@@ -201,7 +193,7 @@ export class RecipeForm extends React.Component {
             <h2>Add each ingredient and amount needed *:</h2>
             <RecipeInput 
               addIngredientAndAmount={this.addIngredientAndAmount} 
-              alertEmpty={this.alertEmpty}
+              // alertEmpty={this.alertEmpty}
             />
 
             <label htmlFor="directions">Directions *</label>

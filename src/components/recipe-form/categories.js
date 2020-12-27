@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 export function Categories(props) {
   const { categoryList, categories } = props;
-  // console.log(categoryList, categories)
+  // console.log('category props', props)
       return categoryList.map((category, i) => {
           const checked = categories.includes(category);
           const label = category[0].toUpperCase() + category.slice(1);
@@ -16,9 +16,9 @@ export function Categories(props) {
                         type="checkbox"
                         value={category}
                         checked={checked}
-                        onChange={(e) => props.checkOrUncheck(e)} /> 
+                        onChange={(e) => props.checkOrUncheck(e)} 
+                      /> 
                     <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
-                    <br></br>
                 </div>
             )
       })

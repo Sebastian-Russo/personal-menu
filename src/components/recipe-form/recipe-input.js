@@ -1,4 +1,6 @@
 import React from 'react'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class RecipeInput extends React.Component {
     constructor(props){
@@ -6,7 +8,8 @@ export default class RecipeInput extends React.Component {
  
         this.state = {                 
             ingredient: "",
-            amount: ""
+            amount: "",
+            alertNum: ""
         }
     }
     // checks if props are coming from edit button 
@@ -25,7 +28,7 @@ export default class RecipeInput extends React.Component {
             [name]: value
         })
     }
-
+    
     handleClick = e => {
         e.preventDefault();
         if (this.state.ingredient && this.state.amount) {
@@ -36,12 +39,12 @@ export default class RecipeInput extends React.Component {
                 ingredient: ""
             })
         } else {
-            console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
-            this.props.alertEmpty()
+            toast('Please fill in empty ingredient and/or amount before adding to list');
         }
     }
 
     render() {
+        
         return (
             <div className="form-input">
                 <label htmlFor="ingredient">Ingredient *</label>
@@ -61,7 +64,9 @@ export default class RecipeInput extends React.Component {
                     onChange={this.handleChange} 
                     />
                 <button type="button" className="button" onClick={this.handleClick}>Add Amount of Ingredient</button>
+                <ToastContainer />
             </div>
         );
     }
 }
+
