@@ -2,6 +2,8 @@ import React from "react";
 import { reduxForm, focus } from "redux-form";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Categories from "./categories";
 import Ingredients from "./ingredients";
 import RecipeInput from "./recipe-input";
@@ -47,10 +49,6 @@ export class RecipeForm extends React.Component {
       ingredients: [...this.state.ingredients, ingredient]
     });
   };
-  // alertEmpty = () => {
-  //   // console.log('Alert! Please fill in empty ingredient and/or amount before adding to list')
-  //   this.setState({ alertNum: 2 })
-  // }
 
   deleteIngredientAndAmount = (e, id, index) => {
     console.log('index', index)
@@ -116,7 +114,7 @@ export class RecipeForm extends React.Component {
 
   onSubmit = values => {
     if (!this.props.userId) {
-      return alert('Alert! Please login or register before adding to your menu & recipe book')
+      return toast('Alert! Please login or register before adding to your menu & recipe book')
     }
 
     if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
@@ -142,13 +140,11 @@ export class RecipeForm extends React.Component {
     const { 
       submitSucceeded, 
       handleSubmit, 
-      // valid 
     } = this.props;
-    // console.log(this.props)
 
     if (submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
-      alert("Alert! You have successfully added a new recipe")
-      return <Redirect to='/your-menu' />
+      toast("Alert! You have successfully added a new recipe")
+      // return <Redirect to='/your-menu' />
     }
 
     let newCategory;
@@ -193,7 +189,6 @@ export class RecipeForm extends React.Component {
             <h2>Add each ingredient and amount needed *:</h2>
             <RecipeInput 
               addIngredientAndAmount={this.addIngredientAndAmount} 
-              // alertEmpty={this.alertEmpty}
             />
 
             <label htmlFor="directions">Directions *</label>
@@ -217,6 +212,7 @@ export class RecipeForm extends React.Component {
             <button type="submit"
             >Create Recipe</button>
         </form>
+        <ToastContainer />
       </div>
     );
   }
