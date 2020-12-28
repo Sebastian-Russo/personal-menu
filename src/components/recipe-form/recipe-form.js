@@ -172,10 +172,6 @@ export class RecipeForm extends React.Component {
             />
 
             <h2>"Create" & "Select" one or more categories *: </h2>
-            <Categories
-              categories={categories}
-              checkOrUncheck={this.checkOrUncheck}
-            />
             <input
               name="other"
               id="other"
@@ -183,8 +179,12 @@ export class RecipeForm extends React.Component {
               value={this.props.categories}
               onChange={() => this.toggleCheckbox()}
             />
-            <label htmlFor="other">New Category</label>
+            <label htmlFor="other" className="new-category" >New Category</label>
             {newCategory}
+            <Categories
+              categories={categories}
+              checkOrUncheck={this.checkOrUncheck}
+            />
 
             <h2>Add each ingredient and amount needed *:</h2>
             <RecipeInput 

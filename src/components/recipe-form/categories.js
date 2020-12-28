@@ -8,9 +8,9 @@ export function Categories(props) {
           const checked = categories.includes(category);
           const label = category[0].toUpperCase() + category.slice(1);
             return (
-                <div key={`${category}-${i}`} className="ingredient-list">
+                <div key={`${category}-${i}`} 
+                     className="category-list" >
                     <input 
-                        className="categories-input"
                         name={category}
                         id={category}
                         type="checkbox"
@@ -18,7 +18,10 @@ export function Categories(props) {
                         checked={checked}
                         onChange={(e) => props.checkOrUncheck(e)} 
                       /> 
-                    <label htmlFor={category}>{label.replace(/-/g, ' ')}</label>
+                    <label 
+                    className="category-list"
+                    htmlFor={category}>{label.replace(/-/g, ' ')}
+                    </label>
                 </div>
             )
       })

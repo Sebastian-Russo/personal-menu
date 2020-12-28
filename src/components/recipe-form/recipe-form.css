@@ -26,3 +26,20 @@ form > h2 {
   border: none;
   box-shadow: none;
 }
+
+.category-list input {
+  width: 20px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.new-category {
+  color: red;
+}
+
+.category-list label {
+  width: 10px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}

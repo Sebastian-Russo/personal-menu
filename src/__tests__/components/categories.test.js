@@ -33,7 +33,7 @@ describe('Categories', () => {
       />
     )
 
-    const checked = wrapper.find('.ingredient-list')
+    const checked = wrapper.find('.category-list')
 
     expect(checked).toHaveLength(4)
   })
