@@ -1,14 +1,13 @@
 import React from "react";
 import { reduxForm, focus } from "redux-form";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Categories from "./categories";
 import Ingredients from "./ingredients";
 import RecipeInput from "./recipe-input";
 import NewCategory from "./new-category";
-// import { required, nonEmpty } from "../../validators";
 import { menu, users } from "../../actions";
 import Alerts from '../helpers/alerts';
 import "./recipe-form.css";
@@ -112,19 +111,30 @@ export class RecipeForm extends React.Component {
     });
   };
 
-  onSubmit = values => {
+  onSubmit = () => {
+    // checks if there's a user signed in 
     if (!this.props.userId) {
       return toast('Alert! Please login or register before adding to your menu & recipe book')
     }
 
-    if (this.state.id) {  // checks if there's a recipe, then edit rather than add new 
+    // checks if there's a recipe, if truthy, edit receipe 
+    if (this.state.id) {  
       this.props.dispatch(
         menu.updateMenuItem(this.props.authToken, this.state.id, this.state)
       );
+    // check if checkbox aka category is not selected
+    } else if (this.state.categories.length === 0) {
+      return toast('Alert! Please create and / or select at least one category')
+
+    // add new recipe 
     } else {
       const recipe = this.state;
       recipe.userId = this.props.userId; // add user id to new recipe 
       this.props.dispatch(menu.addRecipe(this.props.authToken, recipe));
+
+      if (this.props.submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
+        toast("Alert! You have successfully added a new recipe")
+      }
     }
   };
 
@@ -138,14 +148,8 @@ export class RecipeForm extends React.Component {
       toggleCheckbox 
     } = this.state;
     const { 
-      submitSucceeded, 
       handleSubmit, 
     } = this.props;
-
-    if (submitSucceeded) {  // submitSucceeded is a prop of redux form, boolean: true, and succeed to submit 
-      toast("Alert! You have successfully added a new recipe")
-      // return <Redirect to='/your-menu' />
-    }
 
     let newCategory;
     if (toggleCheckbox) {
@@ -191,7 +195,7 @@ export class RecipeForm extends React.Component {
               addIngredientAndAmount={this.addIngredientAndAmount} 
             />
 
-            <label htmlFor="directions">Directions *</label>
+            <label htmlFor="directions" className="directions">Directions *</label>
             <textarea
               name="directions"
               id="directions"

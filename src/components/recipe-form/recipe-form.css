@@ -12,7 +12,8 @@ button {
   padding: 5px;
 }
 
-form > h2 {
+form > h2,
+.h2 {
   color: #03f7f7;
 }
 
@@ -27,6 +28,13 @@ form > h2 {
   box-shadow: none;
 }
 
+.category-list label {
+  width: 10px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .category-list input {
   width: 20px;
   position: relative;
@@ -37,9 +45,7 @@ form > h2 {
   color: red;
 }
 
-.category-list label {
-  width: 10px;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
+.directions {
+  /* color: #03f7f7; */
+  font-size: larger;
 }

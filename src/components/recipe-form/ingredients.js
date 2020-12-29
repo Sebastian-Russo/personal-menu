@@ -4,7 +4,7 @@ export default function Ingredients(props) {
   let title;
   
   if (props.ingredients.length) {
-    title = <h3>Ingredients</h3>
+    title = <h2 className="h2">Ingredients</h2>
   }
 
   return (
