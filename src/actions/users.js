@@ -21,6 +21,11 @@ export const addCategoriesToUser = category => ({
   category
 });
 
+export const CLEAR_LISTS = "CLEAR_LISTS";
+export const clearLists = () => ({
+    type: CLEAR_LISTS
+})
+
 export const DELETE_CATEGORIES_FROM_USER = "DELETE_CATEGORIES_FROM_USER";
 export const deleteCategoriesFromUser = index => ({
   type: DELETE_CATEGORIES_FROM_USER,

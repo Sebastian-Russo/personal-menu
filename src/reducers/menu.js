@@ -22,14 +22,12 @@ export default function menuReducer(state=initialState, action) {
         answer = Object.assign({}, state, {
             menuItems: action.recipes
         })
-        // console.log('global store', action, answer)
         return answer
     }
     if (action.type === GET_RECIPES_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        // console.log('global store', action, answer)
         return answer
     }
 
@@ -44,14 +42,12 @@ export default function menuReducer(state=initialState, action) {
                     directions: action.directions
             }]
         })
-        // console.log('global store', action, answer)
         return answer
     } 
     if (action.type === ADD_RECIPE_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        // console.log('global store', action, answer)
         return answer
     }
 
@@ -66,14 +62,12 @@ export default function menuReducer(state=initialState, action) {
                 directions: action.directions
             } : menuItem)
         })
-        // console.log('UPDATE_MENU_ITEM_SUCCESS', action, answer)
         return answer
     }
     if (action.type === UPDATE_MENU_ITEM_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        // console.log('UPDATE_MENU_ITEM_ERROR', action, answer)
         return answer
     }
 
@@ -83,18 +77,15 @@ export default function menuReducer(state=initialState, action) {
         answer = Object.assign({}, state, {
             menuItems: selected
         })
-        // console.log('DELETE_MENU_ITEM_SUCCESS', action, answer)
         return answer
     }
     if (action.type === DELETE_MENU_ITEM_ERROR) {
         answer = Object.assign({}, state, {
             error: action.error
         })
-        // console.log('DELETE_MENU_ITEM_ERROR', action, answer)
         return answer
     }
 
-    // console.log('global store', action, answer)
     return state;
 }
 
