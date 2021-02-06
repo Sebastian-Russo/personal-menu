@@ -51,7 +51,7 @@ export class YourMenuItem extends React.Component {
   };
 
   render() {
-    console.log("grocery list state", this.state);
+    console.log(this.props)
     const { menuItem } = this.state;
 
   // if no menu item (aka has been deleted) redirect to menu

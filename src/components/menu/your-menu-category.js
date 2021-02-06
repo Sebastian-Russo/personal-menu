@@ -7,8 +7,8 @@ export class YourMenuCategory extends React.Component {
 
     render() {
         
-        console.log(this.props)
-        const menuItems = this.props.menuItems;
+        const {menuItems} = this.props;
+        console.log(menuItems)
     
         // menu item from selected category              (i.e. 'item = breakfast')
         const selectedCategory = this.props.categoryList.filter(item => item === this.props.match.params.category)[0];
@@ -19,7 +19,6 @@ export class YourMenuCategory extends React.Component {
         ? menuItems.filter(menuItem => menuItem.categories.find(category => { 
             return category === selectedCategory }))
         : [];
-        console.log(selectedMenuItems)
     
         // list of menu items from selected category
         const menuItem = selectedMenuItems.map((item, i) => {
