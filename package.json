@@ -20,7 +20,7 @@
     "react-bs-notifier": "^5.0.0",
     "react-dom": "^16.14.0",
     "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
+    "react-router-dom": "^7.5.2",
     "react-scripts": "3.4.1",
     "react-toastify": "^6.1.0",
     "redux": "^3.7.1",
